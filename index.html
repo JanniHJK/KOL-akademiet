@@ -165,34 +165,75 @@ Låses op senere
 <section id="mission-screen" class="screen hidden">
 
 
-<img src="assets/characters/anna.svg"
-class="character small">
+<section id="mission-screen" class="screen hidden">
+
+<div class="mission-card">
+
+<h1>
+🫁 Mission 001: Lungernes hemmelighed
+</h1>
 
 
 <div class="dialogue">
 
+<h3>Anna – KOL-vejleder</h3>
+
+<p>
+"Din første borger hedder Erik. 
+Han oplever mere åndenød end tidligere.
+Hjælp mig med at forstå, hvad der sker."
+</p>
+
+</div>
+
+
+
+<div class="citizen-card">
+
+<h2>Erik, 72 år</h2>
+
+<p>
+"Jeg bliver hurtigere forpustet, når jeg går rundt i hjemmet.
+Jeg føler ikke, at jeg kan få luften helt ned i lungerne."
+</p>
+
+</div>
+
+
+
 <h2>
-Første mission
+Hvad tror du sker ved KOL?
 </h2>
 
 
-<p>
-Anna:
-"Din første opgave er at forstå,
-hvad der sker i lungerne ved KOL."
-</p>
+<div class="choice-container">
+
+
+<button onclick="answerQuestion(1)">
+Lungerne bliver mindre og kan ikke fyldes med luft
+</button>
+
+
+<button onclick="answerQuestion(2)">
+Luftvejene bliver snævrere, og det bliver sværere at få luften ud
+</button>
+
+
+<button onclick="answerQuestion(3)">
+Kroppen stopper med at bruge ilt korrekt
+</button>
 
 
 </div>
 
 
-<button onclick="completeMission()">
 
-Gennemfør mission
-
-</button>
+<div id="feedback"></div>
 
 
+</div>
+
+  
 </section>
 
 

@@ -1,3 +1,6 @@
+let currentStep = 0;
+
+
 function showScreen(id){
 
 document.querySelectorAll(".screen")
@@ -25,25 +28,20 @@ function updateDashboard(){
 
 const player=getPlayer();
 
-if(!player){
-return;
-}
+if(!player)return;
 
 
-document.getElementById("player-card")
-.innerHTML =
+document.getElementById("player-card").innerHTML=
 
 `
 <h2>${player.name}</h2>
 
 <p>
-Rang:
-<strong>${player.rank}</strong>
+Rang: ${player.rank}
 </p>
 
 <p>
-⭐ XP:
-${player.xp}
+⭐ XP: ${player.xp}
 </p>
 
 <p>
@@ -51,11 +49,6 @@ Fremskridt:
 ${player.progress}%
 </p>
 
-<p>
-Badges:
-${player.badges.join(", ") || "Ingen endnu"}
-</p>
-
 `;
 
 }
@@ -63,82 +56,111 @@ ${player.badges.join(", ") || "Ingen endnu"}
 
 
 
-function openMission(name){
+function openMission(){
 
-if(name==="lunger"){
+currentStep=0;
 
 showScreen("mission-screen");
 
-}
+showMissionStep();
 
 }
 
 
 
+function showMissionStep(){
 
 
-function answerQuestion(choice){
+let step=
+lungLabMission.steps[currentStep];
 
 
-const feedback =
-document.getElementById("feedback");
+document.getElementById("mission-title")
+.innerHTML=
+`${lungLabMission.title}
+(${currentStep+1}/${lungLabMission.steps.length})`;
 
 
 
-if(choice === 2){
+document.getElementById("mission-story")
+.innerHTML=
+
+`
+<div class="story-box">
+<h3>${step.title}</h3>
+<p>${step.story}</p>
+</div>
+`;
 
 
-feedback.innerHTML =
+
+document.getElementById("mission-question")
+.innerHTML=
+step.question;
+
+
+
+document.getElementById("mission-answers")
+.innerHTML=
+
+step.answers.map((a,index)=>
+
 
 `
 
-<div class="correct">
+<button onclick="chooseAnswer(${index})">
 
-<h3>⭐ Rigtigt!</h3>
+${a.text}
+
+</button>
+
+`
+
+).join("");
+
+
+
+document.getElementById("mission-feedback")
+.innerHTML="";
+
+
+}
+
+
+
+
+function chooseAnswer(index){
+
+
+let step=
+lungLabMission.steps[currentStep];
+
+
+let answer=
+step.answers[index];
+
+
+
+document.getElementById("mission-feedback")
+.innerHTML=
+
+`
+
+<div class="${answer.correct ? "correct":"wrong"}">
+
+<h3>
+${answer.correct ? "God beslutning":"Overvej dette"}
+</h3>
 
 <p>
-Ved KOL bliver luftvejene ofte forsnævrede,
-og lungevævet kan være beskadiget.
-Det gør det sværere at få luften ud.
+${answer.feedback}
 </p>
 
 
-<button onclick="finishMission()">
+<button onclick="nextStep()">
 Fortsæt
 </button>
 
-
-</div>
-
-`;
-
-
-
-}
-
-else{
-
-
-feedback.innerHTML =
-
-`
-
-<div class="wrong">
-
-<h3>Prøv igen</h3>
-
-<p>
-Det er ikke helt rigtigt.
-Ved KOL handler problemet især om
-forsnævrede luftveje og ændringer i lungevævet.
-</p>
-
-
-<button onclick="retryQuestion()">
-Prøv igen
-</button>
-
-
 </div>
 
 `;
@@ -146,60 +168,65 @@ Prøv igen
 }
 
 
+
+function nextStep(){
+
+currentStep++;
+
+
+if(currentStep >= lungLabMission.steps.length){
+
+
+completeMission();
+
+return;
+
+}
+
+
+showMissionStep();
+
 }
 
 
 
 
-function retryQuestion(){
-
-document.getElementById("feedback").innerHTML="";
-
-}
-
-
-
-
-
-function finishMission(){
+function completeMission(){
 
 
 let player=getPlayer();
 
 
-player.xp +=100;
+player.xp +=250;
 
 player.progress=10;
+
 
 player.rank="KOL-assistent";
 
 
-
-if(!player.badges.includes("Lungedetektiv")){
-
 player.badges.push("Lungedetektiv");
-
-}
 
 
 savePlayer(player);
 
 
-showScreen("academy-screen");
+document.getElementById("mission-story").innerHTML=
 
-updateDashboard();
+`
+<h2>
+Mission gennemført!
+</h2>
 
+<p>
+Du har opnået badge:
+<br>
+🏅 Lungedetektiv
+</p>
 
-}
-
-function openArea(area){
-
-if(area==="lunger"){
-
-startMission(lungMission);
-
-showScreen("mission-screen");
-
-}
+<button onclick="showScreen('academy-screen');updateDashboard();">
+Tilbage
+</button>
+`;
 
 }

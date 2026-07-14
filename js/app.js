@@ -25,11 +25,13 @@ function updateDashboard(){
 
 const player=getPlayer();
 
-if(!player)return;
+if(!player){
+return;
+}
 
 
 document.getElementById("player-card")
-.innerHTML=
+.innerHTML =
 
 `
 <h2>${player.name}</h2>
@@ -49,9 +51,15 @@ Fremskridt:
 ${player.progress}%
 </p>
 
+<p>
+Badges:
+${player.badges.join(", ") || "Ingen endnu"}
+</p>
+
 `;
 
 }
+
 
 
 
@@ -67,40 +75,14 @@ showScreen("mission-screen");
 
 
 
-function completeMission(){
-
-let player=getPlayer();
 
 
-player.xp +=100;
-
-player.progress=10;
-
-player.rank="KOL-assistent";
-
-
-player.badges.push(
-"Lungedetektiv"
-);
-
-
-savePlayer(player);
-
-
-alert(
-"Mission gennemført! Du har fået dit første badge 🫁"
-);
-
-
-showScreen("academy-screen");
-
-updateDashboard();
-
-}
 function answerQuestion(choice){
+
 
 const feedback =
 document.getElementById("feedback");
+
 
 
 if(choice === 2){
@@ -109,6 +91,7 @@ if(choice === 2){
 feedback.innerHTML =
 
 `
+
 <div class="correct">
 
 <h3>⭐ Rigtigt!</h3>
@@ -124,18 +107,22 @@ Det gør det sværere at få luften ud.
 Fortsæt
 </button>
 
+
 </div>
+
 `;
 
 
 
 }
-else {
+
+else{
 
 
 feedback.innerHTML =
 
 `
+
 <div class="wrong">
 
 <h3>Prøv igen</h3>
@@ -145,6 +132,7 @@ Det er ikke helt rigtigt.
 Ved KOL handler problemet især om
 forsnævrede luftveje og ændringer i lungevævet.
 </p>
+
 
 <button onclick="retryQuestion()">
 Prøv igen
@@ -162,16 +150,19 @@ Prøv igen
 
 
 
+
 function retryQuestion(){
 
-document.getElementById("feedback")
-.innerHTML="";
+document.getElementById("feedback").innerHTML="";
 
 }
 
 
 
+
+
 function finishMission(){
+
 
 let player=getPlayer();
 
@@ -183,6 +174,7 @@ player.progress=10;
 player.rank="KOL-assistent";
 
 
+
 if(!player.badges.includes("Lungedetektiv")){
 
 player.badges.push("Lungedetektiv");
@@ -191,11 +183,6 @@ player.badges.push("Lungedetektiv");
 
 
 savePlayer(player);
-
-
-alert(
-"Mission gennemført! Du har fået badget: Lungedetektiv"
-);
 
 
 showScreen("academy-screen");

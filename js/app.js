@@ -97,3 +97,110 @@ showScreen("academy-screen");
 updateDashboard();
 
 }
+function answerQuestion(choice){
+
+const feedback =
+document.getElementById("feedback");
+
+
+if(choice === 2){
+
+
+feedback.innerHTML =
+
+`
+<div class="correct">
+
+<h3>⭐ Rigtigt!</h3>
+
+<p>
+Ved KOL bliver luftvejene ofte forsnævrede,
+og lungevævet kan være beskadiget.
+Det gør det sværere at få luften ud.
+</p>
+
+
+<button onclick="finishMission()">
+Fortsæt
+</button>
+
+</div>
+`;
+
+
+
+}
+else {
+
+
+feedback.innerHTML =
+
+`
+<div class="wrong">
+
+<h3>Prøv igen</h3>
+
+<p>
+Det er ikke helt rigtigt.
+Ved KOL handler problemet især om
+forsnævrede luftveje og ændringer i lungevævet.
+</p>
+
+<button onclick="retryQuestion()">
+Prøv igen
+</button>
+
+
+</div>
+
+`;
+
+}
+
+
+}
+
+
+
+function retryQuestion(){
+
+document.getElementById("feedback")
+.innerHTML="";
+
+}
+
+
+
+function finishMission(){
+
+let player=getPlayer();
+
+
+player.xp +=100;
+
+player.progress=10;
+
+player.rank="KOL-assistent";
+
+
+if(!player.badges.includes("Lungedetektiv")){
+
+player.badges.push("Lungedetektiv");
+
+}
+
+
+savePlayer(player);
+
+
+alert(
+"Mission gennemført! Du har fået badget: Lungedetektiv"
+);
+
+
+showScreen("academy-screen");
+
+updateDashboard();
+
+
+}

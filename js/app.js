@@ -3,9 +3,10 @@ let currentStep = 0;
 
 function showScreen(id){
 
-document.querySelectorAll(".screen")
-.forEach(screen=>{
+document.querySelectorAll(".screen").forEach(screen=>{
+
 screen.classList.add("hidden");
+
 });
 
 
@@ -24,41 +25,9 @@ showScreen("profile-screen");
 
 
 
-function updateDashboard(){
-
-const player=getPlayer();
-
-if(!player)return;
-
-
-document.getElementById("player-card").innerHTML=
-
-`
-<h2>${player.name}</h2>
-
-<p>
-Rang: ${player.rank}
-</p>
-
-<p>
-⭐ XP: ${player.xp}
-</p>
-
-<p>
-Fremskridt:
-${player.progress}%
-</p>
-
-`;
-
-}
-
-
-
-
 function openMission(){
 
-currentStep=0;
+currentStep = 0;
 
 showScreen("mission-screen");
 
@@ -68,89 +37,90 @@ showMissionStep();
 
 
 
+
 function showMissionStep(){
 
-
-let step=
-lungLabMission.steps[currentStep];
+const step = lungLabMission.steps[currentStep];
 
 
-document.getElementById("mission-title")
-.innerHTML=
-`${lungLabMission.title}
-(${currentStep+1}/${lungLabMission.steps.length})`;
+document.getElementById("mission-title").innerHTML =
+
+`
+${lungLabMission.title}
+<br>
+<span>Mission ${currentStep + 1} af ${lungLabMission.steps.length}</span>
+`;
 
 
 
-document.getElementById("mission-story")
-.innerHTML=
+document.getElementById("mission-story").innerHTML =
 
 `
 <div class="story-box">
+
 <h3>${step.title}</h3>
-<p>${step.story}</p>
+
+<p>
+${step.story}
+</p>
+
 </div>
 `;
 
 
 
-document.getElementById("mission-question")
-.innerHTML=
+document.getElementById("mission-question").innerHTML =
 step.question;
 
 
 
-document.getElementById("mission-answers")
-.innerHTML=
+document.getElementById("mission-answers").innerHTML =
 
-step.answers.map((a,index)=>
+step.answers.map((answer,index)=>{
 
 
-`
+return `
 
 <button onclick="chooseAnswer(${index})">
 
-${a.text}
+${answer.text}
 
 </button>
 
-`
+`;
 
-).join("");
+}).join("");
 
 
 
-document.getElementById("mission-feedback")
-.innerHTML="";
+document.getElementById("mission-feedback").innerHTML="";
 
 
 }
 
 
 
-
 function chooseAnswer(index){
 
 
-let step=
-lungLabMission.steps[currentStep];
+const step = lungLabMission.steps[currentStep];
+
+const answer = step.answers[index];
 
 
-let answer=
-step.answers[index];
-
-
-
-document.getElementById("mission-feedback")
-.innerHTML=
+document.getElementById("mission-feedback").innerHTML =
 
 `
 
 <div class="${answer.correct ? "correct":"wrong"}">
 
+
 <h3>
-${answer.correct ? "God beslutning":"Overvej dette"}
+
+${answer.correct ? "God beslutning":"Overvej dit valg"}
+
 </h3>
+
 
 <p>
 ${answer.feedback}
@@ -158,8 +128,11 @@ ${answer.feedback}
 
 
 <button onclick="nextStep()">
+
 Fortsæt
+
 </button>
+
 
 </div>
 
@@ -171,11 +144,11 @@ Fortsæt
 
 function nextStep(){
 
+
 currentStep++;
 
 
 if(currentStep >= lungLabMission.steps.length){
-
 
 completeMission();
 
@@ -190,43 +163,64 @@ showMissionStep();
 
 
 
-
 function completeMission(){
 
 
-let player=getPlayer();
+let player = getPlayer();
 
+
+if(player){
 
 player.xp +=250;
 
-player.progress=10;
-
+player.progress = 10;
 
 player.rank="KOL-assistent";
 
 
+if(!player.badges.includes("Lungedetektiv")){
+
 player.badges.push("Lungedetektiv");
+
+}
 
 
 savePlayer(player);
 
+}
 
-document.getElementById("mission-story").innerHTML=
+
+
+document.getElementById("mission-title").innerHTML =
+"Mission gennemført";
+
+
+document.getElementById("mission-story").innerHTML =
 
 `
-<h2>
-Mission gennemført!
-</h2>
+
+<div class="story-box">
+
+<h2>🎉 Godt arbejde!</h2>
 
 <p>
-Du har opnået badge:
+Du har hjulpet Erik gennem den første situation.
+</p>
+
+<p>
+Du har opnået:
 <br>
 🏅 Lungedetektiv
 </p>
 
-<button onclick="showScreen('academy-screen');updateDashboard();">
-Tilbage
-</button>
+
+</div>
+
 `;
+
+
+document.getElementById("mission-question").innerHTML="";
+
+document.getElementById("mission-answers").innerHTML="";
 
 }

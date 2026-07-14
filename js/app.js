@@ -191,3 +191,15 @@ updateDashboard();
 
 
 }
+
+function openArea(area){
+
+if(area==="lunger"){
+
+startMission(lungMission);
+
+showScreen("mission-screen");
+
+}
+
+}

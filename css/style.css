@@ -1,26 +1,27 @@
 body {
 
-font-family: Arial, sans-serif;
-
 margin:0;
+
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
 
 background:
 linear-gradient(
 135deg,
-#12355b,
-#087e8b
+#102a43,
+#0f766e
 );
 
 color:white;
-
-min-height:100vh;
 
 }
 
 
 .screen {
 
-max-width:900px;
+max-width:1000px;
 
 margin:auto;
 
@@ -38,23 +39,34 @@ display:none;
 }
 
 
+
+h1 {
+
+font-size:48px;
+
+}
+
+
+
 button {
 
-background:#ffb703;
+background:#f59e0b;
 
 border:none;
 
-padding:15px 30px;
+padding:18px 40px;
 
-border-radius:30px;
+border-radius:40px;
 
-font-size:18px;
+font-size:20px;
 
 cursor:pointer;
 
-margin-top:20px;
+box-shadow:
+0 8px 20px rgba(0,0,0,.3);
 
 }
+
 
 
 button:hover {
@@ -64,59 +76,28 @@ transform:scale(1.05);
 }
 
 
-input {
 
-padding:15px;
+.character {
 
-font-size:18px;
+width:240px;
 
-border-radius:10px;
-
-border:none;
+height:350px;
 
 }
 
 
-.mentor-box {
+
+.character.small {
+
+width:160px;
+
+}
+
+
+
+.dialogue {
 
 background:white;
-
-color:#12355b;
-
-padding:20px;
-
-border-radius:20px;
-
-margin:25px auto;
-
-max-width:500px;
-
-}
-
-
-.mentor {
-
-font-size:60px;
-
-}
-
-
-.map {
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-gap:20px;
-
-margin-top:30px;
-
-}
-
-
-.building {
-
-background:#ffffff;
 
 color:#12355b;
 
@@ -124,37 +105,86 @@ padding:25px;
 
 border-radius:25px;
 
-cursor:pointer;
+max-width:600px;
+
+margin:20px auto;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.2);
+
+}
+
+
+
+input {
+
+padding:15px;
+
+border-radius:15px;
+
+border:none;
 
 font-size:18px;
 
 }
 
 
-.locked {
 
-opacity:0.5;
+.map {
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
 
 }
 
 
-.unlocked:hover {
 
-transform:translateY(-5px);
+.building {
 
-}
-
-
-#player-card {
-
-background:white;
+background:#fff;
 
 color:#12355b;
 
-padding:20px;
+padding:25px;
 
-border-radius:20px;
+border-radius:30px;
 
-margin:20px;
+min-height:220px;
+
+transition:.3s;
+
+}
+
+
+
+.building img {
+
+width:120px;
+
+height:120px;
+
+}
+
+
+
+.building.open:hover {
+
+transform:
+translateY(-10px);
+
+box-shadow:
+0 15px 30px rgba(0,0,0,.3);
+
+}
+
+
+
+.locked {
+
+opacity:.5;
 
 }

@@ -19,6 +19,8 @@
 <div id="app">
 
 
+<!-- STARTSIDE -->
+
 <section id="welcome-screen" class="screen">
 
 
@@ -44,16 +46,18 @@ class="character"
 <h3>Anna – KOL-vejleder</h3>
 
 <p>
-"Velkommen til akademiet. 
-Her skal du lære at hjælpe borgere med KOL gennem missioner,
-cases og praktiske udfordringer."
+"Velkommen til akademiet.
+Her lærer du at hjælpe borgere med KOL gennem
+missioner, cases og praktiske situationer fra hverdagen."
 </p>
 
 </div>
 
 
 <button onclick="startGame()">
-Start eventyret
+
+Start din rejse
+
 </button>
 
 
@@ -61,23 +65,34 @@ Start eventyret
 
 
 
+
+
+<!-- PROFIL -->
 
 <section id="profile-screen" class="screen hidden">
 
 
 <h2>Opret din profil</h2>
 
+
 <p>
 Hvad skal vi kalde dig på akademiet?
 </p>
 
 
-<input id="player-name"
-placeholder="Dit navn">
+<input 
+id="player-name"
+placeholder="Dit navn"
+>
+
+
+<br>
 
 
 <button onclick="createProfile()">
+
 Bliv elev på akademiet
+
 </button>
 
 
@@ -87,54 +102,75 @@ Bliv elev på akademiet
 
 
 
+
+<!-- KORT -->
+
 <section id="academy-screen" class="screen hidden">
 
 
-<h1>🏰 Akademiet</h1>
+<h1>KOL Akademiet</h1>
 
 
 <div id="player-card"></div>
 
 
-<h2>Missionkort</h2>
+
+<h2>
+Dine missioner
+</h2>
+
 
 
 <div class="world-map">
 
 
-<div class="path"></div>
-
 
 <div class="location academy">
 
+
 <div class="building-icon">
+
 🏰
+
 </div>
 
-<h3>KOL Akademiet</h3>
+
+<h3>
+KOL Akademiet
+</h3>
+
 
 <p>
 Din base
 </p>
 
+
 </div>
+
+
+
 
 
 
 <div class="location unlocked"
-onclick="startMission(lungMission);showScreen('mission-screen')">
+onclick="openMission()">
 
 
 <div class="building-icon">
+
 🫁
+
 </div>
+
 
 <h3>
 Lungelaboratoriet
 </h3>
 
+
 <p>
-Niveau 1
+Mission 1:
+Lungernes hemmelighed
 </p>
 
 
@@ -143,16 +179,23 @@ Niveau 1
 
 
 
+
+
 <div class="location locked">
 
+
 <div class="building-icon">
+
 📡
+
 </div>
+
 
 <h3>
 Kontrolcentralen
 </h3>
 
+
 <p>
 Låses op senere
 </p>
@@ -162,16 +205,24 @@ Låses op senere
 
 
 
+
+
+
 <div class="location locked">
 
+
 <div class="building-icon">
+
 🍲
+
 </div>
+
 
 <h3>
 Energilaboratoriet
 </h3>
 
+
 <p>
 Låses op senere
 </p>
@@ -181,45 +232,23 @@ Låses op senere
 
 
 
+
+
+
 <div class="location locked">
 
+
 <div class="building-icon">
+
 💊
+
 </div>
+
 
 <h3>
 Inhalationsværkstedet
 </h3>
 
-<p>
-Låses op senere
-</p>
-
-
-</div>
-
-
-<div class="building locked">
-
-<h3>
-Kontrolcentralen
-</h3>
-
-<p>
-Låses op senere
-</p>
-
-
-</div>
-
-
-
-
-<div class="building locked">
-
-<h3>
-Energilaboratoriet
-</h3>
 
 <p>
 Låses op senere
@@ -236,6 +265,11 @@ Låses op senere
 </section>
 
 
+
+
+
+
+<!-- MISSION -->
 
 <section id="mission-screen" class="screen hidden">
 
@@ -246,16 +280,21 @@ Låses op senere
 <h1 id="mission-title"></h1>
 
 
+
 <div id="mission-story"></div>
+
 
 
 <h2 id="mission-question"></h2>
 
 
+
 <div id="mission-answers"></div>
 
 
+
 <div id="mission-feedback"></div>
+
 
 
 </div>
@@ -264,7 +303,13 @@ Låses op senere
 </section>
 
 
+
+
+
 </div>
+
+
+
 
 
 <script src="js/storage.js"></script>

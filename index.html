@@ -1,50 +1,69 @@
 <!DOCTYPE html>
 <html lang="da">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>KOL Akademiet</title>
 
 <link rel="stylesheet" href="css/style.css">
+
 </head>
+
 
 <body>
 
+
 <div id="app">
+
 
 <section id="welcome-screen" class="screen">
 
-<h1>🫁 KOL Akademiet</h1>
 
-<h2>Din rejse mod at blive KOL-mester starter her</h2>
+<div class="academy-title">
 
-<p>
-Velkommen til akademiet. Her lærer du at hjælpe borgere med KOL gennem
-missioner, cases og praktiske udfordringer.
-</p>
-
-<div class="mentor-box">
-
-<div class="mentor">
-👩‍⚕️
-</div>
+<h1>KOL Akademiet</h1>
 
 <p>
-<strong>Anna, KOL-vejleder:</strong><br>
-"Velkommen! Dit første mål er at forstå, hvad der sker i lungerne hos en borger med KOL."
+Din rejse fra ny medarbejder til KOL-mester starter her
 </p>
 
 </div>
+
+
+<img 
+src="assets/characters/anna.svg"
+class="character"
+>
+
+
+<div class="dialogue">
+
+<h3>Anna – KOL-vejleder</h3>
+
+<p>
+"Velkommen til akademiet. 
+Her skal du lære at hjælpe borgere med KOL gennem missioner,
+cases og praktiske udfordringer."
+</p>
+
+</div>
+
 
 <button onclick="startGame()">
-Start din rejse
+Start eventyret
 </button>
+
 
 </section>
 
 
+
+
 <section id="profile-screen" class="screen hidden">
+
 
 <h2>Opret din profil</h2>
 
@@ -52,67 +71,86 @@ Start din rejse
 Hvad skal vi kalde dig på akademiet?
 </p>
 
-<input id="player-name" placeholder="Dit navn">
+
+<input id="player-name"
+placeholder="Dit navn">
+
 
 <button onclick="createProfile()">
-Start som ny medarbejder
+Bliv elev på akademiet
 </button>
 
+
 </section>
+
+
 
 
 
 <section id="academy-screen" class="screen hidden">
 
-<h1>🏰 KOL Akademiet</h1>
+
+<h1>🏰 Akademiet</h1>
+
 
 <div id="player-card"></div>
 
 
-<h2>Akademiets områder</h2>
+<h2>Missionkort</h2>
+
 
 <div class="map">
 
 
-<div class="building unlocked"
+<div class="building open"
 onclick="openMission('lunger')">
 
-🫁
-<h3>Lungelaboratoriet</h3>
+
+<img src="assets/buildings/lungelab.svg">
+
+<h3>
+Lungelaboratoriet
+</h3>
 
 <p>
-Introduktion til KOL
+Forstå KOL og lungernes hemmeligheder
 </p>
 
+
 </div>
+
+
 
 
 <div class="building locked">
-📡
-<h3>Kontrolcentralen</h3>
-🔒
+
+<h3>
+Kontrolcentralen
+</h3>
+
+<p>
+Låses op senere
+</p>
+
+
 </div>
+
+
 
 
 <div class="building locked">
-🍲
-<h3>Energilaboratoriet</h3>
-🔒
+
+<h3>
+Energilaboratoriet
+</h3>
+
+<p>
+Låses op senere
+</p>
+
+
 </div>
 
-
-<div class="building locked">
-💊
-<h3>Inhalationsværkstedet</h3>
-🔒
-</div>
-
-
-<div class="building locked">
-🚨
-<h3>Akutstationen</h3>
-🔒
-</div>
 
 
 </div>
@@ -121,30 +159,42 @@ Introduktion til KOL
 </section>
 
 
+
+
+
 <section id="mission-screen" class="screen hidden">
 
-<h1>🫁 Lungelaboratoriet</h1>
+
+<img src="assets/characters/anna.svg"
+class="character small">
 
 
-<div class="mentor-box">
+<div class="dialogue">
+
+<h2>
+Første mission
+</h2>
+
 
 <p>
-👩‍⚕️ Anna:
+Anna:
+"Din første opgave er at forstå,
+hvad der sker i lungerne ved KOL."
 </p>
 
-<p>
-"Før du kan hjælpe borgere med KOL, skal du forstå, hvordan lungerne fungerer."
-</p>
 
 </div>
 
 
 <button onclick="completeMission()">
-Gennemfør første mission
+
+Gennemfør mission
+
 </button>
 
 
 </section>
+
 
 
 </div>
@@ -154,5 +204,7 @@ Gennemfør første mission
 <script src="js/profile.js"></script>
 <script src="js/app.js"></script>
 
+
 </body>
+
 </html>

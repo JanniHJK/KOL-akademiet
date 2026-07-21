@@ -1,120 +1,123 @@
-const lungMission = {
-
-title:"Lungernes hemmelighed",
-
-steps:[
-
-
-{
-text:
-"Erik fortæller, at han bliver mere forpustet. Hvad er den vigtigste årsag ved KOL?",
-
-answers:[
-
-"Det bliver sværere at få luften ud af lungerne",
-
-"Lungerne stopper helt med at arbejde",
-
-"Kroppen producerer for lidt blod"
-
-],
-
-correct:0,
-
-feedback:
-"Ved KOL bliver luftvejene ofte forsnævrede, og lungevævet kan være påvirket. Det gør det svært at få luften ud."
-},
+// ===================================
+// KOL Akademiet v2.0
+// Lungelaboratoriet missioner
+// ===================================
 
 
-
-{
-text:
-"Hvilket symptom er typisk ved KOL?",
-
-answers:[
-
-"Åndenød ved aktivitet",
-
-"Pludselig høretab",
-
-"Brækkede knogler"
-
-],
-
-correct:0,
-
-feedback:
-"Åndenød er et af de mest almindelige symptomer ved KOL."
-},
+const lungMissions = [
 
 
+    {
 
-{
-text:
-"Erik fortæller, at han ofte hoster slim op. Hvad kan det være tegn på?",
-
-answers:[
-
-"Kronisk irritation i luftvejene",
-
-"At lungerne er blevet større",
-
-"At han mangler væske i kroppen"
-
-],
-
-correct:0,
-
-feedback:
-"Ved kronisk bronkitis kan slimproduktionen være øget."
-},
+        id: 1,
 
 
-
-{
-text:
-"Hvad kan hjælpe en borger med KOL og åndenød?",
-
-answers:[
-
-"Rolig vejrtrækning og pauser",
-
-"At undgå al bevægelse",
-
-"At holde vejret så længe som muligt"
-
-],
-
-correct:0,
-
-feedback:
-"Teknikker til vejrtrækning og energibesparelse kan hjælpe."
-},
+        title:
+        "Lungernes hemmelighed",
 
 
+        introduction:
+        `
+        Borger med KOL fortæller,
+        at det er blevet sværere at gå
+        fra stuen til køkkenet.
 
-{
-text:
-"Hvad er vigtigt som medarbejder?",
+        Du skal vurdere, hvad du først
+        vil være opmærksom på.
+        `,
 
-answers:[
 
-"Observere ændringer og reagere tidligt",
+        question:
+        "Hvilken observation er mest relevant?",
 
-"Kun fokusere på medicinen",
 
-"Vente til borgeren selv siger til"
+        answers:[
 
-],
 
-correct:0,
+            {
 
-feedback:
-"Tidlig opsporing er vigtig ved KOL."
+                text:
+                "Observere ændringer i åndenød og aktivitetsniveau",
+
+
+                correct:true,
+
+
+                feedback:
+                `
+                Rigtigt.
+
+                Ved KOL er ændringer i
+                åndenød, funktionsevne og
+                aktivitetsniveau vigtige tegn
+                på ændringer i borgerens tilstand.
+                `
+
+            },
+
+
+            {
+
+                text:
+                "Fortælle borgeren at træne mere uden yderligere observation",
+
+
+                correct:false,
+
+
+                feedback:
+                `
+                Ikke helt.
+
+                Træning kan være vigtigt,
+                men først skal ændringer i
+                borgerens situation vurderes.
+                `
+
+            },
+
+
+            {
+
+                text:
+                "Ignorere det, hvis borgeren stadig kan klare daglige aktiviteter",
+
+
+                correct:false,
+
+
+                feedback:
+                `
+                Forkert.
+
+                Små ændringer kan være tidlige
+                tegn på forværring.
+                `
+
+            }
+
+
+        ]
+
+    }
+
+
+
+];
+
+
+
+
+
+function getLungMission(id){
+
+
+    return lungMissions.find(
+
+        mission =>
+        mission.id === id
+
+    );
+
 
 }
-
-
-]
-
-};

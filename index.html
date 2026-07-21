@@ -19,39 +19,61 @@
 <div id="app">
 
 
-<!-- STARTSIDE -->
+<!-- =========================
+     STARTSKÆRM
+========================= -->
 
 <section id="welcome-screen" class="screen">
 
 
-<div class="academy-title">
+<div class="hero">
+
+
+<div class="academy-logo">
 
 <h1>KOL Akademiet</h1>
 
 <p>
-Din rejse fra ny medarbejder til KOL-mester starter her
+Din rejse fra ny medarbejder til KOL-mester
 </p>
 
 </div>
 
 
-<img 
-src="assets/characters/anna.svg"
-class="character"
->
 
+<div class="character-placeholder">
 
-<div class="dialogue">
+<div class="character-circle">
 
-<h3>Anna – KOL-vejleder</h3>
+Anna
+
+</div>
+
 
 <p>
-"Velkommen til akademiet.
-Her lærer du at hjælpe borgere med KOL gennem
-missioner, cases og praktiske situationer fra hverdagen."
+Anna – din KOL-vejleder
 </p>
 
 </div>
+
+
+
+
+<div class="dialogue-box">
+
+
+<h3>Velkommen til akademiet</h3>
+
+
+<p>
+Her lærer du at hjælpe borgere med KOL gennem
+missioner, cases og praktiske udfordringer.
+</p>
+
+
+</div>
+
+
 
 
 <button onclick="startGame()">
@@ -61,18 +83,29 @@ Start din rejse
 </button>
 
 
+</div>
+
+
 </section>
 
 
 
 
 
-<!-- PROFIL -->
+<!-- =========================
+     PROFIL
+========================= -->
+
 
 <section id="profile-screen" class="screen hidden">
 
 
-<h2>Opret din profil</h2>
+<div class="panel">
+
+
+<h2>
+Opret din profil
+</h2>
 
 
 <p>
@@ -80,13 +113,13 @@ Hvad skal vi kalde dig på akademiet?
 </p>
 
 
+
 <input 
 id="player-name"
+type="text"
 placeholder="Dit navn"
 >
 
-
-<br>
 
 
 <button onclick="createProfile()">
@@ -96,6 +129,9 @@ Bliv elev på akademiet
 </button>
 
 
+</div>
+
+
 </section>
 
 
@@ -103,21 +139,32 @@ Bliv elev på akademiet
 
 
 
-<!-- KORT -->
+<!-- =========================
+     KORT
+========================= -->
+
 
 <section id="academy-screen" class="screen hidden">
 
 
-<h1>KOL Akademiet</h1>
+<div class="panel">
 
 
-<div id="player-card"></div>
+<h1>
+🏰 KOL Akademiet
+</h1>
+
+
+<div id="player-card">
+
+</div>
 
 
 
-<h2>
-Dine missioner
-</h2>
+<p>
+Vælg dit næste område
+</p>
+
 
 
 
@@ -125,10 +172,9 @@ Dine missioner
 
 
 
-<div class="location academy">
+<div class="map-location academy">
 
-
-<div class="building-icon">
+<div class="location-icon">
 
 🏰
 
@@ -136,7 +182,7 @@ Dine missioner
 
 
 <h3>
-KOL Akademiet
+Akademiet
 </h3>
 
 
@@ -152,11 +198,11 @@ Din base
 
 
 
-<div class="location unlocked"
-onclick="openMission()">
+<div class="map-location unlocked"
+onclick="openArea('lungelaboratoriet')">
 
 
-<div class="building-icon">
+<div class="location-icon">
 
 🫁
 
@@ -169,8 +215,7 @@ Lungelaboratoriet
 
 
 <p>
-Mission 1:
-Lungernes hemmelighed
+Introduktion til KOL
 </p>
 
 
@@ -181,10 +226,10 @@ Lungernes hemmelighed
 
 
 
-<div class="location locked">
+<div class="map-location locked">
 
 
-<div class="building-icon">
+<div class="location-icon">
 
 📡
 
@@ -192,7 +237,7 @@ Lungernes hemmelighed
 
 
 <h3>
-Kontrolcentralen
+Telemedicinsk kontrolrum
 </h3>
 
 
@@ -208,10 +253,11 @@ Låses op senere
 
 
 
-<div class="location locked">
+
+<div class="map-location locked">
 
 
-<div class="building-icon">
+<div class="location-icon">
 
 🍲
 
@@ -219,7 +265,7 @@ Låses op senere
 
 
 <h3>
-Energilaboratoriet
+Ernæringscaféen
 </h3>
 
 
@@ -235,10 +281,10 @@ Låses op senere
 
 
 
-<div class="location locked">
+<div class="map-location locked">
 
 
-<div class="building-icon">
+<div class="location-icon">
 
 💊
 
@@ -246,7 +292,7 @@ Låses op senere
 
 
 <h3>
-Inhalationsværkstedet
+Medicincenteret
 </h3>
 
 
@@ -262,6 +308,9 @@ Låses op senere
 </div>
 
 
+</div>
+
+
 </section>
 
 
@@ -269,31 +318,60 @@ Låses op senere
 
 
 
-<!-- MISSION -->
+
+<!-- =========================
+     OMRÅDE
+========================= -->
+
+
+<section id="area-screen" class="screen hidden">
+
+
+<div class="panel">
+
+
+<h1 id="area-title">
+
+</h1>
+
+
+
+<div id="area-content">
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- =========================
+     MISSION
+========================= -->
+
 
 <section id="mission-screen" class="screen hidden">
 
 
-<div class="mission-card">
+<div class="panel">
 
 
-<h1 id="mission-title"></h1>
+<h1 id="mission-title">
 
-
-
-<div id="mission-story"></div>
-
-
-
-<h2 id="mission-question"></h2>
+</h1>
 
 
 
-<div id="mission-answers"></div>
+<div id="mission-content">
 
-
-
-<div id="mission-feedback"></div>
+</div>
 
 
 
@@ -305,18 +383,11 @@ Låses op senere
 
 
 
-
 </div>
 
 
 
 
-
-<script src="js/storage.js"></script>
-
-<script src="missions/lungelab.js"></script>
-
-<script src="js/profile.js"></script>
 
 <script src="js/app.js"></script>
 

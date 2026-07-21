@@ -1,13 +1,13 @@
 // ===================================
 // KOL Akademiet v2.0
 // Mission Engine
+// Stabilisering 4.1
 // ===================================
 
 
 let activeMission = null;
 
 let currentQuestionIndex = 0;
-
 
 
 
@@ -38,14 +38,17 @@ function startMission(mission){
 
     renderMission();
 
+
 }
 
 
 
 
 
+
+
 // ===================================
-// VIS SPØRGSMÅL
+// VIS MISSION
 // ===================================
 
 
@@ -54,12 +57,15 @@ function renderMission(){
 
 
     const title =
+
     document.getElementById(
         "mission-title"
     );
 
 
+
     const content =
+
     document.getElementById(
         "mission-content"
     );
@@ -84,19 +90,16 @@ function renderMission(){
 
 
 
-
     content.innerHTML = `
 
 
     <div class="mission-story">
-
 
     <p>
 
     ${activeMission.story}
 
     </p>
-
 
     </div>
 
@@ -118,29 +121,33 @@ function renderMission(){
 
 
     ${
+        question.answers.map(
 
-    question.answers.map(
-
-        (answer,index)=>`
-
-
-        <button
-
-        class="answer-card"
-
-        onclick="checkMissionAnswer(${index})">
+        (answer,index)=>{
 
 
-        ${answer.text}
+            return `
 
 
-        </button>
+            <button
+
+            class="answer-card"
+
+            onclick="checkMissionAnswer(${index})">
 
 
-        `
+            ${answer.text}
 
-    ).join("")
 
+            </button>
+
+
+            `;
+
+
+        }
+
+        ).join("")
 
     }
 
@@ -152,14 +159,10 @@ function renderMission(){
 
 
 
-
-    <div id="mission-feedback">
-
-    </div>
+    <div id="mission-feedback"></div>
 
 
     `;
-
 
 
 }
@@ -172,7 +175,7 @@ function renderMission(){
 
 
 // ===================================
-// TJEK SVAR
+// SVAR
 // ===================================
 
 
@@ -199,7 +202,6 @@ function checkMissionAnswer(index){
     document.getElementById(
         "mission-feedback"
     );
-
 
 
 
@@ -241,9 +243,7 @@ function checkMissionAnswer(index){
         `;
 
 
-
     }
-
 
     else {
 
@@ -293,8 +293,9 @@ function checkMissionAnswer(index){
 
 
 
+
 // ===================================
-// FORTSÆT
+// NÆSTE SPØRGSMÅL
 // ===================================
 
 
@@ -319,23 +320,43 @@ function continueMission(){
     ){
 
 
-
         renderMission();
-
 
 
     }
 
-
     else {
-
 
 
         finishMission();
 
 
-
     }
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// AFSLUT MISSION
+// ===================================
+
+
+function finishMission(){
+
+
+
+    addPoints(100);
+
+
+
+    completeModuleMission();
 
 
 
@@ -349,65 +370,56 @@ function continueMission(){
 
 
 // ===================================
-// MISSION FÆRDIG
+// VIS RESULTAT
 // ===================================
 
 
-function finishMission(){
+function showMissionComplete(){
 
 
 
-    addPoints(100);
+    const content =
+
+    document.getElementById(
+        "mission-content"
+    );
 
 
 
-
-    if(
-        typeof completeModuleMission === "function"
-    ){
+    content.innerHTML = `
 
 
-        completeModuleMission();
+    <div class="correct-feedback">
 
 
-    }
+    <h2>
 
+    Mission gennemført
 
-    else {
+    </h2>
 
 
 
-        const content =
+    <p>
 
-        document.getElementById(
-            "mission-content"
-        );
+    Du har gennemført denne udfordring.
 
-
-
-        content.innerHTML = `
+    </p>
 
 
-        <div class="correct-feedback">
+
+    <p>
+
+    +100 point
+
+    </p>
 
 
-        <h2>
-        Mission gennemført
-        </h2>
+
+    </div>
 
 
-        <p>
-        Du har afsluttet missionen.
-        </p>
-
-
-        </div>
-
-
-        `;
-
-
-    }
+    `;
 
 
 

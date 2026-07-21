@@ -1,23 +1,33 @@
 // ===================================
 // KOL Akademiet v2.0
-// Missionsmotor
+// Mission Engine
 // ===================================
 
 
 let activeMission = null;
 
-let currentQuestion = 0;
+let currentQuestionIndex = 0;
 
 
 
+
+
+
+
+// ===================================
+// START MISSION
+// ===================================
 
 
 function startMission(mission){
 
 
+
     activeMission = mission;
 
-    currentQuestion = 0;
+
+    currentQuestionIndex = 0;
+
 
 
     showScreen(
@@ -25,8 +35,8 @@ function startMission(mission){
     );
 
 
-    renderMissionQuestion();
 
+    renderMission();
 
 }
 
@@ -34,9 +44,13 @@ function startMission(mission){
 
 
 
+// ===================================
+// VIS SPØRGSMÅL
+// ===================================
 
 
-function renderMissionQuestion(){
+function renderMission(){
+
 
 
     const title =
@@ -53,12 +67,21 @@ function renderMissionQuestion(){
 
 
     const question =
-    activeMission.questions[currentQuestion];
+
+    activeMission.questions[
+        currentQuestionIndex
+    ];
+
+
 
 
 
     title.innerHTML =
+
     activeMission.title;
+
+
+
 
 
 
@@ -79,6 +102,10 @@ function renderMissionQuestion(){
 
 
 
+
+    <div class="question-box">
+
+
     <h3>
 
     ${question.text}
@@ -93,18 +120,27 @@ function renderMissionQuestion(){
     ${
 
     question.answers.map(
+
         (answer,index)=>`
 
-        <button 
+
+        <button
+
         class="answer-card"
-        onclick="checkAnswer(${index})">
+
+        onclick="checkMissionAnswer(${index})">
+
 
         ${answer.text}
 
+
         </button>
 
+
         `
+
     ).join("")
+
 
     }
 
@@ -112,8 +148,12 @@ function renderMissionQuestion(){
     </div>
 
 
+    </div>
 
-    <div id="feedback">
+
+
+
+    <div id="mission-feedback">
 
     </div>
 
@@ -130,33 +170,42 @@ function renderMissionQuestion(){
 
 
 
-function checkAnswer(answerIndex){
+
+// ===================================
+// TJEK SVAR
+// ===================================
+
+
+function checkMissionAnswer(index){
 
 
 
     const question =
-    activeMission.questions[currentQuestion];
+
+    activeMission.questions[
+        currentQuestionIndex
+    ];
 
 
 
     const answer =
-    question.answers[answerIndex];
+
+    question.answers[index];
 
 
 
     const feedback =
+
     document.getElementById(
-        "feedback"
+        "mission-feedback"
     );
 
 
 
 
 
+
     if(answer.correct){
-
-
-        addPoints(25);
 
 
 
@@ -167,12 +216,14 @@ function checkAnswer(answerIndex){
 
 
         <h3>
-        Rigtigt
+        Rigtigt svar
         </h3>
 
 
         <p>
+
         ${answer.feedback}
+
         </p>
 
 
@@ -180,7 +231,7 @@ function checkAnswer(answerIndex){
 
 
 
-        <button onclick="nextQuestion()">
+        <button onclick="continueMission()">
 
         Fortsæt
 
@@ -193,6 +244,7 @@ function checkAnswer(answerIndex){
 
     }
 
+
     else {
 
 
@@ -204,12 +256,14 @@ function checkAnswer(answerIndex){
 
 
         <h3>
-        Ikke helt
+        Ikke korrekt
         </h3>
 
 
         <p>
+
         ${answer.feedback}
+
         </p>
 
 
@@ -217,7 +271,7 @@ function checkAnswer(answerIndex){
 
 
 
-        <button onclick="renderMissionQuestion()">
+        <button onclick="renderMission()">
 
         Prøv igen
 
@@ -227,7 +281,6 @@ function checkAnswer(answerIndex){
         `;
 
 
-
     }
 
 
@@ -240,32 +293,46 @@ function checkAnswer(answerIndex){
 
 
 
+// ===================================
+// FORTSÆT
+// ===================================
 
-function nextQuestion(){
+
+function continueMission(){
 
 
 
-    currentQuestion++;
+    currentQuestionIndex++;
+
 
 
 
 
     if(
-        currentQuestion <
+
+        currentQuestionIndex
+
+        <
+
         activeMission.questions.length
+
     ){
 
 
-        renderMissionQuestion();
+
+        renderMission();
+
 
 
     }
+
 
     else {
 
 
 
-        completeMission();
+        finishMission();
+
 
 
     }
@@ -281,57 +348,66 @@ function nextQuestion(){
 
 
 
-function completeMission(){
+// ===================================
+// MISSION FÆRDIG
+// ===================================
+
+
+function finishMission(){
 
 
 
-    feedback =
-    document.getElementById(
-        "mission-content"
-    );
+    addPoints(100);
 
 
 
-    addPoints(50);
+
+    if(
+        typeof completeModuleMission === "function"
+    ){
+
+
+        completeModuleMission();
+
+
+    }
+
+
+    else {
 
 
 
-    feedback.innerHTML = `
+        const content =
 
-
-    <div class="correct-feedback">
-
-
-    <h2>
-    Mission gennemført!
-    </h2>
-
-
-    <p>
-
-    Du har afsluttet din første
-    KOL-udfordring.
-
-    </p>
-
-
-    <p>
-    +50 point
-    </p>
-
-
-    </div>
+        document.getElementById(
+            "mission-content"
+        );
 
 
 
-    <button onclick="showScreen('academy-screen')">
-
-    Tilbage til kortet
-
-    </button>
+        content.innerHTML = `
 
 
-    `;
+        <div class="correct-feedback">
+
+
+        <h2>
+        Mission gennemført
+        </h2>
+
+
+        <p>
+        Du har afsluttet missionen.
+        </p>
+
+
+        </div>
+
+
+        `;
+
+
+    }
 
 
 

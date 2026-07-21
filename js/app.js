@@ -1,20 +1,7 @@
-
 // ===================================
 // KOL Akademiet v2.0
-// Grundmotor
+// App motor - integration
 // ===================================
-
-
-
-let player = {
-
-    name: "",
-
-    progress: 0
-
-};
-
-
 
 
 
@@ -23,10 +10,12 @@ let player = {
 // ===================================
 
 
-function showScreen(screenId) {
+function showScreen(screenId){
 
 
-    const screens = document.querySelectorAll(".screen");
+    const screens =
+    document.querySelectorAll(".screen");
+
 
 
     screens.forEach(screen => {
@@ -37,7 +26,9 @@ function showScreen(screenId) {
 
 
 
-    const target = document.getElementById(screenId);
+    const target =
+    document.getElementById(screenId);
+
 
 
     if(target){
@@ -53,6 +44,8 @@ function showScreen(screenId) {
 
 
 
+
+
 // ===================================
 // START SPIL
 // ===================================
@@ -61,10 +54,14 @@ function showScreen(screenId) {
 function startGame(){
 
 
-    showScreen("profile-screen");
+    showScreen(
+        "profile-screen"
+    );
 
 
 }
+
+
 
 
 
@@ -78,16 +75,21 @@ function startGame(){
 function createProfile(){
 
 
-    const input = document.getElementById(
+
+    const input =
+    document.getElementById(
         "player-name"
     );
 
 
-    if(!input.value.trim()){
+
+    if(
+        !input.value.trim()
+    ){
 
 
         alert(
-            "Skriv dit navn for at starte eventyret"
+            "Skriv dit navn først"
         );
 
 
@@ -98,10 +100,16 @@ function createProfile(){
 
 
 
-    player.name = input.value;
 
 
-    updatePlayerCard();
+    initializeProfile(
+        input.value
+    );
+
+
+
+    renderPlayerCard();
+
 
 
     showScreen(
@@ -115,47 +123,6 @@ function createProfile(){
 
 
 
-// ===================================
-// VIS SPILLERKORT
-// ===================================
-
-
-function updatePlayerCard(){
-
-
-    const card =
-    document.getElementById(
-        "player-card"
-    );
-
-
-
-    if(card){
-
-
-        card.innerHTML = `
-
-        <div class="dialogue-box">
-
-        <h3>
-        ${player.name}
-        </h3>
-
-        <p>
-        Ny medarbejder på KOL Akademiet
-        </p>
-
-        </div>
-
-        `;
-
-
-    }
-
-
-}
-
-
 
 
 
@@ -167,10 +134,27 @@ function updatePlayerCard(){
 function openArea(area){
 
 
+
+    if(
+        !isAreaUnlocked(area)
+    ){
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
     const title =
     document.getElementById(
         "area-title"
     );
+
 
 
     const content =
@@ -180,12 +164,20 @@ function openArea(area){
 
 
 
-    if(area === "lungelaboratoriet"){
+
+
+
+    if(
+        area === "lungelaboratoriet"
+    ){
 
 
 
         title.innerHTML =
+
         "🫁 Lungelaboratoriet";
+
+
 
 
 
@@ -200,13 +192,17 @@ function openArea(area){
         </h3>
 
 
+
         <p>
 
-        Velkommen til Lungelaboratoriet.
-        Her begynder din rejse med at forstå,
-        hvad der sker i kroppen ved KOL.
+        Du står ved indgangen til
+        Lungelaboratoriet.
+
+        Her skal du lære, hvordan
+        KOL påvirker borgerens lunger.
 
         </p>
+
 
 
         </div>
@@ -215,7 +211,7 @@ function openArea(area){
 
         <button onclick="openMission()">
 
-        Gå til første mission
+        Start mission
 
         </button>
 
@@ -223,13 +219,14 @@ function openArea(area){
         `;
 
 
-
     }
+
 
 
     showScreen(
         "area-screen"
     );
+
 
 
 }
@@ -238,67 +235,82 @@ function openArea(area){
 
 
 
+
+
+
+
 // ===================================
-// ÅBN FØRSTE MISSION
-// Midlertidig grundstruktur
+// FØRSTE MISSION
 // ===================================
 
 
 function openMission(){
 
 
-    const title =
+
     document.getElementById(
         "mission-title"
-    );
+    ).innerHTML =
 
-
-    const content =
-    document.getElementById(
-        "mission-content"
-    );
-
-
-
-    title.innerHTML =
     "Mission 1: Lungernes hemmelighed";
 
 
 
-    content.innerHTML = `
+
+    document.getElementById(
+        "mission-content"
+    ).innerHTML = `
+
 
 
     <div class="dialogue-box">
 
 
     <h3>
-    Første udfordring
+    Din første opgave
     </h3>
 
 
     <p>
 
-    Du skal snart hjælpe din første borger
-    med KOL.
+    En borger med KOL fortæller,
+    at det er blevet sværere at gå
+    fra stuen til køkkenet.
+
+    Hvad vil du først være mest
+    opmærksom på?
 
     </p>
 
 
-    <p>
 
-    Denne mission bygges ud i næste version.
+    <button onclick="missionAnswer(false)">
 
-    </p>
+    Fortælle borgeren at træne mere
+
+    </button>
+
+
+
+    <button onclick="missionAnswer(true)">
+
+    Observere ændringer i åndenød
+    og aktivitetsniveau
+
+    </button>
+
+
+
+    <button onclick="missionAnswer(false)">
+
+    Ignorere det, hvis borgeren
+    stadig kan klare sig selv
+
+    </button>
+
 
 
     </div>
-
-
-    <button onclick="showScreen('academy-screen')">
-
-    Tilbage til kortet
-
-    </button>
 
 
     `;
@@ -310,7 +322,131 @@ function openMission(){
     );
 
 
+
 }
+
+
+
+
+
+
+
+
+// ===================================
+// SVAR PÅ MISSION
+// ===================================
+
+
+function missionAnswer(correct){
+
+
+
+    const box =
+    document.getElementById(
+        "mission-content"
+    );
+
+
+
+    if(correct){
+
+
+
+        addPoints(50);
+
+
+
+        completeArea(
+            "lungelaboratoriet"
+        );
+
+
+
+        box.innerHTML = `
+
+
+        <div class="dialogue-box">
+
+
+        <h3>
+        Godt observeret!
+        </h3>
+
+
+        <p>
+
+        Ændret åndenød og lavere
+        aktivitetsniveau kan være tegn
+        på ændringer hos borgeren.
+
+        </p>
+
+
+        <p>
+        +50 point
+        </p>
+
+
+        </div>
+
+
+        <button onclick="showScreen('academy-screen')">
+
+        Tilbage til kortet
+
+        </button>
+
+
+        `;
+
+
+
+    }
+
+    else {
+
+
+
+        box.innerHTML = `
+
+
+        <div class="dialogue-box">
+
+
+        <h3>
+        Ikke helt
+        </h3>
+
+
+        <p>
+
+        Ved KOL er observation af
+        ændringer vigtig for at opdage
+        problemer tidligt.
+
+        </p>
+
+
+        </div>
+
+
+
+        <button onclick="openMission()">
+
+        Prøv igen
+
+        </button>
+
+
+        `;
+
+
+    }
+
+
+
+}
+
 
 
 
@@ -324,7 +460,7 @@ function openMission(){
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    ()=>{
 
 
         showScreen(

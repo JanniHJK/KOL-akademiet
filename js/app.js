@@ -8,29 +8,47 @@
 function showScreen(screenId){
 
 
+
     const screens =
-    document.querySelectorAll(".screen");
+
+    document.querySelectorAll(
+        ".screen"
+    );
 
 
 
-    screens.forEach(screen => {
+    screens.forEach(screen=>{
 
-        screen.classList.add("hidden");
+
+        screen.classList.add(
+            "hidden"
+        );
+
 
     });
 
 
 
+
+
     const target =
-    document.getElementById(screenId);
+
+    document.getElementById(
+        screenId
+    );
 
 
 
     if(target){
 
-        target.classList.remove("hidden");
+
+        target.classList.remove(
+            "hidden"
+        );
+
 
     }
+
 
 
 }
@@ -41,12 +59,14 @@ function showScreen(screenId){
 
 
 
+
 // ===================================
-// START
+// START SPIL
 // ===================================
 
 
 function startGame(){
+
 
 
     showScreen(
@@ -62,8 +82,9 @@ function startGame(){
 
 
 
+
 // ===================================
-// PROFIL
+// OPRET PROFIL
 // ===================================
 
 
@@ -72,6 +93,7 @@ function createProfile(){
 
 
     const input =
+
     document.getElementById(
         "player-name"
     );
@@ -89,6 +111,7 @@ function createProfile(){
 
 
         return;
+
 
     }
 
@@ -110,7 +133,6 @@ function createProfile(){
     );
 
 
-
 }
 
 
@@ -121,7 +143,7 @@ function createProfile(){
 
 
 // ===================================
-// OMRÅDER
+// ÅBN OMRÅDE
 // ===================================
 
 
@@ -129,7 +151,31 @@ function openArea(area){
 
 
 
+    if(
+        area === "lungelaboratoriet"
+    ){
+
+
+
+        startModule(
+            "lungelaboratoriet"
+        );
+
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
     const title =
+
     document.getElementById(
         "area-title"
     );
@@ -137,64 +183,42 @@ function openArea(area){
 
 
     const content =
+
     document.getElementById(
         "area-content"
     );
 
 
 
-
-
-    if(area === "lungelaboratoriet"){
-
-
-
-        title.innerHTML =
-        "🫁 Lungelaboratoriet";
+    title.innerHTML =
+    area;
 
 
 
-        content.innerHTML = `
+    content.innerHTML = `
 
 
-
-        <div class="dialogue-box">
-
-
-        <h3>
-        Anna – KOL-vejleder
-        </h3>
+    <div class="dialogue-box">
 
 
-        <p>
-
-        Du træder ind i
-        Lungelaboratoriet.
-
-        Her skal du undersøge,
-        hvordan KOL påvirker borgerens
-        vejrtrækning.
-
-        </p>
+    <h3>
+    Området er låst
+    </h3>
 
 
-        </div>
+    <p>
+
+    Dette område bliver åbnet,
+    når du har gennemført tidligere
+    missioner.
+
+    </p>
 
 
-
-        <button onclick="launchFirstLungMission()">
-
-        Start mission
-
-        </button>
+    </div>
 
 
-
-        `;
-
-
-
-    }
+    `;
 
 
 
@@ -203,31 +227,6 @@ function openArea(area){
     );
 
 
-}
-
-
-
-
-
-
-
-// ===================================
-// START LUNGEMISSION
-// ===================================
-
-
-function launchFirstLungMission(){
-
-
-    const mission =
-    getLungMission();
-
-
-
-    startMission(
-        mission
-    );
-
 
 }
 
@@ -239,12 +238,14 @@ function launchFirstLungMission(){
 
 
 // ===================================
-// STARTSIDE
+// START
 // ===================================
 
 
 document.addEventListener(
+
 "DOMContentLoaded",
+
 ()=>{
 
 

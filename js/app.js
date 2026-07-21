@@ -1,6 +1,7 @@
 // ===================================
 // KOL Akademiet v2.0
-// App motor
+// App styring
+// Stabil version
 // ===================================
 
 
@@ -8,48 +9,24 @@
 function showScreen(screenId){
 
 
+    document
+    .querySelectorAll(".screen")
+    .forEach(screen=>{
 
-    const screens =
-
-    document.querySelectorAll(
-        ".screen"
-    );
-
-
-
-    screens.forEach(screen=>{
-
-
-        screen.classList.add(
-            "hidden"
-        );
-
+        screen.classList.add("hidden");
 
     });
 
 
 
+    const screen = document.getElementById(screenId);
 
 
-    const target =
+    if(screen){
 
-    document.getElementById(
-        screenId
-    );
-
-
-
-    if(target){
-
-
-        target.classList.remove(
-            "hidden"
-        );
-
+        screen.classList.remove("hidden");
 
     }
-
-
 
 }
 
@@ -58,15 +35,12 @@ function showScreen(screenId){
 
 
 
-
-
 // ===================================
-// START SPIL
+// START
 // ===================================
 
 
 function startGame(){
-
 
 
     showScreen(
@@ -81,47 +55,36 @@ function startGame(){
 
 
 
-
-
 // ===================================
-// OPRET PROFIL
+// PROFIL
 // ===================================
 
 
 function createProfile(){
 
 
-
     const input =
-
     document.getElementById(
         "player-name"
     );
 
 
 
-    if(
-        !input.value.trim()
-    ){
-
+    if(!input.value.trim()){
 
         alert(
             "Skriv dit navn først"
         );
 
-
         return;
 
-
     }
-
 
 
 
     initializeProfile(
         input.value
     );
-
 
 
     renderPlayerCard();
@@ -143,11 +106,18 @@ function createProfile(){
 
 
 // ===================================
-// ÅBN OMRÅDE
+// ÅBN OMRÅDE FRA KORT
 // ===================================
 
 
 function openArea(area){
+
+
+
+    console.log(
+        "Åbner område:",
+        area
+    );
 
 
 
@@ -156,11 +126,9 @@ function openArea(area){
     ){
 
 
-
         startModule(
             "lungelaboratoriet"
         );
-
 
 
         return;
@@ -170,62 +138,9 @@ function openArea(area){
 
 
 
-
-
-
-
-    const title =
-
-    document.getElementById(
-        "area-title"
-    );
-
-
-
-    const content =
-
-    document.getElementById(
-        "area-content"
-    );
-
-
-
-    title.innerHTML =
-    area;
-
-
-
-    content.innerHTML = `
-
-
-    <div class="dialogue-box">
-
-
-    <h3>
-    Området er låst
-    </h3>
-
-
-    <p>
-
-    Dette område bliver åbnet,
-    når du har gennemført tidligere
-    missioner.
-
-    </p>
-
-
-    </div>
-
-
-    `;
-
-
-
     showScreen(
         "area-screen"
     );
-
 
 
 }
@@ -238,7 +153,7 @@ function openArea(area){
 
 
 // ===================================
-// START
+// STARTSIDE
 // ===================================
 
 
@@ -254,4 +169,6 @@ document.addEventListener(
     );
 
 
-});
+}
+
+);

@@ -1,12 +1,15 @@
 // ===================================
 // KOL Akademiet v2.0
-// Modulstyring
+// Modul Engine
+// Stabilisering 4.1
 // ===================================
 
 
 let activeModule = null;
 
 let activeModuleMissionIndex = 0;
+
+
 
 
 
@@ -63,7 +66,6 @@ function startModule(moduleId){
 
 
 
-
 // ===================================
 // MODULOVERSIGT
 // ===================================
@@ -80,6 +82,7 @@ function showModuleOverview(){
 
 
     const title =
+
     document.getElementById(
         "area-title"
     );
@@ -87,6 +90,7 @@ function showModuleOverview(){
 
 
     const content =
+
     document.getElementById(
         "area-content"
     );
@@ -99,6 +103,7 @@ function showModuleOverview(){
 
 
 
+
     content.innerHTML = `
 
 
@@ -106,15 +111,18 @@ function showModuleOverview(){
 
 
     <h3>
-    Dit læringsområde
+
+    Klar til missioner?
+
     </h3>
 
 
 
     <p>
 
-    Gennemfør missionerne og lær at
-    observere borgere med KOL.
+    Gennemfør missionerne og optjen
+    erfaring gennem realistiske
+    borgersituationer.
 
     </p>
 
@@ -123,6 +131,7 @@ function showModuleOverview(){
     <p>
 
     Missioner:
+
     ${activeModule.missions.length}
 
     </p>
@@ -130,6 +139,7 @@ function showModuleOverview(){
 
 
     </div>
+
 
 
 
@@ -154,7 +164,7 @@ function showModuleOverview(){
 
 
 // ===================================
-// NÆSTE MISSION
+// START MISSION
 // ===================================
 
 
@@ -185,7 +195,7 @@ function startNextModuleMission(){
 
 
 // ===================================
-// AFSLUT MISSION
+// GENNEMFØR MISSION
 // ===================================
 
 
@@ -193,7 +203,7 @@ function completeModuleMission(){
 
 
 
-    const currentMission =
+    const mission =
 
     activeModule.missions[
         activeModuleMissionIndex
@@ -202,10 +212,8 @@ function completeModuleMission(){
 
 
     completeMissionProgress(
-        currentMission.id
+        mission.id
     );
-
-
 
 
 
@@ -214,16 +222,15 @@ function completeModuleMission(){
 
 
 
+    const total =
+
+    activeModule.missions.length;
+
+
 
     const completed =
 
     activeModuleMissionIndex;
-
-
-
-    const total =
-
-    activeModule.missions.length;
 
 
 
@@ -246,7 +253,7 @@ function completeModuleMission(){
 
 
 
-    updateAreaProgress(
+    updatePlayerModuleProgress(
 
         activeModule.id,
 
@@ -259,17 +266,19 @@ function completeModuleMission(){
 
 
 
-
     if(
+
         activeModuleMissionIndex
+
         <
-        activeModule.missions.length
+
+        total
+
     ){
 
 
 
         showNextMission();
-
 
 
     }
@@ -318,7 +327,9 @@ function showNextMission(){
 
 
     <h2>
+
     Mission gennemført
+
     </h2>
 
 
@@ -334,6 +345,7 @@ function showNextMission(){
 
 
 
+
     <button onclick="startNextModuleMission()">
 
     Næste mission
@@ -342,6 +354,7 @@ function showNextMission(){
 
 
     `;
+
 
 
 }
@@ -354,11 +367,21 @@ function showNextMission(){
 
 
 // ===================================
-// MODUL FÆRDIG
+// MODUL FÆRDIGT
 // ===================================
 
 
 function finishModule(){
+
+
+
+    updatePlayerModuleProgress(
+
+        activeModule.id,
+
+        100
+
+    );
 
 
 
@@ -377,22 +400,37 @@ function finishModule(){
 
 
     <h2>
-    Lungelaboratoriet gennemført!
+
+    Modul gennemført!
+
     </h2>
+
 
 
     <p>
 
-    Du har afsluttet modulet.
+    Du har gennemført
+    ${activeModule.title}.
 
     </p>
+
+
+
+    <p>
+
+    Fremgang:
+    100%
+
+    </p>
+
 
 
     </div>
 
 
 
-    <button onclick="showScreen('academy-screen')">
+
+    <button onclick="showScreen('academy-screen');renderPlayerCard();">
 
     Tilbage til kortet
 

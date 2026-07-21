@@ -1,13 +1,8 @@
 // ===================================
 // KOL Akademiet v2.0
-// App motor - integration
+// App motor
 // ===================================
 
-
-
-// ===================================
-// SKIFT SKÆRM
-// ===================================
 
 
 function showScreen(screenId){
@@ -47,7 +42,7 @@ function showScreen(screenId){
 
 
 // ===================================
-// START SPIL
+// START
 // ===================================
 
 
@@ -68,7 +63,7 @@ function startGame(){
 
 
 // ===================================
-// OPRET PROFIL
+// PROFIL
 // ===================================
 
 
@@ -95,9 +90,7 @@ function createProfile(){
 
         return;
 
-
     }
-
 
 
 
@@ -117,6 +110,7 @@ function createProfile(){
     );
 
 
+
 }
 
 
@@ -127,26 +121,11 @@ function createProfile(){
 
 
 // ===================================
-// ÅBN OMRÅDE
+// OMRÅDER
 // ===================================
 
 
 function openArea(area){
-
-
-
-    if(
-        !isAreaUnlocked(area)
-    ){
-
-
-        return;
-
-
-    }
-
-
-
 
 
 
@@ -166,22 +145,17 @@ function openArea(area){
 
 
 
-
-    if(
-        area === "lungelaboratoriet"
-    ){
+    if(area === "lungelaboratoriet"){
 
 
 
         title.innerHTML =
-
         "🫁 Lungelaboratoriet";
 
 
 
-
-
         content.innerHTML = `
+
 
 
         <div class="dialogue-box">
@@ -192,31 +166,32 @@ function openArea(area){
         </h3>
 
 
-
         <p>
 
-        Du står ved indgangen til
+        Du træder ind i
         Lungelaboratoriet.
 
-        Her skal du lære, hvordan
-        KOL påvirker borgerens lunger.
+        Her skal du undersøge,
+        hvordan KOL påvirker borgerens
+        vejrtrækning.
 
         </p>
-
 
 
         </div>
 
 
 
-        <button onclick="openMission()">
+        <button onclick="launchFirstLungMission()">
 
         Start mission
 
         </button>
 
 
+
         `;
+
 
 
     }
@@ -228,7 +203,6 @@ function openArea(area){
     );
 
 
-
 }
 
 
@@ -237,92 +211,24 @@ function openArea(area){
 
 
 
-
-
 // ===================================
-// FØRSTE MISSION
+// START LUNGEMISSION
 // ===================================
 
 
-function openMission(){
+function launchFirstLungMission(){
+
+
+    const mission =
+    getLungMission();
 
 
 
-    document.getElementById(
-        "mission-title"
-    ).innerHTML =
-
-    "Mission 1: Lungernes hemmelighed";
-
-
-
-
-    document.getElementById(
-        "mission-content"
-    ).innerHTML = `
-
-
-
-    <div class="dialogue-box">
-
-
-    <h3>
-    Din første opgave
-    </h3>
-
-
-    <p>
-
-    En borger med KOL fortæller,
-    at det er blevet sværere at gå
-    fra stuen til køkkenet.
-
-    Hvad vil du først være mest
-    opmærksom på?
-
-    </p>
-
-
-
-    <button onclick="missionAnswer(false)">
-
-    Fortælle borgeren at træne mere
-
-    </button>
-
-
-
-    <button onclick="missionAnswer(true)">
-
-    Observere ændringer i åndenød
-    og aktivitetsniveau
-
-    </button>
-
-
-
-    <button onclick="missionAnswer(false)">
-
-    Ignorere det, hvis borgeren
-    stadig kan klare sig selv
-
-    </button>
-
-
-
-    </div>
-
-
-    `;
-
-
-
-    showScreen(
-        "mission-screen"
+    startMission(
+        mission
     );
 
 
-
 }
 
 
@@ -333,140 +239,18 @@ function openMission(){
 
 
 // ===================================
-// SVAR PÅ MISSION
-// ===================================
-
-
-function missionAnswer(correct){
-
-
-
-    const box =
-    document.getElementById(
-        "mission-content"
-    );
-
-
-
-    if(correct){
-
-
-
-        addPoints(50);
-
-
-
-        completeArea(
-            "lungelaboratoriet"
-        );
-
-
-
-        box.innerHTML = `
-
-
-        <div class="dialogue-box">
-
-
-        <h3>
-        Godt observeret!
-        </h3>
-
-
-        <p>
-
-        Ændret åndenød og lavere
-        aktivitetsniveau kan være tegn
-        på ændringer hos borgeren.
-
-        </p>
-
-
-        <p>
-        +50 point
-        </p>
-
-
-        </div>
-
-
-        <button onclick="showScreen('academy-screen')">
-
-        Tilbage til kortet
-
-        </button>
-
-
-        `;
-
-
-
-    }
-
-    else {
-
-
-
-        box.innerHTML = `
-
-
-        <div class="dialogue-box">
-
-
-        <h3>
-        Ikke helt
-        </h3>
-
-
-        <p>
-
-        Ved KOL er observation af
-        ændringer vigtig for at opdage
-        problemer tidligt.
-
-        </p>
-
-
-        </div>
-
-
-
-        <button onclick="openMission()">
-
-        Prøv igen
-
-        </button>
-
-
-        `;
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-// ===================================
-// START
+// STARTSIDE
 // ===================================
 
 
 document.addEventListener(
-    "DOMContentLoaded",
-    ()=>{
+"DOMContentLoaded",
+()=>{
 
 
-        showScreen(
-            "welcome-screen"
-        );
+    showScreen(
+        "welcome-screen"
+    );
 
 
-    }
-);
+});

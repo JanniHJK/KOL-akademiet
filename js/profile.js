@@ -1,6 +1,6 @@
 // ===================================
 // KOL Akademiet v2.0
-// Profilstyring
+// Profil og progression
 // ===================================
 
 
@@ -12,7 +12,7 @@ let currentPlayer = null;
 
 
 // ===================================
-// Opret eller hent profil
+// OPRET PROFIL
 // ===================================
 
 
@@ -20,36 +20,58 @@ function initializeProfile(name){
 
 
 
-    const existingPlayer =
+    const savedPlayer =
+
     loadPlayerData();
 
 
 
 
-    if(existingPlayer){
+    if(savedPlayer){
 
 
-        currentPlayer = existingPlayer;
-
-
-        return currentPlayer;
+        currentPlayer =
+        savedPlayer;
 
 
     }
 
+    else {
 
 
 
-
-    currentPlayer =
-    createDefaultPlayer(name);
+        currentPlayer = {
 
 
+            name:name,
 
 
-    savePlayerData(
-        currentPlayer
-    );
+            rank:
+            "Ny medarbejder",
+
+
+            points:0,
+
+
+            progress:0,
+
+
+            completedMissions:[],
+
+
+            completedAreas:[]
+
+
+        };
+
+
+
+        savePlayerData(
+            currentPlayer
+        );
+
+
+    }
 
 
 
@@ -66,11 +88,12 @@ function initializeProfile(name){
 
 
 // ===================================
-// Opdater profil
+// GEM PROFIL
 // ===================================
 
 
-function updateProfile(){
+function saveCurrentProfile(){
+
 
 
     if(currentPlayer){
@@ -93,7 +116,7 @@ function updateProfile(){
 
 
 // ===================================
-// Tilføj point
+// POINT
 // ===================================
 
 
@@ -116,8 +139,10 @@ function addPoints(points){
     updateRank();
 
 
+    saveCurrentProfile();
 
-    updateProfile();
+
+    renderPlayerCard();
 
 
 }
@@ -130,7 +155,7 @@ function addPoints(points){
 
 
 // ===================================
-// Opdater rang
+// RANG
 // ===================================
 
 
@@ -149,8 +174,9 @@ function updateRank(){
 
     }
 
+
     else if(
-        currentPlayer.points >= 700
+        currentPlayer.points >= 500
     ){
 
 
@@ -160,8 +186,9 @@ function updateRank(){
 
     }
 
+
     else if(
-        currentPlayer.points >= 400
+        currentPlayer.points >= 200
     ){
 
 
@@ -171,16 +198,6 @@ function updateRank(){
 
     }
 
-    else if(
-        currentPlayer.points >= 100
-    ){
-
-
-        currentPlayer.rank =
-        "KOL-assistent";
-
-
-    }
 
     else {
 
@@ -203,7 +220,95 @@ function updateRank(){
 
 
 // ===================================
-// Vis profil på kort
+// MISSION GENNEMFØRT
+// ===================================
+
+
+function completeMissionProgress(
+    missionId
+){
+
+
+
+    if(
+        !currentPlayer.completedMissions.includes(
+            missionId
+        )
+    ){
+
+
+        currentPlayer.completedMissions.push(
+            missionId
+        );
+
+
+    }
+
+
+
+    calculateProgress();
+
+
+
+    saveCurrentProfile();
+
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// BEREGN PROCENT
+// ===================================
+
+
+function calculateProgress(){
+
+
+
+    const totalMissions = 100;
+
+
+
+    currentPlayer.progress =
+
+
+    Math.min(
+
+        Math.round(
+
+            (
+            currentPlayer.completedMissions.length
+            /
+            totalMissions
+            )
+            *
+            100
+
+        ),
+
+        100
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// VIS PROFIL
 // ===================================
 
 
@@ -212,13 +317,17 @@ function renderPlayerCard(){
 
 
     const card =
+
     document.getElementById(
         "player-card"
     );
 
 
 
-    if(!card || !currentPlayer){
+    if(
+        !card ||
+        !currentPlayer
+    ){
 
         return;
 
@@ -234,27 +343,42 @@ function renderPlayerCard(){
 
 
     <h3>
+
     ${currentPlayer.name}
+
     </h3>
 
 
+
     <p>
+
     Rang:
+
     <strong>
+
     ${currentPlayer.rank}
+
     </strong>
+
     </p>
 
 
+
+
     <p>
+
     Point:
     ${currentPlayer.points}
+
     </p>
 
 
+
     <p>
-    Fremskridt:
+
+    Gennemført:
     ${currentPlayer.progress}%
+
     </p>
 
 
@@ -265,15 +389,17 @@ function renderPlayerCard(){
     `;
 
 
-
 }
 
 
 
 
 
+
+
+
 // ===================================
-// Hent nuværende spiller
+// HENT SPILLER
 // ===================================
 
 

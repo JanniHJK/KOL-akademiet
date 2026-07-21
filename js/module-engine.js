@@ -1,8 +1,7 @@
 // ===================================
 // KOL Akademiet v2.0
-// Modul-motor
+// Modulstyring
 // ===================================
-
 
 
 let activeModule = null;
@@ -13,20 +12,17 @@ let activeModuleMissionIndex = 0;
 
 
 
-
-
 // ===================================
 // START MODUL
 // ===================================
 
 
-function startModule(moduleName){
+function startModule(moduleId){
 
 
 
-    if(
-        moduleName === "lungelaboratoriet"
-    ){
+    if(moduleId === "lungelaboratoriet"){
+
 
 
         activeModule = {
@@ -51,14 +47,11 @@ function startModule(moduleName){
 
 
 
-
-
     activeModuleMissionIndex = 0;
 
 
 
     showModuleOverview();
-
 
 
 }
@@ -70,8 +63,9 @@ function startModule(moduleName){
 
 
 
+
 // ===================================
-// VIS MODULOVERSIGT
+// MODULOVERSIGT
 // ===================================
 
 
@@ -112,16 +106,15 @@ function showModuleOverview(){
 
 
     <h3>
-
-    Dit næste område
-
+    Dit læringsområde
     </h3>
+
 
 
     <p>
 
-    Gennemfør missionerne for at
-    opbygge din viden.
+    Gennemfør missionerne og lær at
+    observere borgere med KOL.
 
     </p>
 
@@ -130,20 +123,19 @@ function showModuleOverview(){
     <p>
 
     Missioner:
-
     ${activeModule.missions.length}
 
     </p>
+
 
 
     </div>
 
 
 
-
     <button onclick="startNextModuleMission()">
 
-    Start første mission
+    Start mission
 
     </button>
 
@@ -160,8 +152,9 @@ function showModuleOverview(){
 
 
 
+
 // ===================================
-// START NÆSTE MISSION
+// NÆSTE MISSION
 // ===================================
 
 
@@ -182,7 +175,6 @@ function startNextModuleMission(){
     );
 
 
-
 }
 
 
@@ -193,7 +185,7 @@ function startNextModuleMission(){
 
 
 // ===================================
-// FÆRDIG MISSION
+// AFSLUT MISSION
 // ===================================
 
 
@@ -201,9 +193,31 @@ function completeModuleMission(){
 
 
 
+    const currentMission =
+
+    activeModule.missions[
+        activeModuleMissionIndex
+    ];
+
+
+
+    completeMissionProgress(
+        currentMission.id
+    );
+
+
+
+
+
+    activeModuleMissionIndex++;
+
+
+
+
+
     const completed =
 
-    activeModuleMissionIndex + 1;
+    activeModuleMissionIndex;
 
 
 
@@ -214,16 +228,16 @@ function completeModuleMission(){
 
 
 
+
     const progress =
 
 
     Math.round(
 
-        (
         completed /
-        total
-        )
-        *
+
+        total *
+
         100
 
     );
@@ -244,37 +258,24 @@ function completeModuleMission(){
 
 
 
-    completeMissionProgress(
-
-        activeModule.missions[
-            activeModuleMissionIndex
-        ].id
-
-    );
-
-
-
-
-
-
-
-    activeModuleMissionIndex++;
-
-
-
 
 
     if(
-        activeModuleMissionIndex < total
+        activeModuleMissionIndex
+        <
+        activeModule.missions.length
     ){
 
 
-        showNextMissionButton();
+
+        showNextMission();
+
 
 
     }
 
     else {
+
 
 
         finishModule();
@@ -298,11 +299,12 @@ function completeModuleMission(){
 // ===================================
 
 
-function showNextMissionButton(){
+function showNextMission(){
 
 
 
     const content =
+
     document.getElementById(
         "mission-content"
     );
@@ -315,9 +317,10 @@ function showNextMissionButton(){
     <div class="correct-feedback">
 
 
-    <h3>
+    <h2>
     Mission gennemført
-    </h3>
+    </h2>
+
 
 
     <p>
@@ -328,7 +331,6 @@ function showNextMissionButton(){
 
 
     </div>
-
 
 
 
@@ -352,7 +354,7 @@ function showNextMissionButton(){
 
 
 // ===================================
-// MODUL FÆRDIGT
+// MODUL FÆRDIG
 // ===================================
 
 
@@ -361,6 +363,7 @@ function finishModule(){
 
 
     const content =
+
     document.getElementById(
         "mission-content"
     );
@@ -374,19 +377,18 @@ function finishModule(){
 
 
     <h2>
-    Modul gennemført!
+    Lungelaboratoriet gennemført!
     </h2>
 
 
     <p>
 
-    Lungelaboratoriet er afsluttet.
+    Du har afsluttet modulet.
 
     </p>
 
 
     </div>
-
 
 
 
@@ -399,6 +401,11 @@ function finishModule(){
 
     `;
 
+
+
+    unlockNextArea(
+        activeModule.id
+    );
 
 
 }

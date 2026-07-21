@@ -1,89 +1,36 @@
 /* ===================================
-   KOL Akademiet v2.0
-   Eventyrdesign
+KOL Akademiet v2.0
+Style Sprint 4.2
 =================================== */
 
 
-* {
 
-    box-sizing:border-box;
+*{
 
-}
-
-
-
-body {
-
-
-    margin:0;
-
-
-    min-height:100vh;
-
-
-    font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-
-    background:
-
-    linear-gradient(
-        180deg,
-        #dbeafe,
-        #fef3c7
-    );
-
-
-    color:#1f2937;
-
+box-sizing:border-box;
 
 }
 
 
 
 
-#app {
+body{
 
-    min-height:100vh;
+margin:0;
 
-}
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
 
+background:
+linear-gradient(
+135deg,
+#e8f3ff,
+#f8fbff
+);
 
-
-
-/* ===================================
-   SKÆRME
-=================================== */
-
-
-.screen {
-
-
-    min-height:100vh;
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-    padding:25px;
-
-
-}
-
-
-
-
-.hidden {
-
-    display:none;
+color:#233142;
 
 }
 
@@ -91,38 +38,133 @@ body {
 
 
 
+#app{
 
-/* ===================================
-   PANELER
-=================================== */
+min-height:100vh;
+
+}
+
+
+
+
+
+.screen{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+padding:30px;
+
+}
+
+
+
+
+.hidden{
+
+display:none !important;
+
+}
+
+
+
 
 
 .panel,
-.hero {
+.hero{
+
+background:white;
+
+width:min(900px,95%);
+
+border-radius:24px;
+
+padding:35px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.12);
+
+}
 
 
-    width:100%;
 
 
-    max-width:1000px;
+
+h1{
+
+margin-top:0;
+
+font-size:38px;
+
+}
 
 
-    background:white;
 
 
-    border-radius:35px;
+
+h2{
+
+margin-top:20px;
+
+}
 
 
-    padding:40px;
 
 
-    box-shadow:
 
-    0 20px 45px rgba(0,0,0,.15);
+button{
+
+border:none;
+
+border-radius:14px;
+
+padding:16px 28px;
+
+font-size:18px;
+
+cursor:pointer;
+
+background:#1976d2;
+
+color:white;
+
+margin-top:25px;
+
+transition:0.2s;
+
+}
 
 
-    text-align:center;
 
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+
+
+
+
+input{
+
+width:100%;
+
+padding:15px;
+
+border-radius:12px;
+
+border:1px solid #ccc;
+
+font-size:18px;
+
+margin-top:15px;
 
 }
 
@@ -132,53 +174,14 @@ body {
 
 
 
-/* ===================================
-   STARTSIDE
-=================================== */
+/* ===============================
+PROFILKORT
+=============================== */
 
 
-.hero {
+#player-card{
 
-
-    background:
-
-
-    linear-gradient(
-        135deg,
-        #ffffff,
-        #ecfeff
-    );
-
-
-}
-
-
-
-
-.hero h1 {
-
-
-    font-size:
-
-    clamp(2.5rem,5vw,4rem);
-
-
-    color:#0f766e;
-
-
-    margin-bottom:10px;
-
-
-}
-
-
-
-
-.subtitle {
-
-
-    font-size:1.3rem;
-
+margin:20px 0;
 
 }
 
@@ -186,78 +189,89 @@ body {
 
 
 
-/* ===================================
-   ANNA
-=================================== */
 
 
-.anna-card {
+/* ===============================
+KORT / VERDEN
+=============================== */
 
 
-    margin:
+.world-map{
 
-    35px auto;
+display:grid;
 
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
 
-    max-width:450px;
+gap:30px;
 
-
-    background:#f0fdf4;
-
-
-    border-radius:30px;
-
-
-    padding:25px;
-
+margin-top:35px;
 
 }
 
 
 
 
-.anna-placeholder {
+
+.mission-card{
+
+background:#ffffff;
+
+border-radius:22px;
+
+padding:28px;
+
+box-shadow:
+0 6px 18px rgba(0,0,0,0.12);
+
+cursor:pointer;
+
+transition:0.2s;
+
+min-height:180px;
+
+}
 
 
-    width:180px;
 
 
-    height:220px;
+.mission-card:hover{
+
+transform:translateY(-5px);
+
+}
 
 
-    margin:auto;
 
 
-    border-radius:90px 90px 30px 30px;
+
+.mission-card.unlocked{
+
+border:3px solid #1976d2;
+
+}
 
 
-    background:
 
 
-    linear-gradient(
-        180deg,
-        #14b8a6,
-        #0f766e
-    );
+
+.mission-card.locked{
+
+opacity:0.55;
+
+cursor:not-allowed;
+
+}
 
 
-    display:flex;
 
 
-    align-items:center;
 
+.mission-icon{
 
-    justify-content:center;
+font-size:55px;
 
-
-    color:white;
-
-
-    font-size:2rem;
-
-
-    font-weight:bold;
-
+margin-bottom:15px;
 
 }
 
@@ -266,64 +280,24 @@ body {
 
 
 
-
-/* ===================================
-   KNAPPER
-=================================== */
-
-
-button {
+/* ===============================
+MISSION
+=============================== */
 
 
-    border:none;
+.mission-story{
 
+background:#f2f7fc;
 
-    padding:
+border-radius:18px;
 
-    16px 35px;
+padding:25px;
 
+margin-bottom:35px;
 
-    border-radius:
+line-height:1.7;
 
-    20px;
-
-
-    background:
-
-
-    linear-gradient(
-        135deg,
-        #0f766e,
-        #14b8a6
-    );
-
-
-    color:white;
-
-
-    font-size:1.1rem;
-
-
-    cursor:pointer;
-
-
-    transition:.2s;
-
-
-}
-
-
-
-button:hover {
-
-
-    transform:translateY(-4px);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(0,0,0,.2);
-
+font-size:18px;
 
 }
 
@@ -331,32 +305,20 @@ button:hover {
 
 
 
+.question-box{
 
-input {
+margin-top:25px;
 
-
-    width:80%;
-
-
-    max-width:400px;
+}
 
 
-    padding:15px;
 
 
-    border-radius:15px;
+.question-box h3{
 
+line-height:1.5;
 
-    border:
-
-    2px solid #cbd5e1;
-
-
-    font-size:1rem;
-
-
-    margin-bottom:20px;
-
+margin-bottom:30px;
 
 }
 
@@ -366,31 +328,18 @@ input {
 
 
 
-
-/* ===================================
-   EVENTYRKORT
-=================================== */
+/* NYT SVARLAYOUT */
 
 
-.world-map {
+.answer-grid{
 
+display:flex;
 
-    display:grid;
+flex-direction:column;
 
+gap:20px;
 
-    grid-template-columns:
-
-    repeat(
-        auto-fit,
-        minmax(240px,1fr)
-    );
-
-
-    gap:30px;
-
-
-    margin-top:35px;
-
+width:100%;
 
 }
 
@@ -398,95 +347,29 @@ input {
 
 
 
-.mission-card {
+.answer-card{
 
+width:100%;
 
-    background:white;
+min-height:75px;
 
+text-align:left;
 
-    border-radius:30px;
+padding:22px;
 
+background:white;
 
-    padding:25px;
+color:#233142;
 
+border:2px solid #d5dce5;
 
-    min-height:250px;
+border-radius:18px;
 
+font-size:17px;
 
-    box-shadow:
+line-height:1.5;
 
-
-    0 12px 30px rgba(0,0,0,.12);
-
-
-    cursor:pointer;
-
-
-    transition:.25s;
-
-
-    border:
-
-    3px solid transparent;
-
-
-}
-
-
-
-
-.mission-card:hover {
-
-
-    transform:
-
-    translateY(-8px);
-
-
-    border-color:#14b8a6;
-
-
-}
-
-
-
-
-.mission-card.unlocked {
-
-
-    background:
-
-
-    linear-gradient(
-        135deg,
-        #ecfeff,
-        #ffffff
-    );
-
-
-}
-
-
-
-.mission-card.locked {
-
-
-    opacity:.55;
-
-
-    cursor:not-allowed;
-
-
-}
-
-
-
-
-.mission-icon {
-
-
-    font-size:4rem;
-
+margin:0;
 
 }
 
@@ -494,26 +377,11 @@ input {
 
 
 
-.mission-card span {
+.answer-card:hover{
 
+border-color:#1976d2;
 
-    display:inline-block;
-
-
-    margin-top:15px;
-
-
-    padding:8px 15px;
-
-
-    border-radius:15px;
-
-
-    background:#dcfce7;
-
-
-    color:#166534;
-
+background:#f4f9ff;
 
 }
 
@@ -522,17 +390,39 @@ input {
 
 
 
-
-/* ===================================
-   PROFILKORT
-=================================== */
-
-
-#player-card {
+/* ===============================
+FEEDBACK
+=============================== */
 
 
-    margin-bottom:25px;
+.correct-feedback{
 
+background:#e8f7ed;
+
+border-left:8px solid #2e8b57;
+
+padding:25px;
+
+border-radius:16px;
+
+margin-top:30px;
+
+}
+
+
+
+
+.wrong-feedback{
+
+background:#fdecec;
+
+border-left:8px solid #c62828;
+
+padding:25px;
+
+border-radius:16px;
+
+margin-top:30px;
 
 }
 
@@ -540,96 +430,61 @@ input {
 
 
 
-
-/* ===================================
-   FEEDBACK
-=================================== */
-
-
-.correct-feedback {
+/* ===============================
+MODULBOKS
+=============================== */
 
 
-    background:#dcfce7;
+.dialogue-box{
 
+background:#f5f8fc;
 
-    border-left:
+border-radius:20px;
 
-    8px solid #16a34a;
+padding:30px;
 
+margin-bottom:35px;
 
-    padding:20px;
-
-
-    border-radius:20px;
-
+line-height:1.6;
 
 }
 
 
 
 
-.wrong-feedback {
-
-
-    background:#fee2e2;
-
-
-    border-left:
-
-    8px solid #dc2626;
-
-
-    padding:20px;
-
-
-    border-radius:20px;
-
-
-}
-
-
-
-
-
-
-/* ===================================
-   MOBIL
-=================================== */
 
 
 @media(max-width:600px){
 
 
+.screen{
+
+padding:15px;
+
+}
+
 
 .panel,
-.hero {
+.hero{
 
-
-    padding:25px;
-
-
-    border-radius:25px;
-
+padding:22px;
 
 }
 
 
 
-.world-map {
+h1{
 
-
-    grid-template-columns:1fr;
-
+font-size:30px;
 
 }
 
 
+.answer-card{
 
-button {
+font-size:16px;
 
-
-    width:100%;
-
+padding:18px;
 
 }
 

@@ -4,6 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>KOL Akademiet</title>
@@ -19,9 +20,11 @@
 <div id="app">
 
 
+
 <!-- =========================
-     STARTSKÆRM
+     START
 ========================= -->
+
 
 <section id="welcome-screen" class="screen">
 
@@ -31,17 +34,23 @@
 
 <div class="academy-logo">
 
-<h1>KOL Akademiet</h1>
+
+<h1>
+KOL Akademiet
+</h1>
+
 
 <p>
 Din rejse fra ny medarbejder til KOL-mester
 </p>
+
 
 </div>
 
 
 
 <div class="character-placeholder">
+
 
 <div class="character-circle">
 
@@ -54,6 +63,7 @@ Anna
 Anna – din KOL-vejleder
 </p>
 
+
 </div>
 
 
@@ -62,12 +72,17 @@ Anna – din KOL-vejleder
 <div class="dialogue-box">
 
 
-<h3>Velkommen til akademiet</h3>
+<h3>
+Velkommen til akademiet
+</h3>
 
 
 <p>
-Her lærer du at hjælpe borgere med KOL gennem
-missioner, cases og praktiske udfordringer.
+
+Her lærer du at hjælpe borgere med KOL
+gennem missioner, cases og praktiske
+udfordringer.
+
 </p>
 
 
@@ -83,10 +98,12 @@ Start din rejse
 </button>
 
 
+
 </div>
 
 
 </section>
+
 
 
 
@@ -116,7 +133,6 @@ Hvad skal vi kalde dig på akademiet?
 
 <input 
 id="player-name"
-type="text"
 placeholder="Dit navn"
 >
 
@@ -139,6 +155,7 @@ Bliv elev på akademiet
 
 
 
+
 <!-- =========================
      KORT
 ========================= -->
@@ -151,8 +168,9 @@ Bliv elev på akademiet
 
 
 <h1>
-🏰 KOL Akademiet
+KOL Akademiet
 </h1>
+
 
 
 <div id="player-card">
@@ -161,9 +179,10 @@ Bliv elev på akademiet
 
 
 
-<p>
-Vælg dit næste område
-</p>
+
+<h2>
+Missionkort
+</h2>
 
 
 
@@ -172,12 +191,13 @@ Vælg dit næste område
 
 
 
+
+
 <div class="map-location academy">
 
+
 <div class="location-icon">
-
 🏰
-
 </div>
 
 
@@ -198,14 +218,14 @@ Din base
 
 
 
+
 <div class="map-location unlocked"
+
 onclick="openArea('lungelaboratoriet')">
 
 
 <div class="location-icon">
-
 🫁
-
 </div>
 
 
@@ -215,7 +235,7 @@ Lungelaboratoriet
 
 
 <p>
-Introduktion til KOL
+Mission 1
 </p>
 
 
@@ -226,13 +246,12 @@ Introduktion til KOL
 
 
 
+
 <div class="map-location locked">
 
 
 <div class="location-icon">
-
 📡
-
 </div>
 
 
@@ -258,9 +277,7 @@ Låses op senere
 
 
 <div class="location-icon">
-
 🍲
-
 </div>
 
 
@@ -281,13 +298,12 @@ Låses op senere
 
 
 
+
 <div class="map-location locked">
 
 
 <div class="location-icon">
-
 💊
-
 </div>
 
 
@@ -305,6 +321,7 @@ Låses op senere
 
 
 
+
 </div>
 
 
@@ -312,6 +329,8 @@ Låses op senere
 
 
 </section>
+
+
 
 
 
@@ -335,17 +354,18 @@ Låses op senere
 </h1>
 
 
-
 <div id="area-content">
 
 </div>
-
 
 
 </div>
 
 
 </section>
+
+
+
 
 
 
@@ -368,11 +388,9 @@ Låses op senere
 </h1>
 
 
-
 <div id="mission-content">
 
 </div>
-
 
 
 </div>
@@ -383,15 +401,26 @@ Låses op senere
 
 
 
+
 </div>
 
 
 
 
 
+<!-- VIGTIG RÆKKEFØLGE -->
+
+<script src="js/storage.js"></script>
+
+<script src="js/profile.js"></script>
+
+<script src="js/map.js"></script>
+
 <script src="js/app.js"></script>
 
 
+
 </body>
+
 
 </html>

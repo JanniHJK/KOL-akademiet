@@ -1,18 +1,26 @@
 // ===================================
 // KOL Akademiet v2.0
-// Kort og områder
+// Eventyrkort og progression
 // ===================================
 
 
 
-const academyAreas = {
+const academyMap = {
 
 
     lungelaboratoriet:{
 
 
+        id:
+        "lungelaboratoriet",
+
+
         title:
         "Lungelaboratoriet",
+
+
+        description:
+        "Lær om KOL, lunger og observation af borgeren.",
 
 
         unlocked:true,
@@ -28,8 +36,16 @@ const academyAreas = {
     telemedicin:{
 
 
+        id:
+        "telemedicin",
+
+
         title:
         "Telemedicinsk kontrolrum",
+
+
+        description:
+        "Arbejd med målinger, observationer og tidlig opsporing.",
 
 
         unlocked:false,
@@ -45,8 +61,16 @@ const academyAreas = {
     ernæring:{
 
 
+        id:
+        "ernæring",
+
+
         title:
         "Ernæringscaféen",
+
+
+        description:
+        "Lær om energi, appetit og ernæring ved KOL.",
 
 
         unlocked:false,
@@ -62,8 +86,16 @@ const academyAreas = {
     medicin:{
 
 
+        id:
+        "medicin",
+
+
         title:
         "Medicincenteret",
+
+
+        description:
+        "Inhalation, medicin og korrekt behandling.",
 
 
         unlocked:false,
@@ -79,59 +111,16 @@ const academyAreas = {
     akut:{
 
 
+        id:
+        "akut",
+
+
         title:
         "Akutforværringsafdelingen",
 
 
-        unlocked:false,
-
-
-        progress:0
-
-
-    },
-
-
-
-    highflow:{
-
-
-        title:
-        "High Flow-stationen",
-
-
-        unlocked:false,
-
-
-        progress:0
-
-
-    },
-
-
-
-    niv:{
-
-
-        title:
-        "NIV-centret",
-
-
-        unlocked:false,
-
-
-        progress:0
-
-
-    },
-
-
-
-    ilt:{
-
-
-        title:
-        "Iltklinikken",
+        description:
+        "Genkend tegn på forværring hos borgeren.",
 
 
         unlocked:false,
@@ -142,7 +131,6 @@ const academyAreas = {
 
     }
 
-
 };
 
 
@@ -151,8 +139,29 @@ const academyAreas = {
 
 
 
+
 // ===================================
-// Tjek om område er åbent
+// HENT KORT
+// ===================================
+
+
+function getAcademyMap(){
+
+
+    return academyMap;
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// TJEK OMRÅDE
 // ===================================
 
 
@@ -161,11 +170,11 @@ function isAreaUnlocked(area){
 
 
     if(
-        academyAreas[area]
+        academyMap[area]
     ){
 
 
-        return academyAreas[area].unlocked;
+        return academyMap[area].unlocked;
 
 
     }
@@ -183,8 +192,9 @@ function isAreaUnlocked(area){
 
 
 
+
 // ===================================
-// Lås område op
+// LÅS OMRÅDE OP
 // ===================================
 
 
@@ -193,20 +203,17 @@ function unlockArea(area){
 
 
     if(
-        academyAreas[area]
+        academyMap[area]
     ){
 
 
-        academyAreas[area].unlocked = true;
+        academyMap[area].unlocked = true;
 
 
-
-        updateProfile();
-
+        saveMapProgress();
 
 
     }
-
 
 
 }
@@ -219,24 +226,113 @@ function unlockArea(area){
 
 
 // ===================================
-// Marker område gennemført
+// OPDATER FREMGANG
 // ===================================
 
 
-function completeArea(area){
+function updateAreaProgress(
+    area,
+    value
+){
 
 
 
     if(
-        academyAreas[area]
+        academyMap[area]
     ){
 
 
-        academyAreas[area].progress = 100;
+        academyMap[area].progress =
+        value;
 
 
 
-        unlockNextArea(area);
+        saveMapProgress();
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// GEM KORTDATA
+// ===================================
+
+
+function saveMapProgress(){
+
+
+
+    localStorage.setItem(
+
+        "kol_academy_map",
+
+        JSON.stringify(
+            academyMap
+        )
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// HENT GEMT KORT
+// ===================================
+
+
+function loadMapProgress(){
+
+
+
+    const saved =
+
+    localStorage.getItem(
+        "kol_academy_map"
+    );
+
+
+
+    if(saved){
+
+
+        const loaded =
+        JSON.parse(saved);
+
+
+
+        Object.keys(loaded)
+        .forEach(area=>{
+
+
+            if(
+                academyMap[area]
+            ){
+
+
+                academyMap[area] =
+                loaded[area];
+
+
+            }
+
+
+        });
 
 
 
@@ -254,15 +350,15 @@ function completeArea(area){
 
 
 // ===================================
-// Lås næste område op
+// LÅS NÆSTE OMRÅDE OP
 // ===================================
 
 
-function unlockNextArea(area){
+function unlockNextArea(currentArea){
 
 
 
-    const sequence = [
+    const order = [
 
 
         "lungelaboratoriet",
@@ -273,29 +369,22 @@ function unlockNextArea(area){
 
         "medicin",
 
-        "akut",
-
-        "highflow",
-
-        "niv",
-
-        "ilt"
+        "akut"
 
 
     ];
 
 
 
-
-
     const index =
-    sequence.indexOf(area);
-
+    order.indexOf(
+        currentArea
+    );
 
 
 
     const next =
-    sequence[index + 1];
+    order[index + 1];
 
 
 
@@ -314,18 +403,16 @@ function unlockNextArea(area){
 
 
 
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
 
 
-
-// ===================================
-// Hent kortdata
-// ===================================
-
-
-function getAcademyMap(){
-
-
-    return academyAreas;
+    loadMapProgress();
 
 
 }
+
+);

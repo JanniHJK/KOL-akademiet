@@ -1,8 +1,8 @@
 // ===================================
 // KOL Akademiet v2.0
 // Profil og progression
+// Stabilisering 4.1
 // ===================================
-
 
 
 let currentPlayer = null;
@@ -12,7 +12,7 @@ let currentPlayer = null;
 
 
 // ===================================
-// OPRET PROFIL
+// OPRET / HENT PROFIL
 // ===================================
 
 
@@ -20,18 +20,14 @@ function initializeProfile(name){
 
 
 
-    const savedPlayer =
-
-    loadPlayerData();
+    const saved = loadPlayerData();
 
 
 
+    if(saved){
 
-    if(savedPlayer){
 
-
-        currentPlayer =
-        savedPlayer;
+        currentPlayer = saved;
 
 
     }
@@ -46,29 +42,34 @@ function initializeProfile(name){
             name:name,
 
 
-            rank:
-            "Ny medarbejder",
-
-
             points:0,
-
-
-            progress:0,
 
 
             completedMissions:[],
 
 
-            completedAreas:[]
+            moduleProgress:{
+
+
+                lungelaboratoriet:0,
+
+
+                ernæring:0,
+
+
+                telemedicin:0,
+
+
+                medicin:0
+
+
+            }
 
 
         };
 
 
-
-        savePlayerData(
-            currentPlayer
-        );
+        saveCurrentProfile();
 
 
     }
@@ -78,8 +79,8 @@ function initializeProfile(name){
     return currentPlayer;
 
 
-
 }
+
 
 
 
@@ -96,18 +97,66 @@ function saveCurrentProfile(){
 
 
 
-    if(currentPlayer){
+    if(!currentPlayer){
+
+        return;
+
+    }
 
 
-        savePlayerData(
+
+    localStorage.setItem(
+
+        "kol_player",
+
+        JSON.stringify(
             currentPlayer
-        );
+        )
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// HENT PROFIL
+// ===================================
+
+
+function loadPlayerData(){
+
+
+
+    const saved =
+
+    localStorage.getItem(
+        "kol_player"
+    );
+
+
+
+    if(saved){
+
+
+        return JSON.parse(saved);
 
 
     }
 
 
+
+    return null;
+
+
 }
+
 
 
 
@@ -120,7 +169,7 @@ function saveCurrentProfile(){
 // ===================================
 
 
-function addPoints(points){
+function addPoints(value){
 
 
 
@@ -132,81 +181,15 @@ function addPoints(points){
 
 
 
-    currentPlayer.points += points;
+    currentPlayer.points += value;
 
-
-
-    updateRank();
 
 
     saveCurrentProfile();
 
 
+
     renderPlayerCard();
-
-
-}
-
-
-
-
-
-
-
-
-// ===================================
-// RANG
-// ===================================
-
-
-function updateRank(){
-
-
-
-    if(
-        currentPlayer.points >= 1000
-    ){
-
-
-        currentPlayer.rank =
-        "KOL-mester";
-
-
-    }
-
-
-    else if(
-        currentPlayer.points >= 500
-    ){
-
-
-        currentPlayer.rank =
-        "KOL-ekspert";
-
-
-    }
-
-
-    else if(
-        currentPlayer.points >= 200
-    ){
-
-
-        currentPlayer.rank =
-        "KOL-specialist";
-
-
-    }
-
-
-    else {
-
-
-        currentPlayer.rank =
-        "Ny medarbejder";
-
-
-    }
 
 
 
@@ -246,7 +229,47 @@ function completeMissionProgress(
 
 
 
-    calculateProgress();
+    saveCurrentProfile();
+
+
+}
+
+
+
+
+
+
+
+
+// ===================================
+// MODUL PROCENT
+// ===================================
+
+
+function updatePlayerModuleProgress(
+
+    moduleId,
+
+    progress
+
+){
+
+
+
+    if(
+        !currentPlayer
+    ){
+
+        return;
+
+    }
+
+
+
+
+    currentPlayer.moduleProgress[moduleId]
+    =
+    progress;
 
 
 
@@ -254,6 +277,10 @@ function completeMissionProgress(
 
 
 
+    renderPlayerCard();
+
+
+
 }
 
 
@@ -264,40 +291,53 @@ function completeMissionProgress(
 
 
 // ===================================
-// BEREGN PROCENT
+// SAMLET PROCENT
 // ===================================
 
 
-function calculateProgress(){
+function getTotalProgress(){
 
 
 
-    const totalMissions = 100;
+    if(
+        !currentPlayer
+    ){
+
+        return 0;
+
+    }
 
 
 
-    currentPlayer.progress =
+    const values =
 
+    Object.values(
 
-    Math.min(
-
-        Math.round(
-
-            (
-            currentPlayer.completedMissions.length
-            /
-            totalMissions
-            )
-            *
-            100
-
-        ),
-
-        100
+        currentPlayer.moduleProgress
 
     );
 
 
+
+    const sum =
+
+    values.reduce(
+
+        (a,b)=>a+b,
+
+        0
+
+    );
+
+
+
+    return Math.round(
+
+        sum /
+        values.length
+
+    );
+
 }
 
 
@@ -308,7 +348,7 @@ function calculateProgress(){
 
 
 // ===================================
-// VIS PROFIL
+// VIS PROFILKORT
 // ===================================
 
 
@@ -336,6 +376,7 @@ function renderPlayerCard(){
 
 
 
+
     card.innerHTML = `
 
 
@@ -352,23 +393,10 @@ function renderPlayerCard(){
 
     <p>
 
-    Rang:
-
-    <strong>
-
-    ${currentPlayer.rank}
-
-    </strong>
-
-    </p>
-
-
-
-
-    <p>
-
     Point:
+    <strong>
     ${currentPlayer.points}
+    </strong>
 
     </p>
 
@@ -377,7 +405,11 @@ function renderPlayerCard(){
     <p>
 
     Gennemført:
-    ${currentPlayer.progress}%
+
+    <strong>
+    ${getTotalProgress()}%
+    </strong>
+
 
     </p>
 
@@ -387,6 +419,7 @@ function renderPlayerCard(){
 
 
     `;
+
 
 
 }
@@ -399,7 +432,7 @@ function renderPlayerCard(){
 
 
 // ===================================
-// HENT SPILLER
+// HENT AKTIV SPILLER
 // ===================================
 
 

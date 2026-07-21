@@ -1,34 +1,32 @@
 // ===================================
 // KOL Akademiet v2.0
-// Lungelaboratoriet
-// Missioner
+// Lungelaboratoriet - Modulindhold
 // ===================================
 
 
 const lungelaboratoriumMissions = [
 
-
 {
 
 id:"lung-001",
 
-title:
-"Den første observation",
+title:"Den ændrede hverdag",
 
 
-story:
+story:`
 
-`
 Borger med KOL, Jens på 74 år,
-bor alene og får hjælp i hjemmet.
+bor alene og modtager hjælp i hjemmet.
 
-Borger oplyser, at han bliver hurtigere
-forpustet end tidligere, når han går
-fra stuen til køkkenet.
+Borger oplyser, at han den seneste tid
+er begyndt at holde flere pauser, når
+han går rundt i boligen.
 
-Han fortæller:
+Jens siger:
 
-"Jeg kan ikke helt det samme som før."
+"Jeg kan godt det hele endnu,
+men det kræver meget mere af mig."
+
 `,
 
 
@@ -38,15 +36,15 @@ questions:[
 {
 
 text:
-"Hvad er den vigtigste første handling?",
+"Hvad er den vigtigste observation i situationen?",
 
 
 answers:[
 
-
 {
+
 text:
-"Observere ændringer i borgerens åndenød og funktionsniveau",
+"Observere ændringer i åndenød, aktivitet og hvad borgeren kan klare i hverdagen",
 
 correct:true,
 
@@ -54,18 +52,18 @@ feedback:
 `
 Rigtigt.
 
-Ved KOL er ændringer i åndenød,
-aktivitetsniveau og funktionsniveau
-vigtige tegn på ændring i borgerens
-tilstand.
+Ved KOL er ændringer i funktionsevne
+og aktivitetsniveau vigtige tegn på,
+at borgerens tilstand kan have ændret sig.
 `
+
 },
 
 
-
 {
+
 text:
-"Fortælle borgeren at det er normalt at blive ældre",
+"Forklare borgeren at det er normalt at blive mindre aktiv med alderen",
 
 correct:false,
 
@@ -73,17 +71,17 @@ feedback:
 `
 Ikke korrekt.
 
-Alder kan spille en rolle, men nye
-ændringer hos en borger med KOL
-skal altid observeres.
+Nye ændringer hos en borger med KOL
+skal undersøges og ikke forklares væk.
 `
+
 },
 
 
-
 {
+
 text:
-"Anbefale at borgeren undgår aktivitet",
+"Anbefale at borgeren hviler mere og undgår belastning",
 
 correct:false,
 
@@ -91,31 +89,29 @@ feedback:
 `
 Forkert.
 
-Mindre aktivitet kan føre til dårligere
-funktion. Først skal situationen vurderes.
+For meget inaktivitet kan påvirke
+funktionsevnen negativt.
 `
-}
 
+}
 
 ]
 
 },
 
 
-
-
 {
 
 text:
-"Borger fortæller samtidig, at han holder flere pauser under personlig pleje. Hvad er relevant at undersøge?",
+"Borger fortæller, at han bliver mere forpustet ved bad og påklædning. Hvad er relevant at undersøge?",
 
 
 answers:[
 
-
 {
+
 text:
-"Hvornår åndenøden opstår, og hvad der udløser den",
+"Hvornår åndenøden opstår, og om den er anderledes end tidligere",
 
 correct:true,
 
@@ -123,16 +119,17 @@ feedback:
 `
 Korrekt.
 
-Det giver vigtig viden om borgerens
-belastning og ændringer i hverdagen.
+Det er vigtigt at opdage ændringer
+i borgerens vanlige tilstand.
 `
+
 },
 
 
-
 {
+
 text:
-"Om borgeren bare skal gøre tingene hurtigere",
+"Om borgeren kan undgå personlig pleje på dårlige dage",
 
 correct:false,
 
@@ -140,16 +137,17 @@ feedback:
 `
 Forkert.
 
-Tempo og energiforvaltning skal
-tilpasses borgerens situation.
+Målet er støtte til at mestre hverdagen,
+ikke at fjerne nødvendige aktiviteter.
 `
+
 },
 
 
-
 {
+
 text:
-"Om borgeren ønsker at stoppe med alle aktiviteter",
+"Om borgeren blot skal acceptere situationen",
 
 correct:false,
 
@@ -157,22 +155,18 @@ feedback:
 `
 Ikke korrekt.
 
-Målet er støtte til at kunne mestre
-hverdagen - ikke unødvendige begrænsninger.
+Borgerens oplevelse skal tages alvorligt.
 `
-}
 
+}
 
 ]
 
 }
 
-
 ]
-
 
 },
-
 
 
 
@@ -182,21 +176,19 @@ hverdagen - ikke unødvendige begrænsninger.
 
 id:"lung-002",
 
-title:
-"Når vejrtrækningen ændrer sig",
+title:"Slim og hoste",
 
 
-story:
+story:`
 
-`
 Borger med KOL, Anna på 81 år,
-fortæller at hun i dag virker mere
-træt end normalt.
+fortæller at hun hoster mere end normalt.
 
 Borger oplyser:
 
-"Jeg synes, jeg skal bruge mere energi
-på bare at komme rundt."
+"Der kommer mere slim op,
+og jeg føler mig mere træt."
+
 `,
 
 
@@ -206,15 +198,15 @@ questions:[
 {
 
 text:
-"Hvilken ændring kan være vigtig at reagere på?",
+"Hvad er en vigtig observation ved ændret slim?",
 
 
 answers:[
 
-
 {
+
 text:
-"Ændret aktivitetsniveau og øget træthed",
+"Mængde, farve og ændring fra borgerens normale mønster",
 
 correct:true,
 
@@ -222,16 +214,17 @@ feedback:
 `
 Rigtigt.
 
-Ændringer i energi og funktion kan
-være tegn på ændringer i sygdommen.
+Ændringer i slim kan være relevante
+tegn på forværring.
 `
+
 },
 
 
-
 {
+
 text:
-"At borgeren har en dårlig dag",
+"Om borgeren bare synes det er irriterende",
 
 correct:false,
 
@@ -239,16 +232,17 @@ feedback:
 `
 Forkert.
 
-Det kan være tilfældet, men ændringer
-skal undersøges nærmere.
+Borgerens oplevelse er vigtig,
+men ændringen skal også vurderes fagligt.
 `
+
 },
 
 
-
 {
+
 text:
-"At borgeren ikke længere skal bevæge sig",
+"Om borgeren har lyst til at tale om det",
 
 correct:false,
 
@@ -256,116 +250,19 @@ feedback:
 `
 Ikke korrekt.
 
-Bevægelse og aktivitet er fortsat
-vigtigt ved KOL.
+Observationen skal tage udgangspunkt
+i borgerens helbredstilstand.
 `
-}
 
+}
 
 ]
 
 }
 
-
-]
-
-
-},
-
-
-
-
-
-
-{
-
-id:"lung-003",
-
-title:
-"Tryghed ved åndenød",
-
-
-story:
-
-`
-Borger med KOL bliver pludselig urolig
-og siger:
-
-"Jeg føler ikke, jeg kan få vejret."
-`,
-
-
-questions:[
-
-
-{
-
-text:
-"Hvad er en relevant tilgang?",
-
-
-answers:[
-
-
-{
-text:
-"Skabe ro, være nærværende og observere borgerens situation",
-
-correct:true,
-
-feedback:
-`
-Rigtigt.
-
-Tryghed, støtte og observation er
-centralt ved oplevet åndenød.
-`
-},
-
-
-
-{
-text:
-"Sige at borgeren skal tage sig sammen",
-
-correct:false,
-
-feedback:
-`
-Forkert.
-
-Åndenød kan give stor utryghed
-og skal tages alvorligt.
-`
-},
-
-
-
-{
-text:
-"Forlade borgeren så personen kan falde til ro",
-
-correct:false,
-
-feedback:
-`
-Forkert.
-
-Nærvær er vigtigt i situationen.
-`
-}
-
-
 ]
 
 }
-
-
-]
-
-
-}
-
 
 ];
 

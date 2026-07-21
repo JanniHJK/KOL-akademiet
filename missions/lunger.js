@@ -1,123 +1,317 @@
 // ===================================
 // KOL Akademiet v2.0
-// Lungelaboratoriet missioner
+// Lungelaboratoriet
+// Missioner
 // ===================================
 
 
-const lungMissions = [
+const lungMissions = {
 
 
-    {
-
-        id: 1,
+    firstMission:{
 
 
         title:
         "Lungernes hemmelighed",
 
 
-        introduction:
-        `
-        Borger med KOL fortæller,
-        at det er blevet sværere at gå
-        fra stuen til køkkenet.
 
-        Du skal vurdere, hvad du først
-        vil være opmærksom på.
+        story:
+
+        `
+        Borger med KOL, Jens på 74 år,
+        fortæller at han den sidste uge er
+        blevet mere forpustet.
+
+        Han siger:
+
+        "Jeg bliver nødt til at holde flere
+        pauser, når jeg går rundt i hjemmet."
+
+        Du skal undersøge situationen
+        og træffe de rigtige valg.
         `,
 
 
-        question:
-        "Hvilken observation er mest relevant?",
 
-
-        answers:[
+        questions:[
 
 
             {
 
+
                 text:
-                "Observere ændringer i åndenød og aktivitetsniveau",
+
+                "Hvad er den vigtigste første observation?",
 
 
-                correct:true,
+
+                answers:[
 
 
-                feedback:
-                `
-                Rigtigt.
+                    {
 
-                Ved KOL er ændringer i
-                åndenød, funktionsevne og
-                aktivitetsniveau vigtige tegn
-                på ændringer i borgerens tilstand.
-                `
+                    text:
+                    "Om borgeren har ændringer i åndenød og aktivitetsniveau",
+
+                    correct:true,
+
+
+                    feedback:
+
+                    `
+                    Korrekt.
+
+                    Ændringer i åndenød og
+                    funktionsniveau kan være tidlige
+                    tegn på ændring i borgerens KOL.
+                    `
+
+                    },
+
+
+                    {
+
+                    text:
+                    "Om borgeren bare skal tage sig mere sammen",
+
+                    correct:false,
+
+
+                    feedback:
+
+                    `
+                    Forkert.
+
+                    Åndenød ved KOL handler ikke om
+                    motivation, men om sygdommens
+                    påvirkning af kroppen.
+                    `
+
+                    },
+
+
+                    {
+
+                    text:
+                    "Om borgeren stadig kan klare alt uden hjælp",
+
+                    correct:false,
+
+
+                    feedback:
+
+                    `
+                    Ikke helt.
+
+                    Selv små ændringer kan være
+                    vigtige observationer.
+                    `
+
+                    }
+
+
+                ]
 
             },
 
 
+
+
+
+
             {
 
+
                 text:
-                "Fortælle borgeren at træne mere uden yderligere observation",
+
+                "Borger fortæller også, at han hoster mere slim op end normalt. Hvad gør du?",
 
 
-                correct:false,
+
+                answers:[
 
 
-                feedback:
-                `
-                Ikke helt.
+                    {
 
-                Træning kan være vigtigt,
-                men først skal ændringer i
-                borgerens situation vurderes.
-                `
+
+                    text:
+
+                    "Observerer ændringer i mængde, farve og konsistens af slimen",
+
+                    correct:true,
+
+
+                    feedback:
+
+                    `
+                    Rigtigt.
+
+                    Ændringer i slim kan være tegn
+                    på forværring og skal observeres.
+                    `
+
+                    },
+
+
+
+                    {
+
+                    text:
+
+                    "Fortæller borgeren at det er normalt ved alder",
+
+                    correct:false,
+
+
+                    feedback:
+
+                    `
+                    Forkert.
+
+                    Nye ændringer hos en borger med
+                    KOL skal vurderes.
+                    `
+
+                    },
+
+
+
+                    {
+
+                    text:
+
+                    "Ignorerer det, hvis borgeren ikke har feber",
+
+                    correct:false,
+
+
+                    feedback:
+
+                    `
+                    Ikke korrekt.
+
+                    Forværring kan vise sig på flere
+                    måder end feber.
+                    `
+
+                    }
+
+
+                ]
+
 
             },
 
 
+
+
+
+
+
             {
 
+
                 text:
-                "Ignorere det, hvis borgeren stadig kan klare daglige aktiviteter",
+
+                "Borger bliver bekymret og siger: 'Jeg bliver bange når jeg ikke kan få vejret'. Hvad er en relevant handling?",
 
 
-                correct:false,
+
+                answers:[
 
 
-                feedback:
-                `
-                Forkert.
 
-                Små ændringer kan være tidlige
-                tegn på forværring.
-                `
+                    {
+
+
+                    text:
+
+                    "Skabe ro, støtte borgeren i vejrtrækningen og observere situationen",
+
+                    correct:true,
+
+
+                    feedback:
+
+                    `
+                    Rigtigt.
+
+                    Angst og åndenød kan forstærke
+                    hinanden. Tryghed og observation
+                    er vigtigt.
+                    `
+
+                    },
+
+
+
+                    {
+
+                    text:
+
+                    "Sige at borgeren ikke skal tænke på det",
+
+                    correct:false,
+
+
+                    feedback:
+
+                    `
+                    Forkert.
+
+                    Borgerens oplevelse skal tages
+                    alvorligt.
+                    `
+
+                    },
+
+
+
+                    {
+
+                    text:
+
+                    "Gå fra borgeren så personen kan falde til ro",
+
+                    correct:false,
+
+
+                    feedback:
+
+                    `
+                    Forkert.
+
+                    Ved åndenød og uro er nærvær
+                    vigtigt.
+                    `
+
+                    }
+
+
+                ]
 
             }
 
 
+
         ]
+
 
     }
 
 
-
-];
-
+};
 
 
 
 
-function getLungMission(id){
 
 
-    return lungMissions.find(
+function getLungMission(){
 
-        mission =>
-        mission.id === id
 
-    );
+    return lungMissions.firstMission;
 
 
 }

@@ -1,226 +1,336 @@
-let currentStep = 0;
+
+// ===================================
+// KOL Akademiet v2.0
+// Grundmotor
+// ===================================
 
 
-function showScreen(id){
 
-document.querySelectorAll(".screen").forEach(screen=>{
+let player = {
 
-screen.classList.add("hidden");
+    name: "",
 
-});
+    progress: 0
+
+};
 
 
-document.getElementById(id)
-.classList.remove("hidden");
+
+
+
+// ===================================
+// SKIFT SKÆRM
+// ===================================
+
+
+function showScreen(screenId) {
+
+
+    const screens = document.querySelectorAll(".screen");
+
+
+    screens.forEach(screen => {
+
+        screen.classList.add("hidden");
+
+    });
+
+
+
+    const target = document.getElementById(screenId);
+
+
+    if(target){
+
+        target.classList.remove("hidden");
+
+    }
+
 
 }
 
+
+
+
+
+// ===================================
+// START SPIL
+// ===================================
 
 
 function startGame(){
 
-showScreen("profile-screen");
+
+    showScreen("profile-screen");
+
 
 }
 
+
+
+
+
+// ===================================
+// OPRET PROFIL
+// ===================================
+
+
+function createProfile(){
+
+
+    const input = document.getElementById(
+        "player-name"
+    );
+
+
+    if(!input.value.trim()){
+
+
+        alert(
+            "Skriv dit navn for at starte eventyret"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+    player.name = input.value;
+
+
+    updatePlayerCard();
+
+
+    showScreen(
+        "academy-screen"
+    );
+
+
+}
+
+
+
+
+
+// ===================================
+// VIS SPILLERKORT
+// ===================================
+
+
+function updatePlayerCard(){
+
+
+    const card =
+    document.getElementById(
+        "player-card"
+    );
+
+
+
+    if(card){
+
+
+        card.innerHTML = `
+
+        <div class="dialogue-box">
+
+        <h3>
+        ${player.name}
+        </h3>
+
+        <p>
+        Ny medarbejder på KOL Akademiet
+        </p>
+
+        </div>
+
+        `;
+
+
+    }
+
+
+}
+
+
+
+
+
+// ===================================
+// ÅBN OMRÅDE
+// ===================================
+
+
+function openArea(area){
+
+
+    const title =
+    document.getElementById(
+        "area-title"
+    );
+
+
+    const content =
+    document.getElementById(
+        "area-content"
+    );
+
+
+
+    if(area === "lungelaboratoriet"){
+
+
+
+        title.innerHTML =
+        "🫁 Lungelaboratoriet";
+
+
+
+        content.innerHTML = `
+
+
+        <div class="dialogue-box">
+
+
+        <h3>
+        Anna – KOL-vejleder
+        </h3>
+
+
+        <p>
+
+        Velkommen til Lungelaboratoriet.
+        Her begynder din rejse med at forstå,
+        hvad der sker i kroppen ved KOL.
+
+        </p>
+
+
+        </div>
+
+
+
+        <button onclick="openMission()">
+
+        Gå til første mission
+
+        </button>
+
+
+        `;
+
+
+
+    }
+
+
+    showScreen(
+        "area-screen"
+    );
+
+
+}
+
+
+
+
+
+// ===================================
+// ÅBN FØRSTE MISSION
+// Midlertidig grundstruktur
+// ===================================
 
 
 function openMission(){
 
-currentStep = 0;
 
-showScreen("mission-screen");
-
-showMissionStep();
-
-}
+    const title =
+    document.getElementById(
+        "mission-title"
+    );
 
 
-
-
-function showMissionStep(){
-
-const step = lungLabMission.steps[currentStep];
-
-
-document.getElementById("mission-title").innerHTML =
-
-`
-${lungLabMission.title}
-<br>
-<span>Mission ${currentStep + 1} af ${lungLabMission.steps.length}</span>
-`;
+    const content =
+    document.getElementById(
+        "mission-content"
+    );
 
 
 
-document.getElementById("mission-story").innerHTML =
-
-`
-<div class="story-box">
-
-<h3>${step.title}</h3>
-
-<p>
-${step.story}
-</p>
-
-</div>
-`;
+    title.innerHTML =
+    "Mission 1: Lungernes hemmelighed";
 
 
 
-document.getElementById("mission-question").innerHTML =
-step.question;
+    content.innerHTML = `
+
+
+    <div class="dialogue-box">
+
+
+    <h3>
+    Første udfordring
+    </h3>
+
+
+    <p>
+
+    Du skal snart hjælpe din første borger
+    med KOL.
+
+    </p>
+
+
+    <p>
+
+    Denne mission bygges ud i næste version.
+
+    </p>
+
+
+    </div>
+
+
+    <button onclick="showScreen('academy-screen')">
+
+    Tilbage til kortet
+
+    </button>
+
+
+    `;
 
 
 
-document.getElementById("mission-answers").innerHTML =
-
-step.answers.map((answer,index)=>{
-
-
-return `
-
-<button onclick="chooseAnswer(${index})">
-
-${answer.text}
-
-</button>
-
-`;
-
-}).join("");
-
-
-
-document.getElementById("mission-feedback").innerHTML="";
+    showScreen(
+        "mission-screen"
+    );
 
 
 }
 
 
 
-function chooseAnswer(index){
 
 
-const step = lungLabMission.steps[currentStep];
 
-const answer = step.answers[index];
+// ===================================
+// START
+// ===================================
 
 
-document.getElementById("mission-feedback").innerHTML =
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-`
 
-<div class="${answer.correct ? "correct":"wrong"}">
+        showScreen(
+            "welcome-screen"
+        );
 
 
-<h3>
-
-${answer.correct ? "God beslutning":"Overvej dit valg"}
-
-</h3>
-
-
-<p>
-${answer.feedback}
-</p>
-
-
-<button onclick="nextStep()">
-
-Fortsæt
-
-</button>
-
-
-</div>
-
-`;
-
-}
-
-
-
-function nextStep(){
-
-
-currentStep++;
-
-
-if(currentStep >= lungLabMission.steps.length){
-
-completeMission();
-
-return;
-
-}
-
-
-showMissionStep();
-
-}
-
-
-
-function completeMission(){
-
-
-let player = getPlayer();
-
-
-if(player){
-
-player.xp +=250;
-
-player.progress = 10;
-
-player.rank="KOL-assistent";
-
-
-if(!player.badges.includes("Lungedetektiv")){
-
-player.badges.push("Lungedetektiv");
-
-}
-
-
-savePlayer(player);
-
-}
-
-
-
-document.getElementById("mission-title").innerHTML =
-"Mission gennemført";
-
-
-document.getElementById("mission-story").innerHTML =
-
-`
-
-<div class="story-box">
-
-<h2>🎉 Godt arbejde!</h2>
-
-<p>
-Du har hjulpet Erik gennem den første situation.
-</p>
-
-<p>
-Du har opnået:
-<br>
-🏅 Lungedetektiv
-</p>
-
-
-</div>
-
-`;
-
-
-document.getElementById("mission-question").innerHTML="";
-
-document.getElementById("mission-answers").innerHTML="";
-
-}
+    }
+);

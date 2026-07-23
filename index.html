@@ -3,254 +3,235 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOL Akademiet 3.0</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>KOL Akademiet</title>
-
-    <link rel.css
+    css/style.css">
 </head>
 
 <body>
 
-<div id="app">
+    <div id="app">
 
-    <!-- STARTSIDE -->
+        <!-- STARTSIDE -->
+        <section id="welcome-screen" class="screen">
 
-    <section id="welcome-screen" class="screen">
+            <div class="hero">
 
-        <div class="hero">
+                <h1>🫁 KOL Akademiet</h1>
 
-            <h1>🫁 KOL Akademiet</h1>
+                <p class="subtitle">
+                    Fra ny medarbejder til KOL-mester
+                </p>
 
-            <p class="subtitle">
-                Fra ny medarbejder til KOL-mester
-            </p>
+                <div class="anna-card">
 
-            <div class="anna-card">
+                    <div class="anna-placeholder">
+                        👩‍⚕️
+                    </div>
 
-                <div class="anna-placeholder">
-                    👩‍⚕️
+                    <h2>Anna • Akademiets vejleder</h2>
+
+                    <p>
+                        Velkommen til KOL-riget.
+                    </p>
+
+                    <p>
+                        Rundt omkring i riget oplever borgere med KOL
+                        øget åndenød, mindre energi og begyndende
+                        forværringer.
+                    </p>
+
+                    <p>
+                        KOL Akademiet uddanner Lungedetektiver, som kan
+                        opdage faresignaler i tide og hjælpe borgerne.
+                    </p>
+
+                    <p>
+                        Din rejse begynder i Lungelaboratoriet.
+                    </p>
+
                 </div>
 
-                <h2>Anna • Akademiets vejleder</h2>
-
-                <p>
-                    Velkommen til KOL-riget.
-                </p>
-
-                <p>
-                    Rundt omkring i riget oplever borgere med KOL
-                    øget åndenød, mindre energi og begyndende
-                    forværringer.
-                </p>
-
-                <p>
-                    KOL Akademiet uddanner Lungedetektiver
-                    som kan opdage faresignaler i tide.
-                </p>
-
-                <p>
-                    Din rejse begynder i Lungelaboratoriet.
-                </p>
+                <button onclick="startGame()">
+                    Start eventyret
+                </button>
 
             </div>
 
-            <button onclick="startGame()">
-                Start eventyret
-            </button>
+        </section>
 
-        </div>
+        <!-- PROFIL -->
+        <section id="profile-screen" class="screen hidden">
 
-    </section>
+            <div class="panel">
 
-    <!-- PROFIL -->
+                <h1>Opret din profil</h1>
 
-    <section id="profile-screen"
-             class="screen hidden">
+                <p>
+                    Hvad skal Anna kalde dig?
+                </p>
 
-        <div class="panel">
+                <input
+                    id="player-name"
+                    type="text"
+                    placeholder="Dit navn">
 
-            <h1>Opret din profil</h1>
+                <button onclick="createProfile()">
+                    Bliv Lungedetektiv
+                </button>
 
-            <p>
-                Hvad skal Anna kalde dig?
-            </p>
+            </div>
 
-            <br>
+        </section>
 
-            <input
-                id="player-name"
-                type="text"
-                placeholder="Dit navn">
+        <!-- VERDENSKORT -->
+        <section id="academy-screen" class="screen hidden">
 
-            <br><br>
+            <div class="panel">
 
-            <button onclick="createProfile()">
-                Bliv Lungedetektiv
-            </button>
+                <h1>🌍 KOL-riget</h1>
 
-        </div>
+                <p>
+                    Udforsk KOL-rigets områder.
+                </p>
 
-    </section>
+                <div id="player-card"></div>
 
-    <!-- VERDENSKORT -->
+                <div class="world-map">
 
-    <section id="academy-screen"
-             class="screen hidden">
+                    <div class="mission-card home">
 
-        <div class="panel">
+                        <div class="mission-icon">
+                            🏰
+                        </div>
 
-            <h1>🌍 KOL-riget</h1>
+                        <h3>KOL Akademiet</h3>
 
-            <p>
-                Udforsk rigets områder og hjælp borgere
-                gennem realistiske KOL-udfordringer.
-            </p>
+                        <p>
+                            Din base mellem missionerne.
+                        </p>
 
-            <br>
-
-            <div id="player-card"></div>
-
-            <div class="world-map">
-
-                <div class="mission-card home">
-
-                    <div class="mission-icon">
-                        🏰
                     </div>
 
-                    <h3>KOL Akademiet</h3>
+                    <div
+                        class="mission-card unlocked"
+                        onclick="openArea('lungelaboratoriet')">
 
-                    <p>
-                        Din base mellem missionerne.
-                    </p>
+                        <div class="mission-icon">
+                            🫁
+                        </div>
 
-                </div>
+                        <h3>Lungelaboratoriet</h3>
 
-                <div class="mission-card unlocked"
-                     onclick="openArea('lungelaboratoriet')">
+                        <p>
+                            Observationer, symptomer
+                            og tidlig opsporing.
+                        </p>
 
-                    <div class="mission-icon">
-                        🫁
                     </div>
 
-                    <h3>Lungelaboratoriet</h3>
+                    <div class="mission-card locked">
 
-                    <p>
-                        Observationer, symptomer og
-                        tidlig opsporing.
-                    </p>
+                        <div class="mission-icon">
+                            📡
+                        </div>
 
-                </div>
+                        <h3>Telemedicinsk Tårn</h3>
 
-                <div class="mission-card locked">
+                        <p>
+                            Kommer senere.
+                        </p>
 
-                    <div class="mission-icon">
-                        📡
                     </div>
 
-                    <h3>Telemedicinsk Tårn</h3>
+                    <div class="mission-card locked">
 
-                    <p>
-                        Låses op senere.
-                    </p>
+                        <div class="mission-icon">
+                            🍲
+                        </div>
 
-                </div>
+                        <h3>Ernæringscaféen</h3>
 
-                <div class="mission-card locked">
+                        <p>
+                            Kommer senere.
+                        </p>
 
-                    <div class="mission-icon">
-                        🍲
                     </div>
 
-                    <h3>Ernæringscaféen</h3>
+                    <div class="mission-card locked">
 
-                    <p>
-                        Låses op senere.
-                    </p>
+                        <div class="mission-icon">
+                            💊
+                        </div>
 
-                </div>
+                        <h3>Medicincenteret</h3>
 
-                <div class="mission-card locked">
+                        <p>
+                            Kommer senere.
+                        </p>
 
-                    <div class="mission-icon">
-                        💊
                     </div>
 
-                    <h3>Medicincenteret</h3>
+                    <div class="mission-card locked">
 
-                    <p>
-                        Låses op senere.
-                    </p>
+                        <div class="mission-icon">
+                            ⚠️
+                        </div>
 
-                </div>
+                        <h3>Akutbjergene</h3>
 
-                <div class="mission-card locked">
+                        <p>
+                            Kommer senere.
+                        </p>
 
-                    <div class="mission-icon">
-                        ⚠️
                     </div>
-
-                    <h3>Akutbjergene</h3>
-
-                    <p>
-                        Låses op senere.
-                    </p>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+        <!-- MODUL -->
+        <section id="area-screen" class="screen hidden">
 
-    <!-- MODULSIDE -->
+            <div class="panel">
 
-    <section id="area-screen"
-             class="screen hidden">
+                <h1 id="area-title"></h1>
 
-        <div class="panel">
+                <div id="area-content"></div>
 
-            <h1 id="area-title"></h1>
+            </div>
 
-            <div id="area-content"></div>
+        </section>
 
-        </div>
+        <!-- MISSION -->
+        <section id="mission-screen" class="screen hidden">
 
-    </section>
+            <div class="panel">
 
-    <!-- MISSIONER -->
+                <h1 id="mission-title"></h1>
 
-    <section id="mission-screen"
-             class="screen hidden">
+                <div id="mission-content"></div>
 
-        <div class="panel">
+            </div>
 
-            <h1 id="mission-title"></h1>
+        </section>
 
-            <div id="mission-content"></div>
+    </div>
 
-        </div>
+    js/storage.js
+    js/profile.js
+    js/map.js>
+    "></script>
 
-    </section>
+    missions/lungelaboratorium.js"></script>
 
-</div>
-
-<!-- JavaScript -->
-
-js/storage.js
-/profile.js"></script>
-js/map.js
-js/anna.js
-
-/lungelaboratorium.js"></script>
-
-js/mission-engine.js"></script>
-"></script>
-js/app.js
+    js/mission-engine.jsscript>
+    -engine.js"></script>
+    js/app.js"></script>
 
 </body>
+
 </html>

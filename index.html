@@ -2,361 +2,254 @@
 <html lang="da">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOL Akademiet</title>
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>KOL Akademiet</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+    css/style.css
 </head>
-
-
 
 <body>
 
-
 <div id="app">
 
+    <!-- STARTSIDE -->
+    <section id="welcome-screen" class="screen">
 
+        <div class="hero">
 
-<!-- STARTSIDE -->
+            <h1>🫁 KOL Akademiet</h1>
 
-<section id="welcome-screen" class="screen">
+            <p class="subtitle">
+                En rejse fra ny medarbejder til KOL-mester
+            </p>
 
+            <div class="anna-card">
 
-<div class="hero">
+                <div class="anna-placeholder">
+                    👩‍⚕️
+                </div>
 
+                <h2>Anna - Akademiets vejleder</h2>
 
-<h1>
-KOL Akademiet
-</h1>
+                <p>
+                    Velkommen til KOL-riget.
+                </p>
 
+                <br>
 
-<p class="subtitle">
-Fra ny medarbejder til KOL-mester
-</p>
+                <p>
+                    Balancen er truet.
+                    Borgere mister energi.
+                    Tegn på forværring bliver overset.
+                    Angst og åndenød spreder sig.
+                </p>
 
+                <br>
 
+                <p>
+                    Kun dygtige Lungedetektiver kan hjælpe.
+                </p>
 
-<div class="anna-card">
+                <br>
 
+                <p>
+                    Din opgave er at rejse gennem akademiets områder,
+                    løse virkelighedsnære udfordringer og hjælpe
+                    borgere med KOL til en bedre hverdag.
+                </p>
 
-<div class="anna-placeholder">
+            </div>
 
-Anna
+            <button onclick="startGame()">
+                Start eventyret
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- PROFIL -->
+    <section id="profile-screen" class="screen hidden">
+
+        <div class="panel">
+
+            <h1>Opret din elevprofil</h1>
+
+            <p>
+                Hvilket navn skal stå i Akademiets elevregister?
+            </p>
+
+            <br>
+
+            <input
+                id="player-name"
+                placeholder="Skriv dit navn">
+
+            <br><br>
+
+            <button onclick="createProfile()">
+                Bliv Lungedetektiv
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- AKADEMIKORT -->
+    <section id="academy-screen" class="screen hidden">
+
+        <div class="panel">
+
+            <h1>🌍 KOL-riget</h1>
+
+            <p>
+                Udforsk områderne og hjælp borgere gennem
+                virkelighedsnære KOL-udfordringer.
+            </p>
+
+            <br>
+
+            <div id="player-card"></div>
+
+            <div class="world-map">
+
+                <div class="mission-card home">
+
+                    <div class="mission-icon">
+                        🏰
+                    </div>
+
+                    <h3>KOL Akademiet</h3>
+
+                    <p>
+                        Din base mellem missionerne.
+                    </p>
+
+                </div>
+
+                <div
+                    class="mission-card unlocked"
+                    onclick="openArea('lungelaboratoriet')">
+
+                    <div class="mission-icon">
+                        🫁
+                    </div>
+
+                    <h3>Lungelaboratoriet</h3>
+
+                    <p>
+                        Undersøg symptomer, observationer
+                        og borgernes hverdag.
+                    </p>
+
+                    <span>
+                        Klar til mission
+                    </span>
+
+                </div>
+
+                <div class="mission-card locked">
+
+                    <div class="mission-icon">
+                        📡
+                    </div>
+
+                    <h3>Telemedicinsk Tårn</h3>
+
+                    <p>
+                        Overvåg målinger og find skjulte tegn
+                        på forværring.
+                    </p>
+
+                </div>
+
+                <div class="mission-card locked">
+
+                    <div class="mission-icon">
+                        🍲
+                    </div>
+
+                    <h3>Ernæringscaféen</h3>
+
+                    <p>
+                        Hjælp borgere med at bevare energi
+                        og kræfter.
+                    </p>
+
+                </div>
+
+                <div class="mission-card locked">
+
+                    <div class="mission-icon">
+                        💊
+                    </div>
+
+                    <h3>Medicincenteret</h3>
+
+                    <p>
+                        Lær korrekt behandling og inhalation.
+                    </p>
+
+                </div>
+
+                <div class="mission-card locked">
+
+                    <div class="mission-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>Akutbjergene</h3>
+
+                    <p>
+                        Håndtér akutte forværringer.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- OMRÅDE -->
+    <section id="area-screen" class="screen hidden">
+
+        <div class="panel">
+
+            <h1 id="area-title"></h1>
+
+            <div id="area-content"></div>
+
+        </div>
+
+    </section>
+
+    <!-- MISSION -->
+    <section id="mission-screen" class="screen hidden">
+
+        <div class="panel">
+
+            <h1 id="mission-title"></h1>
+
+            <div id="mission-content"></div>
+
+        </div>
+
+    </section>
 
 </div>
 
-
-<h3>
-Anna – KOL-vejleder
-</h3>
-
-
-<p>
-
-Jeg hjælper dig gennem akademiet.
-Lær gennem missioner, cases og
-praktiske situationer.
-
-</p>
-
-
-</div>
-
-
-
-<button onclick="startGame()">
-
-Start din rejse
-
-</button>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- PROFIL -->
-
-<section id="profile-screen" class="screen hidden">
-
-
-<div class="panel">
-
-
-<h2>
-Din profil
-</h2>
-
-
-<p>
-Hvad skal vi kalde dig?
-</p>
-
-
-
-<input
-id="player-name"
-placeholder="Dit navn"
->
-
-
-
-<button onclick="createProfile()">
-
-Bliv elev
-
-</button>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- KORT -->
-
-<section id="academy-screen" class="screen hidden">
-
-
-<div class="panel">
-
-
-<h1>
-KOL Akademiets verden
-</h1>
-
-
-
-<div id="player-card"></div>
-
-
-
-
-<div class="world-map">
-
-
-
-
-
-<div class="mission-card home">
-
-
-<h3>
-KOL Akademiet
-</h3>
-
-
-<p>
-Din base
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="mission-card unlocked"
-
-onclick="openArea('lungelaboratoriet')">
-
-
-<div class="mission-icon">
-
-🫁
-
-</div>
-
-
-
-<h3>
-Lungelaboratoriet
-</h3>
-
-
-<p>
-
-Lær om KOL, observation og
-lungernes funktion.
-
-</p>
-
-
-<span>
-Åben
-</span>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="mission-card locked">
-
-
-<div class="mission-icon">
-
-🍲
-
-</div>
-
-
-<h3>
-Ernæringscaféen
-</h3>
-
-
-<p>
-Kommer senere
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="mission-card locked">
-
-
-<div class="mission-icon">
-
-📡
-
-</div>
-
-
-<h3>
-Telemedicin
-</h3>
-
-
-<p>
-Kommer senere
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- OMRÅDE -->
-
-<section id="area-screen" class="screen hidden">
-
-
-<div class="panel">
-
-
-<h1 id="area-title"></h1>
-
-
-<div id="area-content"></div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- MISSION -->
-
-<section id="mission-screen" class="screen hidden">
-
-
-<div class="panel">
-
-
-<h1 id="mission-title"></h1>
-
-
-<div id="mission-content"></div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- JAVASCRIPT RÆKKEFØLGE ER VIGTIG -->
-
-<script src="js/storage.js"></script>
-
-<script src="js/profile.js"></script>
-
-<script src="js/map.js"></script>
-
-<script src="missions/lungelaboratorium.js"></script>
-
-<script src="js/mission-engine.js"></script>
-
-<script src="js/module-engine.js"></script>
-
-<script src="js/app.js"></script>
-
-
+.js"></script>
+js/profile.js
+js/map.js
+
+atorium.js"></script>
+
+mission-engine.js"></script>
+js/module-engine.js>
+js/app.js
 
 </body>
-
 </html>

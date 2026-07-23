@@ -1,277 +1,336 @@
 // ===================================
-// KOL Akademiet v2.0
-// Lungelaboratoriet - Modulindhold
+// KOL Akademiet 3.0
+// Lungelaboratoriet
+// Adventure Edition
 // ===================================
-
 
 const lungelaboratoriumMissions = [
 
 {
+    id: "lung-001",
 
-id:"lung-001",
+    title: "Den Mystiske Åndenød",
 
-title:"Den ændrede hverdag",
+    story: `
+    Du er netop blevet optaget som
+    Lungedetektiv på KOL Akademiet.
 
+    Din første opgave kommer fra Anna.
 
-story:`
+    Borgeren Jens på 74 år har de
+    seneste dage oplevet mere åndenød.
 
-Borger med KOL, Jens på 74 år,
-bor alene og modtager hjælp i hjemmet.
+    Han fortæller:
 
-Borger oplyser, at han den seneste tid
-er begyndt at holde flere pauser, når
-han går rundt i boligen.
+    "Jeg kan stadig klare mig selv,
+    men jeg må holde flere pauser
+    end normalt."
 
-Jens siger:
+    Anna ser alvorligt på dig.
 
-"Jeg kan godt det hele endnu,
-men det kræver meget mere af mig."
+    "Noget har ændret sig hos Jens.
 
-`,
+    Kan du finde de første spor?"
+    `,
 
+    questions: [
 
-questions:[
+        {
+            text:
+            "Hvad er den vigtigste første observation?",
 
+            answers: [
 
-{
+                {
+                    text:
+                    "Undersøge ændringer i åndenød og aktivitetsniveau",
 
-text:
-"Hvad er den vigtigste observation i situationen?",
+                    correct: true,
 
+                    feedback:
+                    "Korrekt. Små ændringer i åndenød og funktionsevne kan være tidlige tegn på forværring."
+                },
 
-answers:[
+                {
+                    text:
+                    "Forklare Jens at det er normalt at blive ældre",
 
-{
+                    correct: false,
 
-text:
-"Observere ændringer i åndenød, aktivitet og hvad borgeren kan klare i hverdagen",
+                    feedback:
+                    "Ikke korrekt. Nye ændringer hos borgere med KOL skal undersøges nærmere."
+                },
 
-correct:true,
+                {
+                    text:
+                    "Anbefale at Jens holder sig mere i ro",
 
-feedback:
-`
-Rigtigt.
+                    correct: false,
 
-Ved KOL er ændringer i funktionsevne
-og aktivitetsniveau vigtige tegn på,
-at borgerens tilstand kan have ændret sig.
-`
+                    feedback:
+                    "Ikke korrekt. Aktivitet er vigtig, og årsagen til ændringen skal undersøges."
+                }
 
+            ]
+        },
+
+        {
+            text:
+            "Jens fortæller også, at han bliver mere forpustet ved bad og påklædning. Hvad undersøger du?",
+
+            answers: [
+
+                {
+                    text:
+                    "Hvornår åndenøden opstår, og om den er anderledes end tidligere",
+
+                    correct: true,
+
+                    feedback:
+                    "Rigtigt. Det er vigtigt at kende ændringen fra Jens' normale tilstand."
+                },
+
+                {
+                    text:
+                    "Om han kan springe badet over",
+
+                    correct: false,
+
+                    feedback:
+                    "Forkert. Fokus er observation og vurdering."
+                },
+
+                {
+                    text:
+                    "Om han blot skal vænne sig til situationen",
+
+                    correct: false,
+
+                    feedback:
+                    "Forkert. Ændringer skal tages alvorligt."
+                }
+
+            ]
+        }
+
+    ]
 },
 
-
 {
+    id: "lung-002",
 
-text:
-"Forklare borgeren at det er normalt at blive mindre aktiv med alderen",
+    title: "Slimsporene",
 
-correct:false,
+    story: `
+    Anna sender dig videre til næste sag.
 
-feedback:
-`
-Ikke korrekt.
+    Borgeren Anna på 81 år oplever
+    mere hoste end normalt.
 
-Nye ændringer hos en borger med KOL
-skal undersøges og ikke forklares væk.
-`
+    Hun fortæller:
 
+    "Der kommer mere slim op,
+    og jeg føler mig mere træt."
+
+    Du tager din detektivnotesbog frem
+    og begynder undersøgelsen.
+    `,
+
+    questions: [
+
+        {
+            text:
+            "Hvad er vigtigst at observere ved slimen?",
+
+            answers: [
+
+                {
+                    text:
+                    "Mængde, farve og ændringer fra det normale",
+
+                    correct: true,
+
+                    feedback:
+                    "Korrekt. Ændringer i slim kan være et vigtigt tegn på forværring."
+                },
+
+                {
+                    text:
+                    "Om slimen generer borgeren",
+
+                    correct: false,
+
+                    feedback:
+                    "Borgerens oplevelse er vigtig, men du skal også observere kliniske ændringer."
+                },
+
+                {
+                    text:
+                    "Om hosten kun kommer om morgenen",
+
+                    correct: false,
+
+                    feedback:
+                    "Det kan være relevant, men er ikke den vigtigste observation her."
+                }
+
+            ]
+        },
+
+        {
+            text:
+            "Anna virker mere træt end normalt. Hvad tænker du?",
+
+            answers: [
+
+                {
+                    text:
+                    "At ændringer i energiniveau kan være relevante oplysninger",
+
+                    correct: true,
+
+                    feedback:
+                    "Rigtigt. Træthed kan være en vigtig del af det samlede billede."
+                },
+
+                {
+                    text:
+                    "At det sikkert bare skyldes alder",
+
+                    correct: false,
+
+                    feedback:
+                    "Forkert. Man bør ikke bortforklare ændringer."
+                },
+
+                {
+                    text:
+                    "At det ikke er vigtigt ved KOL",
+
+                    correct: false,
+
+                    feedback:
+                    "Forkert. Funktionsevne og energi er vigtige observationer."
+                }
+
+            ]
+        }
+
+    ]
 },
 
-
 {
+    id: "lung-003",
 
-text:
-"Anbefale at borgeren hviler mere og undgår belastning",
+    title: "Når Angsten Vokser",
 
-correct:false,
+    story: `
+    Senere samme dag bliver du kaldt
+    ud til Erik.
 
-feedback:
-`
-Forkert.
+    Erik sidder foroverbøjet på sin stol.
 
-For meget inaktivitet kan påvirke
-funktionsevnen negativt.
-`
+    Han virker urolig.
 
-}
+    "Jeg bliver bange, når jeg ikke kan få vejret."
 
-]
+    Anna ser på dig.
 
-},
+    "Nu handler det om mere
+    end observation.
 
+    Hvordan møder du Erik?"
+    `,
 
-{
+    questions: [
 
-text:
-"Borger fortæller, at han bliver mere forpustet ved bad og påklædning. Hvad er relevant at undersøge?",
+        {
+            text:
+            "Hvad er den bedste handling?",
 
+            answers: [
 
-answers:[
+                {
+                    text:
+                    "Skabe ro, støtte Erik og observere hans vejrtrækning",
 
-{
+                    correct: true,
 
-text:
-"Hvornår åndenøden opstår, og om den er anderledes end tidligere",
+                    feedback:
+                    "Rigtigt. Angst og åndenød kan forstærke hinanden."
+                },
 
-correct:true,
+                {
+                    text:
+                    "Sige at han ikke skal være nervøs",
 
-feedback:
-`
-Korrekt.
+                    correct: false,
 
-Det er vigtigt at opdage ændringer
-i borgerens vanlige tilstand.
-`
+                    feedback:
+                    "Forkert. Det kan opleves som en afvisning af hans oplevelse."
+                },
 
-},
+                {
+                    text:
+                    "Forlade rummet for at give ham fred",
 
+                    correct: false,
 
-{
+                    feedback:
+                    "Forkert. Erik har brug for støtte og observation."
+                }
 
-text:
-"Om borgeren kan undgå personlig pleje på dårlige dage",
+            ]
+        },
 
-correct:false,
+        {
+            text:
+            "Hvorfor er ro vigtig ved åndenød?",
 
-feedback:
-`
-Forkert.
+            answers: [
 
-Målet er støtte til at mestre hverdagen,
-ikke at fjerne nødvendige aktiviteter.
-`
+                {
+                    text:
+                    "Fordi uro og angst kan øge oplevelsen af åndenød",
 
-},
+                    correct: true,
 
+                    feedback:
+                    "Korrekt. Tryghed kan hjælpe borgeren til bedre kontrol over situationen."
+                },
 
-{
+                {
+                    text:
+                    "Fordi det fjerner KOL-sygdommen",
 
-text:
-"Om borgeren blot skal acceptere situationen",
+                    correct: false,
 
-correct:false,
+                    feedback:
+                    "Forkert. Ro behandler ikke sygdommen, men kan hjælpe situationen."
+                },
 
-feedback:
-`
-Ikke korrekt.
+                {
+                    text:
+                    "Fordi alle bliver raske af at slappe af",
 
-Borgerens oplevelse skal tages alvorligt.
-`
+                    correct: false,
 
-}
+                    feedback:
+                    "Forkert. KOL kræver faglig vurdering og støtte."
+                }
 
-]
+            ]
+        }
 
-}
-
-]
-
-},
-
-
-
-
-
-{
-
-id:"lung-002",
-
-title:"Slim og hoste",
-
-
-story:`
-
-Borger med KOL, Anna på 81 år,
-fortæller at hun hoster mere end normalt.
-
-Borger oplyser:
-
-"Der kommer mere slim op,
-og jeg føler mig mere træt."
-
-`,
-
-
-questions:[
-
-
-{
-
-text:
-"Hvad er en vigtig observation ved ændret slim?",
-
-
-answers:[
-
-{
-
-text:
-"Mængde, farve og ændring fra borgerens normale mønster",
-
-correct:true,
-
-feedback:
-`
-Rigtigt.
-
-Ændringer i slim kan være relevante
-tegn på forværring.
-`
-
-},
-
-
-{
-
-text:
-"Om borgeren bare synes det er irriterende",
-
-correct:false,
-
-feedback:
-`
-Forkert.
-
-Borgerens oplevelse er vigtig,
-men ændringen skal også vurderes fagligt.
-`
-
-},
-
-
-{
-
-text:
-"Om borgeren har lyst til at tale om det",
-
-correct:false,
-
-feedback:
-`
-Ikke korrekt.
-
-Observationen skal tage udgangspunkt
-i borgerens helbredstilstand.
-`
-
-}
-
-]
-
-}
-
-]
-
+    ]
 }
 
 ];
 
-
-
-
+// ===================================
+// HENT MISSIONER
+// ===================================
 
 function getLungelaboratoriumMissions(){
-
-return lungelaboratoriumMissions;
-
+    return lungelaboratoriumMissions;
 }

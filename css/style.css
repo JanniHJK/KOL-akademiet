@@ -1,864 +1,1003 @@
 /* =====================================
-KOL AKADEMIET
+2
+KOL Akademiet 3.0
+3
 Adventure Edition
+4
 ===================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+5
+ 
+6
+* {
+7
+margin: 0;
+8
+padding: 0;
+9
+box-sizing: border-box;
+10
 }
-
-body{
-    font-family:'Segoe UI',sans-serif;
-    background:
-        linear-gradient(
-            180deg,
-            #102542 0%,
-            #1b3b6f 50%,
-            #27496d 100%
-        );
-    color:white;
-    min-height:100vh;
+11
+ 
+12
+body {
+13
+font-family: "Segoe UI", sans-serif;
+14
+ 
+15
+min-height: 100vh;
+16
+ 
+17
+color: #ffffff;
+18
+ 
+19
+background:
+20
+linear-gradient(
+21
+180deg,
+22
+#0d1b2a 0%,
+23
+#1b3b6f 40%,
+24
+#28527a 100%
+25
+);
+26
+ 
+27
+background-attachment: fixed;
+28
 }
-
-#app{
-    min-height:100vh;
+29
+ 
+30
+.hidden {
+31
+display: none;
+32
 }
-
-.screen{
-    min-height:100vh;
-    padding:40px 20px;
+33
+ 
+34
+.screen {
+35
+min-height: 100vh;
+36
+padding: 40px 20px;
+37
 }
-
-.hidden{
-    display:none;
-}
-
+38
+ 
+39
 /* =====================================
+40
 LAYOUT
+41
 ===================================== */
-
+42
+ 
+43
 .hero,
-.panel{
-    max-width:1200px;
-    margin:auto;
+44
+.panel {
+45
+max-width: 1200px;
+46
+margin: 0 auto;
+47
 }
-
-.hero{
-    text-align:center;
+48
+ 
+49
+.hero {
+50
+text-align: center;
+51
 }
-
-h1{
-    font-size:3rem;
-    color:#f4b942;
-    margin-bottom:15px;
-    text-shadow:
-        0 0 15px rgba(244,185,66,0.5);
-}
-
-h2{
-    margin-bottom:15px;
-}
-
-h3{
-    margin-bottom:10px;
-}
-
-p{
-    line-height:1.6;
-}
-
-.subtitle{
-    font-size:1.25rem;
-    opacity:0.9;
-    margin-bottom:30px;
-}
-
+52
+ 
+53
 /* =====================================
-ANNA
+54
+OVERSKRIFTER
+55
 ===================================== */
-
-.anna-card{
-    background:
-        rgba(255,255,255,0.08);
-
-    border:
-        2px solid rgba(255,255,255,0.15);
-
-    border-radius:25px;
-
-    padding:30px;
-
-    max-width:700px;
-
-    margin:40px auto;
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.3);
+56
+ 
+57
+h1 {
+58
+font-size: 3rem;
+59
+margin-bottom: 15px;
+60
+ 
+61
+color: #f4c95d;
+62
+ 
+63
+text-shadow:
+64
+0 0 10px rgba(244, 201, 93, 0.4),
+65
+0 0 25px rgba(244, 201, 93, 0.2);
+66
 }
-
-.anna-placeholder{
-    width:130px;
-    height:130px;
-
-    border-radius:50%;
-
-    margin:0 auto 20px auto;
-
-    background:#f4b942;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:3rem;
-
-    color:#102542;
-
-    box-shadow:
-        0 0 25px rgba(244,185,66,0.5);
+67
+ 
+68
+h2 {
+69
+margin-bottom: 15px;
+70
 }
-
+71
+ 
+72
+h3 {
+73
+margin-bottom: 10px;
+74
+}
+75
+ 
+76
+p {
+77
+line-height: 1.7;
+78
+}
+79
+ 
+80
+.subtitle {
+81
+font-size: 1.2rem;
+82
+opacity: 0.9;
+83
+margin-bottom: 35px;
+84
+}
+85
+ 
+86
 /* =====================================
+87
+ANNA KORT
+88
+===================================== */
+89
+ 
+90
+.anna-card {
+91
+ 
+92
+max-width: 750px;
+93
+ 
+94
+margin: 40px auto;
+95
+ 
+96
+padding: 30px;
+97
+ 
+98
+border-radius: 24px;
+99
+ 
+100
+background:
+101
+rgba(255,255,255,0.08);
+102
+ 
+103
+border:
+104
+1px solid rgba(255,255,255,0.15);
+105
+ 
+106
+backdrop-filter: blur(10px);
+107
+ 
+108
+box-shadow:
+109
+0 15px 40px rgba(0,0,0,0.30);
+110
+}
+111
+ 
+112
+.anna-placeholder {
+113
+ 
+114
+width: 140px;
+115
+height: 140px;
+116
+ 
+117
+margin: 0 auto 25px auto;
+118
+ 
+119
+border-radius: 50%;
+120
+ 
+121
+display: flex;
+122
+align-items: center;
+123
+justify-content: center;
+124
+ 
+125
+font-size: 4rem;
+126
+ 
+127
+background:
+128
+linear-gradient(
+129
+180deg,
+130
+#ffd369,
+131
+#f4b942
+132
+);
+133
+ 
+134
+color: #102542;
+135
+ 
+136
+box-shadow:
+137
+0 0 30px rgba(244,185,66,0.4);
+138
+}
+139
+ 
+140
+/* =====================================
+141
 KNAPPER
+142
 ===================================== */
-
-button{
-    background:#f4b942;
-    color:#102542;
-
-    border:none;
-
-    padding:15px 30px;
-
-    border-radius:12px;
-
-    font-size:1rem;
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:all 0.3s ease;
+143
+ 
+144
+button {
+145
+ 
+146
+border: none;
+147
+ 
+148
+border-radius: 12px;
+149
+ 
+150
+padding: 14px 28px;
+151
+ 
+152
+font-size: 1rem;
+153
+ 
+154
+font-weight: 700;
+155
+ 
+156
+cursor: pointer;
+157
+ 
+158
+color: #102542;
+159
+ 
+160
+background:
+161
+linear-gradient(
+162
+180deg,
+163
+#ffd369,
+164
+#f4b942
+165
+);
+166
+ 
+167
+transition: all 0.25s ease;
+168
 }
-
-button:hover{
-    transform:translateY(-3px);
-    box-shadow:
-        0 10px 20px rgba(0,0,0,0.3);
-
-    background:#ffd369;
+169
+ 
+170
+button:hover {
+171
+ 
+172
+transform:
+173
+translateY(-3px);
+174
+ 
+175
+box-shadow:
+176
+0 10px 20px rgba(0,0,0,0.25);
+177
 }
-
-button:active{
-    transform:scale(0.98);
+178
+ 
+179
+button:active {
+180
+ 
+181
+transform:
+182
+scale(0.98);
+183
 }
-
+184
+ 
+185
 /* =====================================
+186
 INPUT
+187
 ===================================== */
-
-input{
-    width:100%;
-    max-width:400px;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    margin-top:15px;
-
-    font-size:1rem;
+188
+ 
+189
+input {
+190
+ 
+191
+width: 100%;
+192
+max-width: 400px;
+193
+ 
+194
+padding: 15px;
+195
+ 
+196
+border: none;
+197
+ 
+198
+border-radius: 12px;
+199
+ 
+200
+font-size: 1rem;
+201
 }
-
+202
+ 
+203
 /* =====================================
+204
 SPILLERKORT
-===================================== */
-
-#player-card{
-    margin:25px 0;
-}
-
-.dialogue-box{
-    background:
-        rgba(255,255,255,0.08);
-
-    border-radius:20px;
-
-    padding:20px;
-
-    border:
-        2px solid rgba(255,255,255,0.15);
-
-    backdrop-filter:blur(10px);
-}
-
-/* =====================================
-VERDENSKORT
-=======
-
-.world-map{
 205
-display:grid;
+===================================== */
 206
  
 207
-grid-template-columns:
+#player-card {
 208
-repeat(
+margin-bottom: 30px;
 209
-auto-fit,
+}
 210
-minmax(250px,1fr)
+ 
 211
-);
+.dialogue-box {
 212
  
 213
-gap:25px;
+background:
 214
- 
+rgba(255,255,255,0.08);
 215
-margin-top:30px;
+ 
 216
-}
+border-radius: 20px;
 217
  
 218
-.mission-card{
+padding: 25px;
 219
-border-radius:20px;
-220
  
+220
+border:
 221
-padding:25px;
+1px solid rgba(255,255,255,0.15);
 222
  
 223
-transition:all 0.3s ease;
+backdrop-filter: blur(10px);
 224
-}
+ 
 225
- 
+box-shadow:
 226
-.mission-card:hover{
+0 10px 25px rgba(0,0,0,0.20);
 227
-transform:
-228
-translateY(-8px);
-229
 }
+228
+ 
+229
+/* =====================================
 230
- 
+XP BAR
 231
-.mission-card.unlocked{
+===================================== */
 232
-background:#f4f7fa;
-233
-color:#102542;
-234
  
+233
+.xp-wrapper {
+234
+margin-top: 20px;
 235
-cursor:pointer;
+}
 236
  
 237
-border:3px solid #f4b942;
+.xp-bar {
 238
  
 239
-box-shadow:
+width: 100%;
 240
-0 10px 30px rgba(0,0,0,0.2);
+ 
 241
-}
+height: 18px;
 242
  
 243
-.mission-card.unlocked:hover{
+overflow: hidden;
 244
-box-shadow:
+ 
 245
-0 15px 40px rgba(0,0,0,0.3);
+border-radius: 999px;
 246
-}
+ 
 247
- 
-248
-.mission-card.locked{
-249
 background:
-250
+248
 rgba(255,255,255,0.15);
-251
- 
-252
-opacity:0.6;
-253
+249
 }
+250
+ 
+251
+.xp-fill {
+252
+ 
+253
+height: 100%;
 254
  
 255
-.mission-card.home{
-256
 background:
+256
+linear-gradient(
 257
-rgba(244,185,66,0.15);
+90deg,
 258
- 
+#ffd369,
 259
-border:
+#f4b942
 260
-2px solid #f4b942;
+);
 261
-}
+ 
 262
- 
+transition: width 0.4s ease;
 263
-.mission-icon{
+}
 264
-font-size:3rem;
+ 
 265
-margin-bottom:15px;
+/* =====================================
 266
-}
+VERDENSKORT
 267
- 
+===================================== */
 268
-/* =====================================
+ 
 269
-OMRÅDESIDE
+.world-map {
 270
-===================================== */
+ 
 271
- 
+display: grid;
 272
-#area-content{
+ 
 273
-margin-top:25px;
+grid-template-columns:
 274
-}
+repeat(
 275
- 
+auto-fit,
 276
-#area-content button{
+minmax(260px, 1fr)
 277
-margin-top:20px;
+);
 278
-}
-279
  
+279
+gap: 25px;
 280
-/* =====================================
+ 
 281
-MISSIONER
+margin-top: 35px;
 282
-===================================== */
+}
 283
  
 284
-.mission-story{
+.mission-card {
 285
-background:
+ 
 286
-rgba(255,255,255,0.08);
+border-radius: 20px;
 287
  
 288
-border-radius:20px;
+padding: 25px;
 289
  
 290
-padding:25px;
+transition: all 0.3s ease;
 291
- 
-292
-margin-bottom:25px;
-293
 }
+292
+ 
+293
+.mission-card:hover {
 294
  
 295
-.question-box{
+transform:
 296
-background:white;
+translateY(-8px);
 297
-color:#102542;
+}
 298
  
 299
-border-radius:20px;
+.mission-card.home {
 300
  
 301
-padding:25px;
+border:
 302
- 
+2px solid #f4b942;
 303
-margin-top:20px;
-304
-}
-305
  
+304
+background:
+305
+rgba(244,185,66,0.15);
 306
-.question-box h3{
-307
-margin-bottom:20px;
-308
 }
+307
+ 
+308
+.mission-card.unlocked {
 309
  
 310
-/* =====================================
+background: #ffffff;
 311
-SVAR
+ 
 312
-===================================== */
+color: #1b3b6f;
 313
  
 314
-.answer-grid{
+border:
 315
-display:grid;
+3px solid #f4b942;
 316
-gap:15px;
-317
-margin-top:20px;
-318
-}
-319
  
+317
+cursor: pointer;
+318
+ 
+319
+box-shadow:
 320
-.answer-card{
+0 12px 30px rgba(0,0,0,0.20);
 321
-background:#f4f7fa;
+}
 322
  
 323
-color:#102542;
+.mission-card.locked {
 324
  
 325
-padding:18px;
+background:
 326
- 
+rgba(255,255,255,0.10);
 327
-border-radius:15px;
-328
  
+328
+opacity: 0.55;
 329
-cursor:pointer;
+}
 330
  
 331
-transition:all 0.25s ease;
+.mission-icon {
 332
-}
+ 
 333
- 
+font-size: 3rem;
 334
-.answer-card:hover{
+ 
 335
-background:#ffd369;
+margin-bottom: 15px;
 336
- 
-337
-transform:
-338
-translateX(5px);
-339
 }
-340
+337
  
-341
+338
 /* =====================================
-342
-FEEDBACK
-343
+339
+MODULER
+340
 ===================================== */
+341
+ 
+342
+#area-content {
+343
+margin-top: 25px;
 344
- 
+}
 345
-.correct-feedback{
-346
-margin-top:20px;
-347
  
+346
+#area-content button {
+347
+margin-top: 20px;
 348
-padding:20px;
+}
 349
  
 350
-background:#4caf50;
+/* =====================================
 351
- 
+MISSION STORY
 352
-border-radius:15px;
+===================================== */
 353
-}
+ 
 354
- 
+.mission-story {
 355
-.wrong-feedback{
+ 
 356
-margin-top:20px;
+background:
 357
- 
+rgba(255,255,255,0.08);
 358
-padding:20px;
+ 
 359
- 
+border-radius: 20px;
 360
-background:#d9534f;
-361
  
+361
+padding: 25px;
 362
-border-radius:15px;
+ 
 363
-}
+margin-bottom: 25px;
 364
  
 365
-/* =====================================
+box-shadow:
 366
-XP BAR
+0 10px 20px rgba(0,0,0,0.15);
 367
-===================================== */
+}
 368
  
 369
-.xp-wrapper{
+/* =====================================
 370
-margin-top:15px;
+SPØRGSMÅL
 371
-}
+===================================== */
 372
  
 373
-.xp-bar{
+.question-box {
 374
-height:16px;
-375
  
+375
+background: #ffffff;
 376
-background:
+ 
 377
-rgba(255,255,255,0.2);
+color: #1b3b6f;
 378
  
 379
-border-radius:999px;
+border-radius: 20px;
 380
  
 381
-overflow:hidden;
+padding: 25px;
 382
 }
 383
  
 384
-.xp-fill{
+.question-box h3 {
 385
-height:100%;
+margin-bottom: 20px;
 386
- 
-387
-width:40%;
-388
- 
-389
-background:
-390
-linear-gradient(
-391
-90deg,
-392
-#f4b942,
-393
-#ffd369
-394
-);
-395
 }
-396
+387
  
-397
+388
 /* =====================================
-398
-MOBIL
-399
+389
+SVAR
+390
 ===================================== */
+391
+ 
+392
+.answer-grid {
+393
+ 
+394
+display: grid;
+395
+ 
+396
+gap: 15px;
+397
+ 
+398
+margin-top: 20px;
+399
+}
 400
  
 401
-@media(max-width:768px){
+.answer-card {
 402
  
 403
-h1{
+padding: 18px;
 404
-font-size:2rem;
+ 
 405
-}
+border-radius: 15px;
 406
  
 407
-.world-map{
+background: #eef4fb;
 408
-grid-template-columns:1fr;
+ 
 409
-}
+color: #1b3b6f;
 410
  
 411
-.anna-card{
+cursor: pointer;
 412
-padding:20px;
+ 
 413
-}
+transition: all 0.25s ease;
 414
- 
+}
 415
+ 
+416
+.answer-card:hover {
+417
+ 
+418
+background: #ffd369;
+419
+ 
+420
+transform:
+421
+translateX(5px);
+422
 }
-
+423
+ 
+424
 /* =====================================
-ANNA POPUP
+425
+FEEDBACK
+426
 ===================================== */
-
-#anna-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-    rgba(0,0,0,0.6);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:9999;
+427
+ 
+428
+.correct-feedback {
+429
+ 
+430
+margin-top: 20px;
+431
+ 
+432
+padding: 20px;
+433
+ 
+434
+border-radius: 15px;
+435
+ 
+436
+background: #4caf50;
+437
 }
-
-.anna-popup{
-
-    width:90%;
-    max-width:600px;
-
-    background:white;
-
-    color:#102542;
-
-    border-radius:25px;
-
-    padding:30px;
-
-    text-align:center;
-
-    animation:
-    popupAppear
-    0.4s ease;
+438
+ 
+439
+.wrong-feedback {
+440
+ 
+441
+margin-top: 20px;
+442
+ 
+443
+padding: 20px;
+444
+ 
+445
+border-radius: 15px;
+446
+ 
+447
+background: #d9534f;
+448
 }
-
-.anna-avatar{
-
-    width:120px;
-    height:120px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    background:#f4b942;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:3rem;
-
-    margin-bottom:20px;
-}
-
-@keyframes popupAppear{
-
-    from{
-        opacity:0;
-        transform:
-        scale(0.8);
-    }
-
-    to{
-        opacity:1;
-        transform:
-        scale(1);
-    }
-
-}
-
+449
+ 
+450
 /* =====================================
-2
-ANNA POPUP
-3
+451
+ANIMATIONER
+452
 ===================================== */
-4
+453
  
-5
-#anna-overlay{
-6
+454
+@keyframes fadeIn {
+455
  
-7
-position:fixed;
-8
- 
-9
-inset:0;
-10
- 
-11
-background:
-12
-rgba(0,0,0,0.6);
-13
- 
-14
-display:flex;
-15
- 
-16
-align-items:center;
-17
- 
-18
-justify-content:center;
-19
- 
-20
-z-index:9999;
-21
+456
+from {
+457
+opacity: 0;
+458
+transform: translateY(15px);
+459
 }
-22
+460
  
-23
-.anna-popup{
-24
+461
+to {
+462
+opacity: 1;
+463
+transform: translateY(0);
+464
+}
+465
+}
+466
  
-25
-width:90%;
-26
-max-width:600px;
-27
+467
+.hero,
+468
+.panel,
+469
+.mission-card,
+470
+.dialogue-box,
+471
+.question-box {
+472
  
-28
-background:white;
-29
- 
-30
-color:#102542;
-31
- 
-32
-border-radius:25px;
-33
- 
-34
-padding:30px;
-35
- 
-36
-text-align:center;
-37
- 
-38
+473
 animation:
-39
-popupAppear
-40
-0.4s ease;
-41
+474
+fadeIn 0.4s ease;
+475
 }
-42
+476
  
-43
-.anna-avatar{
-44
+477
+/* =====================================
+478
+MOBIL
+479
+===================================== */
+480
  
-45
-width:120px;
-46
-height:120px;
-47
+481
+@media (max-width: 768px) {
+482
  
-48
-margin:auto;
-49
- 
-50
-border-radius:50%;
-51
- 
-52
-background:#f4b942;
-53
- 
-54
-display:flex;
-55
- 
-56
-align-items:center;
-57
- 
-58
-justify-content:center;
-59
- 
-60
-font-size:3rem;
-61
- 
-62
-margin-bottom:20px;
-63
+483
+h1 {
+484
+font-size: 2rem;
+485
 }
-64
+486
  
-65
-@keyframes popupAppear{
-66
- 
-67
-from{
-68
-opacity:0;
-69
-transform:
-70
-scale(0.8);
-71
+487
+.world-map {
+488
+grid-template-columns: 1fr;
+489
 }
-72
+490
  
-73
-to{
-74
-opacity:1;
-75
-transform:
-76
-scale(1);
-77
+491
+.anna-card {
+492
+padding: 20px;
+493
 }
-78
+494
  
-79
+495
+.anna-placeholder {
+496
+ 
+497
+width: 110px;
+498
+height: 110px;
+499
+ 
+500
+font-size: 3rem;
+501
+}
+502
 }

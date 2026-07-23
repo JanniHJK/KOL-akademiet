@@ -24,177 +24,177 @@ let activeModuleMissionIndex = 0;
 13
  
 14
-function startModule(moduleId){
+function startModule(moduleId) {
 15
  
 16
-console.log(
+switch (moduleId) {
 17
-"Starter modul:",
+ 
 18
-moduleId
-19
-);
-20
- 
-21
-switch(moduleId){
-22
- 
-23
 case "lungelaboratoriet":
-24
+19
  
-25
+20
 activeModule = {
+21
+ 
+22
+id: "lungelaboratoriet",
+23
+ 
+24
+title: "🫁 Lungelaboratoriet",
+25
+ 
 26
- 
-27
-id:
-28
-"lungelaboratoriet",
-29
- 
-30
-title:
-31
-"🫁 Lungelaboratoriet",
-32
- 
-33
 description:
+27
+"Lær at observere symptomer, opdage ændringer og hjælpe borgere med KOL.",
+28
+ 
+29
+missions:
+30
+getLungelaboratoriumMissions()
+31
+ 
+32
+};
+33
+ 
 34
-"Her lærer du at observere symptomer, identificere ændringer og hjælpe borgere med KOL.",
+break;
 35
  
 36
-missions:
-37
-getLungelaboratoriumMissions()
-38
- 
-39
-};
-40
- 
-41
-break;
-42
- 
-43
 default:
+37
+ 
+38
+alert(
+39
+"Dette område er endnu ikke åbent."
+40
+);
+41
+ 
+42
+return;
+43
+}
 44
  
 45
-alert(
-46
-"Dette modul er endnu ikke åbent."
-47
-);
-48
- 
-49
-return;
-50
- 
-51
-}
-52
- 
-53
 activeModuleMissionIndex = 0;
-54
+46
  
-55
+47
 renderModuleOverview();
-56
+48
 }
-57
+49
  
-58
+50
 // ===================================
-59
+51
 // MODUL FORSIDE
-60
+52
 // ===================================
-61
+53
  
-62
-function renderModuleOverview(){
-63
+54
+function renderModuleOverview() {
+55
  
-64
+56
 showScreen(
-65
+57
 "area-screen"
-66
+58
 );
-67
+59
  
-68
+60
 const title =
-69
+61
 document.getElementById(
-70
+62
 "area-title"
-71
+63
 );
+64
+ 
+65
+const content =
+66
+document.getElementById(
+67
+"area-content"
+68
+);
+69
+ 
+70
+title.innerHTML =
+71
+activeModule.title;
 72
  
 73
-const content =
+content.innerHTML = `
 74
-document.getElementById(
-75
-"area-content"
-76
-);
-77
  
+75
+<div class="dialogue-box">
+76
+ 
+77
+<h2>
 78
-title.innerHTML =
+${activeModule.title}
 79
-activeModule.title;
+</h2>
 80
  
 81
-content.innerHTML = `
+<p>
 82
- 
+${activeModule.description}
 83
-<div class="dialogue-box">
+</p>
 84
  
 85
-<h2>
-86
-${activeModule.title}
-87
-</h2>
-88
- 
-89
-<p>
-90
-${activeModule.description}
-91
-</p>
-92
- 
-93
 <br>
-94
+86
  
-95
+87
 <p>
-96
-Antal missioner:
-97
+88
+Missioner:
+89
 <strong>
-98
+90
 ${activeModule.missions.length}
-99
+91
 </strong>
+92
+</p>
+93
+ 
+94
+<br>
+95
+ 
+96
+<p>
+97
+Anna har brug for din hjælp.
+98
+Undersøg borgernes situationer
+99
+og find de rigtige spor.
 100
 </p>
 101
@@ -204,313 +204,313 @@ ${activeModule.missions.length}
 103
  
 104
-<p>
+<button onclick="startNextMission()">
 105
-Anna venter på dine observationer.
+Start mission
 106
-Hver mission bringer dig tættere på
+</button>
 107
-titlen som KOL-mester.
+ 
 108
-</p>
+</div>
 109
  
 110
-<br>
+`;
 111
- 
+}
 112
-<button
+ 
 113
-onclick="
+// ===================================
 114
-startNextMission()
+// START NÆSTE MISSION
 115
-">
+// ===================================
 116
-Start første mission
+ 
 117
-</button>
+function startNextMission() {
 118
  
 119
-</div>
+const mission =
 120
- 
+activeModule.missions[
 121
-`;
+activeModuleMissionIndex
 122
-}
+];
 123
  
 124
-// ===================================
+if (!mission) {
 125
-// START MISSION
+ 
 126
-// ===================================
+finishModule();
 127
  
 128
-function startNextMission(){
-129
- 
-130
-const mission =
-131
-activeModule.missions[
-132
-activeModuleMissionIndex
-133
-];
-134
- 
-135
-if(!mission){
-136
- 
-137
-finishModule();
-138
- 
-139
 return;
-140
+129
 }
+130
+ 
+131
+startMission(
+132
+mission
+133
+);
+134
+}
+135
+ 
+136
+// ===================================
+137
+// MISSION AFSLUTTET
+138
+// ===================================
+139
+ 
+140
+function completeModuleMission() {
 141
  
 142
-startMission(
+activeModuleMissionIndex++;
 143
-mission
-144
-);
-145
-}
-146
  
+144
+updateModuleProgress();
+145
+ 
+146
+if (
 147
-// ===================================
+activeModuleMissionIndex <
 148
-// MISSION FÆRDIG
+activeModule.missions.length
 149
-// ===================================
+) {
 150
  
 151
-function completeModuleMission(){
+showMissionReward();
 152
  
 153
-addPoints(
+return;
 154
-100
+}
 155
-);
-156
  
+156
+finishModule();
 157
-activeModuleMissionIndex++;
+}
 158
  
 159
-updateModuleProgress();
+// ===================================
 160
- 
+// FREMDRIFT
 161
-if(
+// ===================================
 162
-activeModuleMissionIndex <
+ 
 163
-activeModule.missions.length
+function updateModuleProgress() {
 164
-){
+ 
 165
- 
+const progress =
 166
-renderNextMissionScreen();
+Math.round(
 167
- 
+(
 168
-return;
+activeModuleMissionIndex /
 169
-}
+activeModule.missions.length
 170
- 
+) * 100
 171
-finishModule();
+);
 172
-}
-173
  
+173
+updatePlayerModuleProgress(
 174
-// ===================================
+activeModule.id,
 175
-// MODULPROGRESSION
+progress
 176
-// ===================================
+);
 177
  
 178
-function updateModuleProgress(){
+updateAreaProgress(
 179
- 
+activeModule.id,
 180
-const progress =
+progress
 181
-Math.round(
+);
 182
- 
+}
 183
-(
+ 
 184
-activeModuleMissionIndex /
+// ===================================
 185
-activeModule.missions.length
+// BELØNNING MELLEM MISSIONER
 186
-) * 100
+// ===================================
 187
  
 188
-);
+function showMissionReward() {
 189
  
 190
-updatePlayerModuleProgress(
+const content =
 191
-activeModule.id,
+document.getElementById(
 192
-progress
+"mission-content"
 193
 );
 194
-}
-195
  
+195
+const nextMission =
 196
-// ===================================
+activeModule.missions[
 197
-// NÆSTE MISSION
+activeModuleMissionIndex
 198
-// ===================================
+];
 199
  
 200
-function renderNextMissionScreen(){
+content.innerHTML = `
 201
  
 202
-const content =
-203
-document.getElementById(
-204
-"mission-content"
-205
-);
-206
- 
-207
-const nextMission =
-208
-activeModule.missions[
-209
-activeModuleMissionIndex
-210
-];
-211
- 
-212
-content.innerHTML = `
-213
- 
-214
 <div class="dialogue-box">
-215
+203
  
-216
+204
 <h2>
-217
-⭐ Mission gennemført
-218
+205
+⭐ Flot arbejde
+206
 </h2>
+207
+ 
+208
+<p>
+209
+Anna er imponeret over
+210
+dine observationer.
+211
+</p>
+212
+ 
+213
+<br>
+214
+ 
+215
+<p>
+216
+Du har gennemført endnu en mission.
+217
+</p>
+218
+ 
 219
- 
+<br>
 220
-<p>
+ 
 221
-Du har gennemført den foregående mission.
+<p>
 222
-</p>
+Næste opgave:
 223
- 
+</p>
 224
-<br>
+ 
 225
- 
+<h3>
 226
-<p>
-227
-+100 point
-228
-</p>
-229
- 
-230
-<br>
-231
- 
-232
-<p>
-233
-Næste mission:
-234
-<strong>
-235
 ${nextMission.title}
-236
-</strong>
-237
-</p>
-238
+227
+</h3>
+228
  
-239
+229
 <br>
-240
+230
  
-241
-<button
-242
-onclick="
-243
-startNextMission()
-244
-">
-245
+231
+<button onclick="startNextMission()">
+232
 Fortsæt
-246
+233
 </button>
-247
+234
  
-248
+235
 </div>
-249
+236
  
-250
+237
 `;
-251
+238
 }
-252
+239
  
-253
+240
 // ===================================
-254
+241
 // MODUL AFSLUTTET
-255
+242
 // ===================================
-256
+243
  
+244
+function finishModule() {
+245
+ 
+246
+updatePlayerModuleProgress(
+247
+activeModule.id,
+248
+100
+249
+);
+250
+ 
+251
+completeArea(
+252
+activeModule.id
+253
+);
+254
+ 
+255
+unlockNextArea(
+256
+activeModule.id
 257
-function finishModule(){
+);
 258
  
 259
@@ -522,57 +522,57 @@ addPoints(
 262
  
 263
-updatePlayerModuleProgress(
+const content =
 264
-activeModule.id,
+document.getElementById(
 265
-100
+"mission-content"
 266
 );
 267
  
 268
-const content =
-269
-document.getElementById(
-270
-"mission-content"
-271
-);
-272
- 
-273
 content.innerHTML = `
-274
+269
  
-275
+270
 <div class="dialogue-box">
-276
+271
  
-277
+272
 <h1>
-278
-🎉 Modul gennemført
-279
+273
+🎉 Lungelaboratoriet gennemført
+274
 </h1>
+275
+ 
+276
+<p>
+277
+Du har afsluttet alle missioner
+278
+i dette område.
+279
+</p>
 280
  
 281
-<h2>
-282
-${activeModule.title}
-283
-</h2>
-284
- 
-285
 <br>
+282
+ 
+283
+<p>
+284
+Belønning:
+285
+</p>
 286
  
 287
 <p>
 288
-Fantastisk arbejde.
+⭐ 250 bonuspoint
 289
 </p>
 290
@@ -584,71 +584,72 @@ Fantastisk arbejde.
 293
 <p>
 294
-Du har hjulpet flere borgere
+Anna kalder dig nu:
 295
-og styrket dine færdigheder som
-296
-Lungedetektiv.
-297
 </p>
-298
+296
  
+297
+<h2>
+298
+Lungedetektiv
 299
-<br>
+</h2>
 300
  
 301
-<p>
-302
-Bonus:
-303
-+250 point
-304
-</p>
-305
- 
-306
 <br>
-307
+302
  
-308
-<button
-309
-onclick="
-310
-returnToAcademy()
-311
-">
-312
+303
+<button onclick="returnToAcademy()">
+304
 Tilbage til KOL-riget
-313
+305
 </button>
-314
+306
  
-315
+307
 </div>
-316
+308
  
-317
+309
 `;
-318
- 
-319
-unlockNextGameArea();
-320
+310
 }
+311
+ 
+312
+// ===================================
+313
+// HENT AKTIVT MODUL
+314
+// ===================================
+315
+ 
+316
+function getCurrentModule() {
+317
+ 
+318
+return activeModule;
+319
+}
+320
+ 
 321
- 
+// ===================================
 322
-// ===================================
+// HENT MISSION NUMMER
 323
-// TILBAGE TIL KORT
-324
 // ===================================
+324
+ 
 325
- 
+function getCurrentMissionIndex() {
 326
-function returnToAcademy(){
-327
  
+327
+return activeModuleMissionIndex;
 328
+}

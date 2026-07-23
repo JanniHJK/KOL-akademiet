@@ -276,7 +276,7 @@ document.addEventListener(
                 annaWelcome();
 
             },
-            800
+            1500
         );
 
     }

@@ -1,675 +1,867 @@
 // ===================================
-// KOL Akademiet v3.0
+2
+// KOL Akademiet 3.0
+3
 // Profilsystem
+4
 // Adventure Edition
+5
 // ===================================
-
-let currentPlayer = null;
-
-// ===================================
-// TITLER
-// ===================================
-
-const playerRanks = [
-    "Ny medarbejder",
-    "Lungedetektiv",
-    "KOL-assistent",
-    "KOL-specialist",
-    "Telemedicinmester",
-    "Akutekspert",
-    "KOL-mester"
-];
-
-// ===================================
-// OPRET PROFIL
-// ===================================
-
-function initializeProfile(name){
-
-    const saved = loadPlayerData();
-
-    if(saved){
-
-        currentPlayer = saved;
-
-        if(!currentPlayer.level){
-            currentPlayer.level = 1;
-        }
-
-        if(!currentPlayer.xp){
-            currentPlayer.xp = 0;
-        }
-
-        if(!currentPlayer.rank){
-            currentPlayer.rank =
-            "Ny medarbejder";
-        }
-
-        return currentPlayer;
-    }
-
-    currentPlayer = {
-
-        name:name,
-
-        level:1,
-
-        xp:0,
-
-        points:0,
-
-        rank:"Ny medarbejder",
-
-        badges:[],
-
-        completedMissions:[],
-
-        moduleProgress:{
-            lungelaboratoriet:0,
-            telemedicin:0,
-            ernæring:0,
-            medicin:0,
-            akut:0
-        }
-
-    };
-
-    saveCurrentProfile();
-
-    return currentPlayer;
-}
-
-// ===================================
-// GEM
-// ===================================
-
-function saveCurrentProfile(){
-
-    if(!currentPlayer){
-        return;
-    }
-
-    localStorage.setItem(
-        "kol_player",
-        JSON.stringify(currentPlayer)
-    );
-}
-
-// ===================================
-// HENT
-// ===================================
-
-function loadPlayerData(){
-
-    const saved =
-    localStorage.getItem(
-        "kol_player"
-    );
-
-    if(saved){
-        return JSON.parse(saved);
-}
-112
+6
  
+7
+let currentPlayer = null;
+8
+ 
+9
+// ===================================
+10
+// OPRET / HENT PROFIL
+11
+// ===================================
+12
+ 
+13
+function initializeProfile(name) {
+14
+ 
+15
+const savedPlayer =
+16
+loadPlayerData();
+17
+ 
+18
+if (savedPlayer) {
+19
+ 
+20
+currentPlayer =
+21
+savedPlayer;
+22
+ 
+23
+ensurePlayerStructure();
+24
+ 
+25
+saveCurrentProfile();
+26
+ 
+27
+return currentPlayer;
+28
+}
+29
+ 
+30
+currentPlayer = {
+31
+ 
+32
+name: name,
+33
+ 
+34
+level: 1,
+35
+ 
+36
+xp: 0,
+37
+ 
+38
+points: 0,
+39
+ 
+40
+rank: "Ny medarbejder",
+41
+ 
+42
+badges: [],
+43
+ 
+44
+completedMissions: [],
+45
+ 
+46
+moduleProgress: {
+47
+lungelaboratoriet: 0,
+48
+telemedicin: 0,
+49
+ernæring: 0,
+50
+medicin: 0,
+51
+akut: 0
+52
+}
+53
+ 
+54
+};
+55
+ 
+56
+saveCurrentProfile();
+57
+ 
+58
+return currentPlayer;
+59
+}
+60
+ 
+61
+// ===================================
+62
+// SIKR STRUKTUR
+63
+// ===================================
+64
+ 
+65
+function ensurePlayerStructure() {
+66
+ 
+67
+if (!currentPlayer.level) {
+68
+currentPlayer.level = 1;
+69
+}
+70
+ 
+71
+if (!currentPlayer.xp) {
+72
+currentPlayer.xp = 0;
+73
+}
+74
+ 
+75
+if (!currentPlayer.points) {
+76
+currentPlayer.points = 0;
+77
+}
+78
+ 
+79
+if (!currentPlayer.rank) {
+80
+currentPlayer.rank =
+81
+"Ny medarbejder";
+82
+}
+83
+ 
+84
+if (!currentPlayer.badges) {
+85
+currentPlayer.badges = [];
+86
+}
+87
+ 
+88
+if (!currentPlayer.completedMissions) {
+89
+currentPlayer.completedMissions = [];
+90
+}
+91
+ 
+92
+if (!currentPlayer.moduleProgress) {
+93
+ 
+94
+currentPlayer.moduleProgress = {
+95
+ 
+96
+lungelaboratoriet: 0,
+97
+telemedicin: 0,
+98
+ernæring: 0,
+99
+medicin: 0,
+100
+akut: 0
+101
+ 
+102
+};
+103
+}
+104
+}
+105
+ 
+106
+// ===================================
+107
+// GEM
+108
+// ===================================
+109
+ 
+110
+function saveCurrentProfile() {
+111
+ 
+112
+if (!currentPlayer) {
 113
-return null;
+return;
 114
 }
 115
  
 116
-// ===================================
+localStorage.setItem(
 117
-// XP
+"kol_player",
 118
-// ===================================
+JSON.stringify(currentPlayer)
 119
- 
+);
 120
-function addXP(amount){
+}
 121
  
 122
-if(!currentPlayer){
+// ===================================
 123
-return;
+// HENT GEMT DATA
 124
-}
+// ===================================
 125
  
 126
-currentPlayer.xp += amount;
+function loadPlayerData() {
 127
  
 128
-checkLevelUp();
+const saved =
 129
- 
+localStorage.getItem(
 130
-saveCurrentProfile();
+"kol_player"
 131
- 
+);
 132
-renderPlayerCard();
+ 
 133
-}
+if (!saved) {
 134
- 
+return null;
 135
-// ===================================
+}
 136
-// POINT
+ 
 137
-// ===================================
+return JSON.parse(saved);
 138
- 
+}
 139
-function addPoints(amount){
+ 
 140
- 
+// ===================================
 141
-if(!currentPlayer){
+// POINT
 142
-return;
+// ===================================
 143
-}
+ 
 144
- 
+function addPoints(value) {
 145
-currentPlayer.points += amount;
+ 
 146
- 
+if (!currentPlayer) {
 147
-addXP(amount);
+return;
 148
- 
-149
-saveCurrentProfile();
-150
- 
-151
-renderPlayerCard();
-152
 }
+149
+ 
+150
+currentPlayer.points += value;
+151
+ 
+152
+addXP(value);
 153
  
 154
-// ===================================
+saveCurrentProfile();
 155
-// LEVEL SYSTEM
+ 
 156
-// ===================================
+renderPlayerCard();
 157
- 
+}
 158
-function checkLevelUp(){
-159
  
+159
+// ===================================
 160
-const newLevel =
+// XP
 161
-Math.floor(
+// ===================================
 162
-currentPlayer.xp / 500
+ 
 163
-) + 1;
+function addXP(value) {
 164
  
 165
-if(
+if (!currentPlayer) {
 166
-newLevel >
+return;
 167
-currentPlayer.level
+}
 168
-){
+ 
 169
- 
+currentPlayer.xp += value;
 170
-currentPlayer.level =
+ 
 171
-newLevel;
+updateLevel();
 172
- 
+}
 173
-updateRank();
-174
-}
-175
  
+174
+// ===================================
+175
+// LEVEL
 176
-}
+// ===================================
 177
  
 178
-// ===================================
+function updateLevel() {
 179
-// TITEL
+ 
 180
-// ===================================
+const newLevel =
 181
- 
+Math.floor(
 182
-function updateRank(){
+currentPlayer.xp / 250
 183
- 
+) + 1;
 184
-const level =
+ 
 185
-currentPlayer.level;
+if (
 186
- 
+newLevel >
 187
-if(level >= 15){
+currentPlayer.level
 188
- 
+) {
 189
-currentPlayer.rank =
+ 
 190
-"KOL-mester";
+currentPlayer.level =
 191
- 
+newLevel;
 192
-}else if(level >= 12){
-193
  
+193
+updateRank();
 194
-currentPlayer.rank =
+}
 195
-"Akutekspert";
+}
 196
  
 197
-}else if(level >= 9){
+// ===================================
 198
- 
+// TITLER
 199
-currentPlayer.rank =
+// ===================================
 200
-"Telemedicinmester";
+ 
 201
- 
+function updateRank() {
 202
-}else if(level >= 6){
+ 
 203
- 
+const level =
 204
-currentPlayer.rank =
+currentPlayer.level;
 205
-"KOL-specialist";
+ 
 206
- 
+if (level >= 12) {
 207
-}else if(level >= 3){
+ 
 208
- 
+currentPlayer.rank =
 209
-currentPlayer.rank =
+"KOL-mester";
 210
-"KOL-assistent";
+ 
 211
- 
+} else if (level >= 10) {
 212
-}else if(level >= 2){
+ 
 213
- 
+currentPlayer.rank =
 214
-currentPlayer.rank =
+"Akutekspert";
 215
-"Lungedetektiv";
+ 
 216
- 
+} else if (level >= 8) {
 217
-}else{
-218
  
-219
+218
 currentPlayer.rank =
+219
+"Telemedicinmester";
 220
-"Ny medarbejder";
+ 
 221
-}
+} else if (level >= 6) {
 222
  
 223
-}
+currentPlayer.rank =
 224
- 
+"KOL-specialist";
 225
-// ===================================
-226
-// MISSION GENNEMFØRT
-227
-// ===================================
-228
  
+226
+} else if (level >= 4) {
+227
+ 
+228
+currentPlayer.rank =
 229
-function completeMissionProgress(
+"KOL-assistent";
 230
-missionId
+ 
 231
-){
+} else if (level >= 2) {
 232
  
 233
-if(
+currentPlayer.rank =
 234
-!currentPlayer.completedMissions.includes(
+"Lungedetektiv";
 235
-missionId
+ 
 236
-)
+} else {
 237
-){
+ 
 238
- 
+currentPlayer.rank =
 239
-currentPlayer.completedMissions.push(
+"Ny medarbejder";
 240
-missionId
+}
 241
-);
-242
  
+242
+saveCurrentProfile();
 243
 }
 244
  
 245
-saveCurrentProfile();
+// ===================================
 246
-}
+// XP BAR
 247
- 
+// ===================================
 248
-// ===================================
+ 
 249
-// MODULPROGRESSION
+function getXPPercent() {
 250
-// ===================================
+ 
 251
- 
+const currentXP =
 252
-function updatePlayerModuleProgress(
+currentPlayer.xp % 250;
 253
-moduleId,
+ 
 254
-progress
+return Math.round(
 255
-){
+(currentXP / 250) * 100
 256
- 
+);
 257
-if(!currentPlayer){
-258
-return;
-259
 }
+258
+ 
+259
+// ===================================
 260
- 
+// MISSION
 261
-currentPlayer.moduleProgress[
+// ===================================
 262
-moduleId
-263
-] = progress;
-264
  
+263
+function completeMissionProgress(
+264
+missionId
 265
-saveCurrentProfile();
+) {
 266
  
 267
-renderPlayerCard();
+if (
 268
-}
+!currentPlayer.completedMissions.includes(
 269
- 
+missionId
 270
-// ===================================
+)
 271
-// TOTAL PROGRESSION
+) {
 272
-// ===================================
+ 
 273
- 
+currentPlayer.completedMissions.push(
 274
-function getTotalProgress(){
+missionId
 275
- 
+);
 276
-if(!currentPlayer){
+ 
 277
-return 0;
+saveCurrentProfile();
 278
 }
 279
- 
+}
 280
-const values =
+ 
 281
-Object.values(
+// ===================================
 282
-currentPlayer.moduleProgress
+// MODUL FREMDRIFT
 283
-);
+// ===================================
 284
  
 285
-const sum =
+function updatePlayerModuleProgress(
 286
-values.reduce(
+moduleId,
 287
-(a,b)=>a+b,
+progress
 288
-0
+) {
 289
-);
+ 
 290
- 
+if (!currentPlayer) {
 291
-return Math.round(
+return;
 292
-sum /
-293
-values.length
-294
-);
-295
 }
+293
+ 
+294
+currentPlayer.moduleProgress[
+295
+moduleId
 296
- 
+] = progress;
 297
-// ===================================
-298
-// XP PROCENT
-299
-// ===================================
-300
  
+298
+saveCurrentProfile();
+299
+ 
+300
+renderPlayerCard();
 301
-function getXPPercent(){
+}
 302
  
 303
-const current =
+// ===================================
 304
-currentPlayer.xp % 500;
+// SAMLET FREMDRIFT
 305
- 
+// ===================================
 306
-return Math.round(
+ 
 307
-(current / 500) * 100
+function getTotalProgress() {
 308
-);
+ 
 309
-}
+if (!currentPlayer) {
 310
- 
+return 0;
 311
-// ===================================
+}
 312
-// VIS SPILLERKORT
+ 
 313
-// ===================================
+const values =
 314
- 
+Object.values(
 315
-function renderPlayerCard(){
+currentPlayer.moduleProgress
 316
- 
-317
-const card =
-318
-document.getElementById(
-319
-"player-card"
-320
 );
-321
+317
  
+318
+const sum =
+319
+values.reduce(
+320
+(a, b) => a + b,
+321
+0
 322
-if(
+);
 323
-!card ||
+ 
 324
-!currentPlayer
+return Math.round(
 325
-){
+sum / values.length
 326
-return;
+);
 327
 }
 328
  
 329
-card.innerHTML = `
+// ===================================
 330
- 
+// BADGES
 331
-<div class="dialogue-box">
+// ===================================
 332
  
 333
-<h2>🫁 ${currentPlayer.name}</h2>
+function addBadge(badgeName) {
 334
  
 335
-<p>
+if (
 336
-⭐ Niveau:
+currentPlayer.badges.includes(
 337
-<strong>
+badgeName
 338
-${currentPlayer.level}
+)
 339
-</strong>
+) {
 340
-</p>
+return;
 341
- 
+}
 342
-<p>
-343
-🏅 Titel:
-344
-<strong>
-345
-${currentPlayer.rank}
-346
-</strong>
-347
-</p>
-348
  
+343
+currentPlayer.badges.push(
+344
+badgeName
+345
+);
+346
+ 
+347
+saveCurrentProfile();
+348
+}
 349
-<p>
+ 
 350
-🎯 Point:
+// ===================================
 351
-<strong>
+// VIS SPILLERKORT
 352
-${currentPlayer.points}
+// ===================================
 353
-</strong>
+ 
 354
-</p>
+function renderPlayerCard() {
 355
  
 356
-<p>
+const card =
 357
-📈 Gennemført:
+document.getElementById(
 358
-<strong>
+"player-card"
 359
-${getTotalProgress()}%
+);
 360
-</strong>
+ 
 361
-</p>
+if (
 362
- 
+!card ||
 363
-<div class="xp-wrapper">
+!currentPlayer
 364
- 
+) {
 365
-<p>
+return;
 366
-XP:
+}
 367
-${currentPlayer.xp}
+ 
 368
-</p>
+card.innerHTML = `
 369
  
 370
-<div class="xp-bar">
+<div class="dialogue-box">
 371
-<div
+ 
 372
-class="xp-fill"
+<h2>
 373
-style="
+🫁 ${currentPlayer.name}
 374
-width:${getXPPercent()}%;
+</h2>
 375
-">
+ 
 376
-</div>
+<p>
 377
-</div>
+⭐ Niveau:
 378
- 
+<strong>
 379
-</div>
+${currentPlayer.level}
 380
- 
+</strong>
 381
-</div>
+</p>
 382
  
 383
-`;
+<p>
 384
- 
+🏅 Titel:
 385
-}
+<strong>
 386
- 
+${currentPlayer.rank}
 387
-// ===================================
+</strong>
 388
-// HENT SPILLER
+</p>
 389
-// ===================================
-390
  
+390
+<p>
 391
-function getCurrentPlayer(){
+🎯 Point:
 392
-return currentPlayer;
+<strong>
 393
-}   
+${currentPlayer.points}
+394
+</strong>
+395
+</p>
+396
+ 
+397
+<p>
+398
+📈 Fremdrift:
+399
+<strong>
+400
+${getTotalProgress()}%
+401
+</strong>
+402
+</p>
+403
+ 
+404
+<div class="xp-wrapper">
+405
+ 
+406
+<p>
+407
+XP: ${currentPlayer.xp}
+408
+</p>
+409
+ 
+410
+<div class="xp-bar">
+411
+ 
+412
+<div
+413
+class="xp-fill"
+414
+style="
+415
+width:${getXPPercent()}%;
+416
+">
+417
+</div>
+418
+ 
+419
+</div>
+420
+ 
+421
+</div>
+422
+ 
+423
+</div>
+424
+ 
+425
+`;
+426
+}
+427
+ 
+428
+// ===================================
+429
+// HENT AKTIV SPILLER
+430
+// ===================================
+431
+ 
+432
+function getCurrentPlayer() {
+433
+return currentPlayer;
+434
+}

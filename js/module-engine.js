@@ -1,408 +1,242 @@
 // ===================================
-// KOL Akademiet v2.0
-// Modul Engine
-// Stabil version
+// KOL Akademiet 3.0
+// Module Engine
+// Adventure Edition
 // ===================================
 
-
 let activeModule = null;
-
 let activeModuleMissionIndex = 0;
-
-
-
-
 
 // ===================================
 // START MODUL
 // ===================================
 
-
 function startModule(moduleId){
-
 
     console.log(
         "Starter modul:",
         moduleId
     );
 
+    switch(moduleId){
 
+        case "lungelaboratoriet":
 
-    if(
-        moduleId === "lungelaboratoriet"
-    ){
+            activeModule = {
 
+                id:
+                "lungelaboratoriet",
 
-        activeModule = {
+                title:
+                "🫁 Lungelaboratoriet",
 
+                description:
+                "Her lærer du at observere symptomer, identificere ændringer og hjælpe borgere med KOL.",
 
-            id:
-            "lungelaboratoriet",
+                missions:
+                getLungelaboratoriumMissions()
 
+            };
 
-            title:
-            "Lungelaboratoriet",
+            break;
 
+        default:
 
-            missions:
-            getLungelaboratoriumMissions()
+            alert(
+                "Dette modul er endnu ikke åbent."
+            );
 
-
-        };
-
-
-    }
-
-
-    else {
-
-
-        console.error(
-            "Ukendt modul:",
-            moduleId
-        );
-
-
-        return;
-
+            return;
 
     }
-
-
-
-
 
     activeModuleMissionIndex = 0;
 
-
-
-    showModuleOverview();
-
-
+    renderModuleOverview();
 }
 
-
-
-
-
-
-
-
 // ===================================
-// VIS MODUL
+// MODUL FORSIDE
 // ===================================
 
-
-function showModuleOverview(){
-
-
+function renderModuleOverview(){
 
     showScreen(
         "area-screen"
     );
 
-
-
     const title =
-
     document.getElementById(
         "area-title"
     );
 
-
-
     const content =
-
     document.getElementById(
         "area-content"
     );
 
-
-
-
-
-    if(!activeModule){
-
-        return;
-
-    }
-
-
-
-
-
     title.innerHTML =
-
     activeModule.title;
-
-
-
-
 
     content.innerHTML = `
 
+        <div class="dialogue-box">
 
-    <div class="mission-card unlocked">
+            <h2>
+                ${activeModule.title}
+            </h2>
 
+            <p>
+                ${activeModule.description}
+            </p>
 
-        <h2>
-        ${activeModule.title}
-        </h2>
+            <br>
 
+            <p>
+                Antal missioner:
+                <strong>
+                    ${activeModule.missions.length}
+                </strong>
+            </p>
 
-        <p>
+            <br>
 
-        Du skal gennemføre
-        ${activeModule.missions.length}
-        missioner.
+            <p>
+                Anna venter på dine observationer.
+                Hver mission bringer dig tættere på
+                titlen som KOL-mester.
+            </p>
 
-        </p>
+            <br>
 
+            <button
+                onclick="
+                startNextMission()
+                ">
+                Start første mission
+            </button>
 
-        <p>
-
-        Lær gennem realistiske
-        borgersituationer.
-
-        </p>
-
-
-    </div>
-
-
-
-    <button onclick="startNextModuleMission()">
-
-    Start første mission
-
-    </button>
-
+        </div>
 
     `;
-
-
-
 }
 
-
-
-
-
-
-
-
 // ===================================
-// NÆSTE MISSION
+// START MISSION
 // ===================================
 
-
-function startNextModuleMission(){
-
-
-
-    if(!activeModule){
-
-        console.error(
-            "Intet aktivt modul"
-        );
-
-        return;
-
-    }
-
-
+function startNextMission(){
 
     const mission =
-
     activeModule.missions[
         activeModuleMissionIndex
     ];
-
-
 
     if(!mission){
 
         finishModule();
 
         return;
-
     }
-
-
-
 
     startMission(
         mission
     );
-
-
 }
 
-
-
-
-
-
-
-
 // ===================================
-// AFSLUT MISSION
+// MISSION FÆRDIG
 // ===================================
-
 
 function completeModuleMission(){
 
-
+    addPoints(
+        100
+    );
 
     activeModuleMissionIndex++;
 
-
-
-
+    updateModuleProgress();
 
     if(
-
-        activeModuleMissionIndex
-
-        <
-
+        activeModuleMissionIndex <
         activeModule.missions.length
-
     ){
 
+        renderNextMissionScreen();
 
-        showNextMission();
-
-
+        return;
     }
 
-    else {
-
-
-        finishModule();
-
-
-    }
-
-
-
+    finishModule();
 }
 
-
-
-
-
-
-
-
 // ===================================
-// NÆSTE
+// MODULPROGRESSION
 // ===================================
 
+function updateModuleProgress(){
 
-function showNextMission(){
+    const progress =
+    Math.round(
 
+        (
+            activeModuleMissionIndex /
+            activeModule.missions.length
+        ) * 100
 
+    );
+
+    updatePlayerModuleProgress(
+        activeModule.id,
+        progress
+    );
+}
+
+// ===================================
+// NÆSTE MISSION
+// ===================================
+
+function renderNextMissionScreen(){
 
     const content =
-
     document.getElementById(
         "mission-content"
     );
 
-
-
-    content.innerHTML = `
-
-
-    <div class="correct-feedback">
-
-
-    <h2>
-    Mission gennemført
-    </h2>
-
-
-    <p>
-
-    Klar til næste udfordring.
-
-    </p>
-
-
-    </div>
-
-
-
-    <button onclick="startNextModuleMission()">
-
-    Næste mission
-
-    </button>
-
-
-    `;
-
-
-}
-
-
-
-
-
-
-
-
-// ===================================
-// FÆRDIG
-// ===================================
-
-
-function finishModule(){
-
-
-
-    const content =
-
-    document.getElementById(
-        "mission-content"
-    );
-
-
+    const nextMission =
+    activeModule.missions[
+        activeModuleMissionIndex
+    ];
 
     content.innerHTML = `
 
+        <div class="dialogue-box">
 
-    <div class="correct-feedback">
+            <h2>
+                ⭐ Mission gennemført
+            </h2>
 
+            <p>
+                Du har gennemført den foregående mission.
+            </p>
 
-    <h2>
+            <br>
 
-    Lungelaboratoriet gennemført
+            <p>
+                +100 point
+            </p>
 
-    </h2>
+            <br>
 
+            <p>
+                Næste mission:
+                <strong>
+                    ${nextMission.title}
+                </strong>
+            </p>
 
-    <p>
+            <br>
 
-    Du har afsluttet modulet.
-
-    </p>
-
-
-    </div>
-
-
-
-    <button onclick="showScreen('academy-screen')">
-
-    Tilbage til kortet
-
-    </button>
-
-
-    `;
-
-
-
-}
+            <button
+    

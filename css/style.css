@@ -1,5 +1,5 @@
 /* =====================================
-KOL Akademiet
+KOL AKADEMIET
 Adventure Edition
 ===================================== */
 
@@ -35,26 +35,44 @@ body{
     display:none;
 }
 
+/* =====================================
+LAYOUT
+===================================== */
+
 .hero,
 .panel{
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
+}
+
+.hero{
+    text-align:center;
 }
 
 h1{
     font-size:3rem;
-    margin-bottom:15px;
     color:#f4b942;
+    margin-bottom:15px;
+    text-shadow:
+        0 0 15px rgba(244,185,66,0.5);
 }
 
 h2{
-    margin-bottom:20px;
+    margin-bottom:15px;
+}
+
+h3{
+    margin-bottom:10px;
+}
+
+p{
+    line-height:1.6;
 }
 
 .subtitle{
-    font-size:1.3rem;
-    margin-bottom:30px;
+    font-size:1.25rem;
     opacity:0.9;
+    margin-bottom:30px;
 }
 
 /* =====================================
@@ -62,65 +80,46 @@ ANNA
 ===================================== */
 
 .anna-card{
-    background:rgba(255,255,255,0.08);
-    border:2px solid rgba(255,255,255,0.15);
-    border-radius:20px;
-    padding:25px;
-    margin:30px 0;
-    backdrop-filter:blur(6px);
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        2px solid rgba(255,255,255,0.15);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    max-width:700px;
+
+    margin:40px auto;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.3);
 }
 
 .anna-placeholder{
-    width:120px;
-    height:120px;
+    width:130px;
+    height:130px;
+
     border-radius:50%;
+
+    margin:0 auto 20px auto;
+
     background:#f4b942;
-    color:#102542;
-    font-weight:bold;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:2rem;
-    margin-bottom:20px;
-}
 
-/* =====================================
-EVENTYRKORT
-===================================== */
-
-.world-map{
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-    margin-top:30px;
-}
-
-.mission-card{
-    border-radius:20px;
-    padding:25px;
-    transition:0.3s;
-    cursor:pointer;
-}
-
-.mission-card:hover{
-    transform:translateY(-8px);
-}
-
-.mission-card.unlocked{
-    background:#f4f7fa;
-    color:#1b3b6f;
-    border:3px solid #f4b942;
-}
-
-.mission-card.locked{
-    background:#566573;
-    opacity:0.6;
-}
-
-.mission-icon{
     font-size:3rem;
-    margin-bottom:15px;
+
+    color:#102542;
+
+    box-shadow:
+        0 0 25px rgba(244,185,66,0.5);
 }
 
 /* =====================================
@@ -130,25 +129,74 @@ KNAPPER
 button{
     background:#f4b942;
     color:#102542;
+
     border:none;
-    padding:15px 25px;
+
+    padding:15px 30px;
+
     border-radius:12px;
+
     font-size:1rem;
-    font-weight:bold;
+    font-weight:700;
+
     cursor:pointer;
-    transition:0.3s;
+
+    transition:all 0.3s ease;
 }
 
 button:hover{
-    transform:scale(1.05);
+    transform:translateY(-3px);
+    box-shadow:
+        0 10px 20px rgba(0,0,0,0.3);
+
     background:#ffd369;
 }
 
+button:active{
+    transform:scale(0.98);
+}
+
+/* =====================================
+INPUT
+===================================== */
+
 input{
-    padding:15px;
-    border-radius:10px;
-    border:none;
     width:100%;
     max-width:400px;
-    margin:15px 0;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    margin-top:15px;
+
+    font-size:1rem;
 }
+
+/* =====================================
+SPILLERKORT
+===================================== */
+
+#player-card{
+    margin:25px 0;
+}
+
+.dialogue-box{
+    background:
+        rgba(255,255,255,0.08);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    border:
+        2px solid rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(10px);
+}
+
+/* =====================================
+VERDENSKORT
+=======

@@ -2,26 +2,39 @@
 <html lang="da">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>KOL Akademiet</title>
 
     css/style.css
+
 </head>
 
 <body>
 
 <div id="app">
 
+    <!-- ===================================== -->
     <!-- STARTSIDE -->
-    <section id="welcome-screen" class="screen">
+    <!-- ===================================== -->
+
+    <section
+        id="welcome-screen"
+        class="screen">
 
         <div class="hero">
 
-            <h1>🫁 KOL Akademiet</h1>
+            <h1>
+                🫁 KOL Akademiet
+            </h1>
 
             <p class="subtitle">
-                En rejse fra ny medarbejder til KOL-mester
+                Fra ny medarbejder til KOL-mester
             </p>
 
             <div class="anna-card">
@@ -30,7 +43,9 @@
                     👩‍⚕️
                 </div>
 
-                <h2>Anna - Akademiets vejleder</h2>
+                <h2>
+                    Anna • KOL-rigets vejleder
+                </h2>
 
                 <p>
                     Velkommen til KOL-riget.
@@ -39,24 +54,26 @@
                 <br>
 
                 <p>
-                    Balancen er truet.
-                    Borgere mister energi.
-                    Tegn på forværring bliver overset.
-                    Angst og åndenød spreder sig.
+                    Rundt omkring i riget oplever
+                    borgere med KOL øget åndenød,
+                    manglende energi og begyndende
+                    forværringer.
                 </p>
 
                 <br>
 
                 <p>
-                    Kun dygtige Lungedetektiver kan hjælpe.
+                    Akademiet uddanner særlige
+                    Lungedetektiver, som kan opdage
+                    symptomer i tide og hjælpe
+                    borgerne til en tryggere hverdag.
                 </p>
 
                 <br>
 
                 <p>
-                    Din opgave er at rejse gennem akademiets områder,
-                    løse virkelighedsnære udfordringer og hjælpe
-                    borgere med KOL til en bedre hverdag.
+                    Din rejse begynder i
+                    Lungelaboratoriet.
                 </p>
 
             </div>
@@ -69,15 +86,22 @@
 
     </section>
 
+    <!-- ===================================== -->
     <!-- PROFIL -->
-    <section id="profile-screen" class="screen hidden">
+    <!-- ===================================== -->
+
+    <section
+        id="profile-screen"
+        class="screen hidden">
 
         <div class="panel">
 
-            <h1>Opret din elevprofil</h1>
+            <h1>
+                Opret din profil
+            </h1>
 
             <p>
-                Hvilket navn skal stå i Akademiets elevregister?
+                Indskriv dig på KOL Akademiet.
             </p>
 
             <br>
@@ -86,7 +110,8 @@
                 id="player-name"
                 placeholder="Skriv dit navn">
 
-            <br><br>
+            <br>
+            <br>
 
             <button onclick="createProfile()">
                 Bliv Lungedetektiv
@@ -96,16 +121,23 @@
 
     </section>
 
+    <!-- ===================================== -->
     <!-- AKADEMIKORT -->
-    <section id="academy-screen" class="screen hidden">
+    <!-- ===================================== -->
+
+    <section
+        id="academy-screen"
+        class="screen hidden">
 
         <div class="panel">
 
-            <h1>🌍 KOL-riget</h1>
+            <h1>
+                🌍 KOL-riget
+            </h1>
 
             <p>
-                Udforsk områderne og hjælp borgere gennem
-                virkelighedsnære KOL-udfordringer.
+                Rejs gennem rigets områder og
+                hjælp borgere med KOL.
             </p>
 
             <br>
@@ -114,19 +146,25 @@
 
             <div class="world-map">
 
+                <!-- AKADEMIET -->
+
                 <div class="mission-card home">
 
                     <div class="mission-icon">
                         🏰
                     </div>
 
-                    <h3>KOL Akademiet</h3>
+                    <h3>
+                        KOL Akademiet
+                    </h3>
 
                     <p>
                         Din base mellem missionerne.
                     </p>
 
                 </div>
+
+                <!-- LUNGELAB -->
 
                 <div
                     class="mission-card unlocked"
@@ -136,11 +174,14 @@
                         🫁
                     </div>
 
-                    <h3>Lungelaboratoriet</h3>
+                    <h3>
+                        Lungelaboratoriet
+                    </h3>
 
                     <p>
-                        Undersøg symptomer, observationer
-                        og borgernes hverdag.
+                        Observationer, symptomer
+                        og tidlige tegn på
+                        forværring.
                     </p>
 
                     <span>
@@ -149,20 +190,26 @@
 
                 </div>
 
+                <!-- TELEMEDICIN -->
+
                 <div class="mission-card locked">
 
                     <div class="mission-icon">
                         📡
                     </div>
 
-                    <h3>Telemedicinsk Tårn</h3>
+                    <h3>
+                        Telemedicinsk Tårn
+                    </h3>
 
                     <p>
-                        Overvåg målinger og find skjulte tegn
-                        på forværring.
+                        Overvåg målinger og
+                        find skjulte advarsler.
                     </p>
 
                 </div>
+
+                <!-- ERNÆRING -->
 
                 <div class="mission-card locked">
 
@@ -170,14 +217,18 @@
                         🍲
                     </div>
 
-                    <h3>Ernæringscaféen</h3>
+                    <h3>
+                        Ernæringscaféen
+                    </h3>
 
                     <p>
-                        Hjælp borgere med at bevare energi
-                        og kræfter.
+                        Hjælp borgerne med at
+                        bevare energi og styrke.
                     </p>
 
                 </div>
+
+                <!-- MEDICIN -->
 
                 <div class="mission-card locked">
 
@@ -185,13 +236,18 @@
                         💊
                     </div>
 
-                    <h3>Medicincenteret</h3>
+                    <h3>
+                        Medicincenteret
+                    </h3>
 
                     <p>
-                        Lær korrekt behandling og inhalation.
+                        Inhalationsteknik og
+                        korrekt behandling.
                     </p>
 
                 </div>
+
+                <!-- AKUT -->
 
                 <div class="mission-card locked">
 
@@ -199,10 +255,13 @@
                         ⚠️
                     </div>
 
-                    <h3>Akutbjergene</h3>
+                    <h3>
+                        Akutbjergene
+                    </h3>
 
                     <p>
-                        Håndtér akutte forværringer.
+                        Reager på tegn på
+                        akut forværring.
                     </p>
 
                 </div>
@@ -213,27 +272,41 @@
 
     </section>
 
+    <!-- ===================================== -->
     <!-- OMRÅDE -->
-    <section id="area-screen" class="screen hidden">
+    <!-- ===================================== -->
+
+    <section
+        id="area-screen"
+        class="screen hidden">
 
         <div class="panel">
 
-            <h1 id="area-title"></h1>
+            <h1 id="area-title">
+            </h1>
 
-            <div id="area-content"></div>
+            <div id="area-content">
+            </div>
 
         </div>
 
     </section>
 
+    <!-- ===================================== -->
     <!-- MISSION -->
-    <section id="mission-screen" class="screen hidden">
+    <!-- ===================================== -->
+
+    <section
+        id="mission-screen"
+        class="screen hidden">
 
         <div class="panel">
 
-            <h1 id="mission-title"></h1>
+            <h1 id="mission-title">
+            </h1>
 
-            <div id="mission-content"></div>
+            <div id="mission-content">
+            </div>
 
         </div>
 
@@ -241,15 +314,24 @@
 
 </div>
 
+<!-- ===================================== -->
+<!-- SCRIPTS -->
+<!-- ===================================== -->
+
+js/storage.js
+
 .js"></script>
-js/profile.js
+
 js/map.js
 
-atorium.js"></script>
+missions/lungelaboratorium.js
 
-mission-engine.js"></script>
-js/module-engine.js>
+/mission-engine.js"></script>
+
+/module-engine.js"></script>
+
 js/app.js
 
 </body>
+
 </html>

@@ -1,337 +1,587 @@
 <!DOCTYPE html>
+2
 <html lang="da">
-
+3
+ 
+4
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>KOL Akademiet</title>
-
-    css/style.css
-
+5
+ 
+6
+<meta charset="UTF-8">
+7
+ 
+8
+<meta name="viewport"
+9
+content="width=device-width, initial-scale=1.0">
+10
+ 
+11
+<title>KOL Akademiet</title>
+12
+ 
+13
+css/style.css
+14
+ 
+15
 </head>
-
+16
+ 
+17
 <body>
-
+18
+ 
+19
 <div id="app">
-
-    <!-- ===================================== -->
-    <!-- STARTSIDE -->
-    <!-- ===================================== -->
-
-    <section
-        id="welcome-screen"
-        class="screen">
-
-        <div class="hero">
-
-            <h1>
-                🫁 KOL Akademiet
-            </h1>
-
-            <p class="subtitle">
-                Fra ny medarbejder til KOL-mester
-            </p>
-
-            <div class="anna-card">
-
-                <div class="anna-placeholder">
-                    👩‍⚕️
-                </div>
-
-                <h2>
-                    Anna • KOL-rigets vejleder
-                </h2>
-
-                <p>
-                    Velkommen til KOL-riget.
-                </p>
-
-                <br>
-
-                <p>
-                    Rundt omkring i riget oplever
-                    borgere med KOL øget åndenød,
-                    manglende energi og begyndende
-                    forværringer.
-                </p>
-
-                <br>
-
-                <p>
-                    Akademiet uddanner særlige
-                    Lungedetektiver, som kan opdage
-                    symptomer i tide og hjælpe
-                    borgerne til en tryggere hverdag.
-                </p>
-
-                <br>
-
-                <p>
-                    Din rejse begynder i
-                    Lungelaboratoriet.
-                </p>
-
-            </div>
-
-            <button onclick="startGame()">
-                Start eventyret
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================== -->
-    <!-- PROFIL -->
-    <!-- ===================================== -->
-
-    <section
-        id="profile-screen"
-        class="screen hidden">
-
-        <div class="panel">
-
-            <h1>
-                Opret din profil
-            </h1>
-
-            <p>
-                Indskriv dig på KOL Akademiet.
-            </p>
-
-            <br>
-
-            <input
-                id="player-name"
-                placeholder="Skriv dit navn">
-
-            <br>
-            <br>
-
-            <button onclick="createProfile()">
-                Bliv Lungedetektiv
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================== -->
-    <!-- AKADEMIKORT -->
-    <!-- ===================================== -->
-
-    <section
-        id="academy-screen"
-        class="screen hidden">
-
-        <div class="panel">
-
-            <h1>
-                🌍 KOL-riget
-            </h1>
-
-            <p>
-                Rejs gennem rigets områder og
-                hjælp borgere med KOL.
-            </p>
-
-            <br>
-
-            <div id="player-card"></div>
-
-            <div class="world-map">
-
-                <!-- AKADEMIET -->
-
-                <div class="mission-card home">
-
-                    <div class="mission-icon">
-                        🏰
-                    </div>
-
-                    <h3>
-                        KOL Akademiet
-                    </h3>
-
-                    <p>
-                        Din base mellem missionerne.
-                    </p>
-
-                </div>
-
-                <!-- LUNGELAB -->
-
-                <div
-                    class="mission-card unlocked"
-                    onclick="openArea('lungelaboratoriet')">
-
-                    <div class="mission-icon">
-                        🫁
-                    </div>
-
-                    <h3>
-                        Lungelaboratoriet
-                    </h3>
-
-                    <p>
-                        Observationer, symptomer
-                        og tidlige tegn på
-                        forværring.
-                    </p>
-
-                    <span>
-                        Klar til mission
-                    </span>
-
-                </div>
-
-                <!-- TELEMEDICIN -->
-
-                <div class="mission-card locked">
-
-                    <div class="mission-icon">
-                        📡
-                    </div>
-
-                    <h3>
-                        Telemedicinsk Tårn
-                    </h3>
-
-                    <p>
-                        Overvåg målinger og
-                        find skjulte advarsler.
-                    </p>
-
-                </div>
-
-                <!-- ERNÆRING -->
-
-                <div class="mission-card locked">
-
-                    <div class="mission-icon">
-                        🍲
-                    </div>
-
-                    <h3>
-                        Ernæringscaféen
-                    </h3>
-
-                    <p>
-                        Hjælp borgerne med at
-                        bevare energi og styrke.
-                    </p>
-
-                </div>
-
-                <!-- MEDICIN -->
-
-                <div class="mission-card locked">
-
-                    <div class="mission-icon">
-                        💊
-                    </div>
-
-                    <h3>
-                        Medicincenteret
-                    </h3>
-
-                    <p>
-                        Inhalationsteknik og
-                        korrekt behandling.
-                    </p>
-
-                </div>
-
-                <!-- AKUT -->
-
-                <div class="mission-card locked">
-
-                    <div class="mission-icon">
-                        ⚠️
-                    </div>
-
-                    <h3>
-                        Akutbjergene
-                    </h3>
-
-                    <p>
-                        Reager på tegn på
-                        akut forværring.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================== -->
-    <!-- OMRÅDE -->
-    <!-- ===================================== -->
-
-    <section
-        id="area-screen"
-        class="screen hidden">
-
-        <div class="panel">
-
-            <h1 id="area-title">
-            </h1>
-
-            <div id="area-content">
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ===================================== -->
-    <!-- MISSION -->
-    <!-- ===================================== -->
-
-    <section
-        id="mission-screen"
-        class="screen hidden">
-
-        <div class="panel">
-
-            <h1 id="mission-title">
-            </h1>
-
-            <div id="mission-content">
-            </div>
-
-        </div>
-
-    </section>
-
+20
+ 
+21
+<!-- ===================================== -->
+22
+<!-- STARTSIDE -->
+23
+<!-- ===================================== -->
+24
+ 
+25
+<section id="welcome-screen" class="screen">
+26
+ 
+27
+<div class="hero">
+28
+ 
+29
+<h1>🫁 KOL Akademiet</h1>
+30
+ 
+31
+<p class="subtitle">
+32
+Fra ny medarbejder til KOL-mester
+33
+</p>
+34
+ 
+35
+<div class="anna-card">
+36
+ 
+37
+<div class="anna-placeholder">
+38
+👩‍⚕️
+39
 </div>
-
+40
+ 
+41
+<h2>Anna • Akademiets vejleder</h2>
+42
+ 
+43
+<p>
+44
+Velkommen til KOL-riget.
+45
+</p>
+46
+ 
+47
+<br>
+48
+ 
+49
+<p>
+50
+Rundt omkring i riget oplever borgere med KOL
+51
+øget åndenød, mindre energi og begyndende
+52
+forværringer.
+53
+</p>
+54
+ 
+55
+<br>
+56
+ 
+57
+<p>
+58
+KOL Akademiet uddanner Lungedetektiver,
+59
+som kan opdage faresignaler i tide og hjælpe
+60
+borgerne til en bedre hverdag.
+61
+</p>
+62
+ 
+63
+<br>
+64
+ 
+65
+<p>
+66
+Din rejse begynder i Lungelaboratoriet.
+67
+</p>
+68
+ 
+69
+</div>
+70
+ 
+71
+<button onclick="startGame()">
+72
+Start eventyret
+73
+</button>
+74
+ 
+75
+</div>
+76
+ 
+77
+</section>
+78
+ 
+79
 <!-- ===================================== -->
-<!-- SCRIPTS -->
+80
+<!-- PROFIL -->
+81
 <!-- ===================================== -->
-
+82
+ 
+83
+<section id="profile-screen"
+84
+class="screen hidden">
+85
+ 
+86
+<div class="panel">
+87
+ 
+88
+<h1>Opret din profil</h1>
+89
+ 
+90
+<p>
+91
+Hvilket navn skal stå i
+92
+Akademiets elevregister?
+93
+</p>
+94
+ 
+95
+<br>
+96
+ 
+97
+<input
+98
+id="player-name"
+99
+type="text"
+100
+placeholder="Skriv dit navn">
+101
+ 
+102
+<br><br>
+103
+ 
+104
+<button onclick="createProfile()">
+105
+Bliv Lungedetektiv
+106
+</button>
+107
+ 
+108
+</div>
+109
+ 
+110
+</section>
+111
+ 
+112
+<!-- ===================================== -->
+113
+<!-- AKADEMIKORT -->
+114
+<!-- ===================================== -->
+115
+ 
+116
+<section id="academy-screen"
+117
+class="screen hidden">
+118
+ 
+119
+<div class="panel">
+120
+ 
+121
+<h1>🌍 KOL-riget</h1>
+122
+ 
+123
+<p>
+124
+Rejs gennem rigets områder og hjælp
+125
+borgere med KOL.
+126
+</p>
+127
+ 
+128
+<br>
+129
+ 
+130
+<div id="player-card"></div>
+131
+ 
+132
+<div class="world-map">
+133
+ 
+134
+<!-- Akademiet -->
+135
+ 
+136
+<div class="mission-card home">
+137
+ 
+138
+<div class="mission-icon">
+139
+🏰
+140
+</div>
+141
+ 
+142
+<h3>KOL Akademiet</h3>
+143
+ 
+144
+<p>
+145
+Din base mellem missionerne.
+146
+</p>
+147
+ 
+148
+</div>
+149
+ 
+150
+<!-- Lungelaboratoriet -->
+151
+ 
+152
+<div class="mission-card unlocked"
+153
+onclick="openArea('lungelaboratoriet')">
+154
+ 
+155
+<div class="mission-icon">
+156
+🫁
+157
+</div>
+158
+ 
+159
+<h3>Lungelaboratoriet</h3>
+160
+ 
+161
+<p>
+162
+Observationer, symptomer
+163
+og tidlig opsporing.
+164
+</p>
+165
+ 
+166
+</div>
+167
+ 
+168
+<!-- Telemedicin -->
+169
+ 
+170
+<div class="mission-card locked">
+171
+ 
+172
+<div class="mission-icon">
+173
+📡
+174
+</div>
+175
+ 
+176
+<h3>Telemedicinsk Tårn</h3>
+177
+ 
+178
+<p>
+179
+Målinger, overvågning og
+180
+skjulte faresignaler.
+181
+</p>
+182
+ 
+183
+</div>
+184
+ 
+185
+<!-- Ernæring -->
+186
+ 
+187
+<div class="mission-card locked">
+188
+ 
+189
+<div class="mission-icon">
+190
+🍲
+191
+</div>
+192
+ 
+193
+<h3>Ernæringscaféen</h3>
+194
+ 
+195
+<p>
+196
+Hjælp borgere med energi,
+197
+appetit og kræfter.
+198
+</p>
+199
+ 
+200
+</div>
+201
+ 
+202
+<!-- Medicin -->
+203
+ 
+204
+<div class="mission-card locked">
+205
+ 
+206
+<div class="mission-icon">
+207
+💊
+208
+</div>
+209
+ 
+210
+<h3>Medicincenteret</h3>
+211
+ 
+212
+<p>
+213
+Inhalationsteknik og
+214
+korrekt medicinhåndtering.
+215
+</p>
+216
+ 
+217
+</div>
+218
+ 
+219
+<!-- Akut -->
+220
+ 
+221
+<div class="mission-card locked">
+222
+ 
+223
+<div class="mission-icon">
+224
+⚠️
+225
+</div>
+226
+ 
+227
+<h3>Akutbjergene</h3>
+228
+ 
+229
+<p>
+230
+Håndtér akutte
+231
+forværringer.
+232
+</p>
+233
+ 
+234
+</div>
+235
+ 
+236
+</div>
+237
+ 
+238
+</div>
+239
+ 
+240
+</section>
+241
+ 
+242
+<!-- ===================================== -->
+243
+<!-- OMRÅDE -->
+244
+<!-- ===================================== -->
+245
+ 
+246
+<section id="area-screen"
+247
+class="screen hidden">
+248
+ 
+249
+<div class="panel">
+250
+ 
+251
+<h1 id="area-title"></h1>
+252
+ 
+253
+<div id="area-content"></div>
+254
+ 
+255
+</div>
+256
+ 
+257
+</section>
+258
+ 
+259
+<!-- ===================================== -->
+260
+<!-- MISSION -->
+261
+<!-- ===================================== -->
+262
+ 
+263
+<section id="mission-screen"
+264
+class="screen hidden">
+265
+ 
+266
+<div class="panel">
+267
+ 
+268
+<h1 id="mission-title"></h1>
+269
+ 
+270
+<div id="mission-content"></div>
+271
+ 
+272
+</div>
+273
+ 
+274
+</section>
+275
+ 
+276
+</div>
+277
+ 
+278
+<!-- ===================================== -->
+279
+<!-- SCRIPTFILER -->
+280
+<!-- ===================================== -->
+281
+ 
+282
 js/storage.js
-
-.js"></script>
-
+283
+/profile.js"></script>
+284
 js/map.js
-
+285
+ 
+286
 missions/lungelaboratorium.js
-
-/mission-engine.js"></script>
-
-/module-engine.js"></script>
-
+287
+ 
+288
+js/mission-engine.js
+289
+.js"></script>
+290
+ 
+291
 js/app.js
-
+292
+ 
+293
 </body>
-
+294
 </html>
